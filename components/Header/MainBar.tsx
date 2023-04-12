@@ -5,7 +5,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 
-export default function MainBar() {
+export function MainBar() {
   return (
     <div className="relative w-full float-left flex items-center p-0 bg-white">
       <div className="container">
@@ -63,7 +63,7 @@ export default function MainBar() {
               </div>
             </form>
           </div>
-          <div className="w-1/3 float-left ml-0 relative min-h-1 px-4">
+          <div className="w-1/3 float-left ml-0 relative min-h-1 px-4 text-red-700">
             <div className="w-48 h-10 float-left mr-5 border border-gray-300 rounded-md">
               <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
                 <FontAwesomeIcon icon={faUser} className="text-lg" />

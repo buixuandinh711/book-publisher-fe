@@ -25,9 +25,11 @@ module.exports = {
       },
       inset: {
         "6px": "6px",
+        "5px": "5px",
       },
       spacing: {
         "6px": "6px",
+        "5px": "5px",
       },
     },
   },
