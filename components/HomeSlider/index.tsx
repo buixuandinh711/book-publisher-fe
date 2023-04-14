@@ -1,12 +1,57 @@
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+function SampleNextArrow(props: any) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "absolute",
+        background: "red",
+        "z-index": "100",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props: any) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "green",
+        "z-index": "100",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
 export function HomeSlider() {
   return (
-    <section className="lib-section-1">
-      <section className="section_slider fw">
-        <div
-          className="home-slider owl-carousel not-dqowl owl-loaded owl-drag"
-        >
-          <div className="owl-stage-outer">
-            <div className="owl-stage">
+    <section className="w-full float-left mb-0">
+      <section className="w-full float-left">
+        <div className="w-full float-left">
+          <div className="relative overflow-hidden">
+            <Slider
+              infinite
+              autoplay
+              autoplaySpeed={1000}
+              pauseOnHover={false}
+              arrows
+              slidesToShow={1}
+              prevArrow={<SamplePrevArrow />}
+              nextArrow={<SampleNextArrow />}
+            >
               <div className="owl-item cloned">
                 <div className="item image-item">
                   <a
@@ -125,13 +170,13 @@ export function HomeSlider() {
                   </a>
                 </div>
               </div>
-            </div>
+            </Slider>
           </div>
-          <div className="owl-nav">
+          {/* <div className="owl-nav">
             <div className="owl-prev">prev</div>
             <div className="owl-next">next</div>
           </div>
-          <div className="owl-dots disabled"></div>
+          <div className="owl-dots disabled"></div> */}
         </div>
       </section>
     </section>
