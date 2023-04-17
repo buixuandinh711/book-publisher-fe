@@ -1,40 +1,7 @@
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-function SampleNextArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "absolute",
-        background: "red",
-        "z-index": "100",
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function SamplePrevArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        background: "green",
-        "z-index": "100",
-      }}
-      onClick={onClick}
-    />
-  );
-}
 
 export function HomeSlider() {
   return (
@@ -49,8 +16,6 @@ export function HomeSlider() {
               pauseOnHover={false}
               arrows
               slidesToShow={1}
-              prevArrow={<SamplePrevArrow />}
-              nextArrow={<SampleNextArrow />}
             >
               <div className="owl-item cloned">
                 <div className="item image-item">

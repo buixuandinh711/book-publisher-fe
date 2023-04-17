@@ -11,7 +11,7 @@ module.exports = {
         xl: "1170px",
         "2xl": "1170px",
       },
-      padding: "15px",
+      padding: "16px",
       center: true,
     },
     extend: {
@@ -21,7 +21,9 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       minHeight: {
-        1: "min-height: 1px",
+        1: "1px",
+        105: "105px",
+        34: "34px",
       },
       inset: {
         "6px": "6px",
@@ -30,6 +32,10 @@ module.exports = {
       spacing: {
         "6px": "6px",
         "5px": "5px",
+      },
+      borderWidth: {
+        10: "10px",
+        20: "20px",
       },
     },
   },
