@@ -1,3 +1,4 @@
+import { CategorySection } from "@/components/CategorySection";
 import { Header } from "@/components/Header";
 import { HomeBanner } from "@/components/HomeBanner";
 import { HomeSlider } from "@/components/HomeSlider";
@@ -10,6 +11,7 @@ export default function Home() {
       <HomeSlider />
       <HomeBanner />
       <SectionWithCarousel />
+      <CategorySection />
     </>
   );
 }
