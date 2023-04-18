@@ -2,6 +2,7 @@ import { CategorySection } from "@/components/CategorySection";
 import { Header } from "@/components/Header";
 import { HomeBanner } from "@/components/HomeBanner";
 import { HomeSlider } from "@/components/HomeSlider";
+import { PrivacySection } from "@/components/PrivacySection";
 import { SectionWithCarousel } from "@/components/SectionWithCarousel";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <HomeBanner />
       <SectionWithCarousel />
       <CategorySection />
+      <PrivacySection />
     </>
   );
 }

@@ -1,6 +1,8 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export function CategorySection() {
   return (
@@ -8,7 +10,11 @@ export function CategorySection() {
       <div className="container">
         <div className="-mx-4">
           <div className="w-full">
-            <Slider slidesToShow={4}>
+            <Slider
+              slidesToShow={4}
+              prevArrow={<PrevArrow />}
+              nextArrow={<NextArrow />}
+            >
               <div>
                 <div className="relative max-w-[270px] mx-auto">
                   <img
@@ -22,7 +28,7 @@ export function CategorySection() {
                       <a
                         href="/sach-moi"
                         title="Sách mới"
-                        className="text-white shadow-sm shadow-red-700"
+                        className="text-white text-shadow"
                       >
                         Sách mới
                       </a>
@@ -46,7 +52,7 @@ export function CategorySection() {
                       <a
                         href="/van-hoc-kinh-dien"
                         title="Sách văn học kinh điển"
-                        className="text-white shadow-sm shadow-red-700"
+                        className="text-white text-shadow"
                       >
                         Sách văn học kinh điển
                       </a>
@@ -70,7 +76,7 @@ export function CategorySection() {
                       <a
                         href="/sach-lien-ket-xuat-ban-moi"
                         title="Sách liên kết xuất bản"
-                        className="text-white shadow-sm shadow-red-700"
+                        className="text-white text-shadow"
                       >
                         Sách liên kết xuất bản
                       </a>
@@ -94,7 +100,7 @@ export function CategorySection() {
                       <a
                         href="/sach-giam-gia"
                         title="Sách giảm giá"
-                        className="text-white shadow-sm shadow-red-700"
+                        className="text-white text-shadow"
                       >
                         Sách giảm giá
                       </a>
@@ -118,7 +124,7 @@ export function CategorySection() {
                       <a
                         href="/"
                         title="Sách quý hiếm"
-                        className="text-white shadow-sm shadow-red-700"
+                        className="text-white text-shadow"
                       >
                         Sách quý hiếm
                       </a>
@@ -134,5 +140,35 @@ export function CategorySection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function PrevArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute top-1/2 left-0 z-10 w-8 h-8 bg-gray-300 bg-opacity-50 cursor-pointer hover:bg-red-700 hover:bg-opacity-100 text-red-700 hover:text-white"
+      onClick={onClick}
+    >
+      <FontAwesomeIcon
+        icon={faAngleLeft}
+        className="absolute translate-y-1/2 w-8"
+      />
+    </div>
+  );
+}
+
+function NextArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute top-1/2 right-0 z-10 w-8 h-8 bg-gray-300 bg-opacity-50 cursor-pointer hover:bg-red-700 hover:bg-opacity-100 text-red-700 hover:text-white"
+      onClick={onClick}
+    >
+      <FontAwesomeIcon
+        icon={faAngleRight}
+        className="absolute translate-y-1/2 w-8"
+      />
+    </div>
   );
 }

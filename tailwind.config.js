@@ -37,6 +37,9 @@ module.exports = {
         10: "10px",
         20: "20px",
       },
+      width: {
+        left70: "calc(100% - 70px)",
+      },
     },
   },
   plugins: [],

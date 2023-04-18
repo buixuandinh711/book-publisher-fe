@@ -25,8 +25,8 @@ export function BookCarousel() {
       <div className="w-full float-left">
         <Slider
           slidesToShow={6}
-          prevArrow={<SamplePrevArrow />}
-          nextArrow={<SampleNextArrow />}
+          prevArrow={<PrevArrow />}
+          nextArrow={<NextArrow />}
         >
           <BookCart />
           <BookCart />
@@ -47,8 +47,8 @@ export function BookCarousel() {
   );
 }
 
-function SamplePrevArrow(props: any) {
-  const { className, style, onClick } = props;
+function PrevArrow(props: any) {
+  const { onClick } = props;
   return (
     <div
       className="absolute top-1/2 -left-6 z-10 w-8 h-8 bg-gray-300 bg-opacity-50 cursor-pointer hover:bg-red-700 hover:bg-opacity-100 text-red-700 hover:text-white"
@@ -62,8 +62,8 @@ function SamplePrevArrow(props: any) {
   );
 }
 
-function SampleNextArrow(props: any) {
-  const { className, style, onClick } = props;
+function NextArrow(props: any) {
+  const { onClick } = props;
   return (
     <div
       className="absolute top-1/2 -right-6 z-10 w-8 h-8 bg-gray-300 bg-opacity-50 cursor-pointer hover:bg-red-700 hover:bg-opacity-100 text-red-700 hover:text-white"
