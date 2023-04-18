@@ -1,4 +1,5 @@
 import { CategorySection } from "@/components/CategorySection";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HomeBanner } from "@/components/HomeBanner";
 import { HomeSlider } from "@/components/HomeSlider";
@@ -14,6 +15,7 @@ export default function Home() {
       <SectionWithCarousel />
       <CategorySection />
       <PrivacySection />
+      <Footer />
     </>
   );
 }
