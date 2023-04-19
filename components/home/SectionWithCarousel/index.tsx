@@ -1,4 +1,4 @@
-import { BookCarousel } from "../BookCarousel";
+import { BookCarousel } from "../../BookCarousel";
 
 export function SectionWithCarousel() {
   return (
