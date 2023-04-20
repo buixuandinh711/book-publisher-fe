@@ -1,6 +1,6 @@
 export function BookCart() {
   return (
-    <div className="text-left relative bg-white w-[165px]">
+    <div className="text-left relative bg-white w-[165px] mx-auto">
       <div className="relative w-full float-left">
         <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
           - 20%

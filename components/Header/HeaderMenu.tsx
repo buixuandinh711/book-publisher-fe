@@ -1,5 +1,6 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 export function HeaderMenu() {
   return (
@@ -26,8 +27,8 @@ export function HeaderMenu() {
                   </a>
                 </li>
                 <li className="float-left relative group">
-                  <a
-                    href="/collections/all"
+                  <Link
+                    href="/catalog"
                     className="text-white bg-red-700  py-5px pr-5 pl-4 relative uppercase leading-8 block"
                   >
                     Sản phẩm{" "}
@@ -35,7 +36,7 @@ export function HeaderMenu() {
                       icon={faCaretRight}
                       className="absolute right-5px top-1/2 transform: -translate-y-1/2"
                     />
-                  </a>
+                  </Link>
                   <ul className="text-base hidden group-hover:block min-w-[210px] m-0 p-0 drop-shadow-lg border border-gray-300 absolute top-full left-0 z-50 float-left text-left list-none bg-white">
                     <li className="border-b border-b-gray-300 relative">
                       <a
