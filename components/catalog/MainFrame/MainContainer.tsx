@@ -89,7 +89,6 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      onclick="doSearch(3)"
                       href="javascript:;"
                     >
                       3
@@ -106,7 +105,6 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      onclick="doSearch(72)"
                       href="javascript:;"
                     >
                       72
@@ -115,7 +113,6 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border rounded-tr-md rounded-br-md border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      onclick="doSearch(2)"
                       href="javascript:;"
                     >
                       »
