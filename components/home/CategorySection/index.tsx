@@ -33,7 +33,7 @@ export function CategorySection() {
                         Sách mới
                       </a>
                     </h2>
-                    <span className="text-base font-semibold uppercase mt-[10px] text-white">
+                    <span className="text-base font-semibold uppercase mt-10px text-white">
                       207 sản phẩm
                     </span>
                   </div>
@@ -57,7 +57,7 @@ export function CategorySection() {
                         Sách văn học kinh điển
                       </a>
                     </h2>
-                    <span className="text-base font-semibold uppercase mt-[10px] text-white">
+                    <span className="text-base font-semibold uppercase mt-10px text-white">
                       80 sản phẩm
                     </span>
                   </div>
@@ -81,7 +81,7 @@ export function CategorySection() {
                         Sách liên kết xuất bản
                       </a>
                     </h2>
-                    <span className="text-base font-semibold uppercase mt-[10px] text-white">
+                    <span className="text-base font-semibold uppercase mt-10px text-white">
                       525 sản phẩm
                     </span>
                   </div>
@@ -105,7 +105,7 @@ export function CategorySection() {
                         Sách giảm giá
                       </a>
                     </h2>
-                    <span className="text-base font-semibold uppercase mt-[10px] text-white">
+                    <span className="text-base font-semibold uppercase mt-10px text-white">
                       126 sản phẩm
                     </span>
                   </div>
@@ -129,7 +129,7 @@ export function CategorySection() {
                         Sách quý hiếm
                       </a>
                     </h2>
-                    <span className="text-base font-semibold uppercase mt-[10px] text-white">
+                    <span className="text-base font-semibold uppercase mt-10px text-white">
                       126 sản phẩm
                     </span>
                   </div>

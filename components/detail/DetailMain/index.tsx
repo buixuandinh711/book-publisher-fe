@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function MainContent() {
+export function DetailMain() {
   return (
     <div className="container">
       <div className="-px-4">
@@ -50,7 +50,7 @@ export function MainContent() {
               >
                 Cảm ơn người đến, chẳng tiếc người đi
               </h1>
-              <div className="mb-[10px] w-full float-left">
+              <div className="mb-10px w-full float-left">
                 <div
                   className="bizweb-product-reviews-badge"
                   data-id={29817309}
@@ -67,23 +67,23 @@ export function MainContent() {
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
-                <span className="text-lg text-black ml-[10px]">
+                <span className="text-lg text-black ml-10px">
                   <span className="line-through" itemProp="priceSpecification">
                     125.000₫
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
               </div>
-              <div className="w-full float-left mb-[10px] text-sm">
+              <div className="w-full float-left mb-10px text-sm">
                 * <em>Giá sản phẩm chưa bao gồm VAT</em>
               </div>
               <ul className="p-0 w-full float-left m-0 text-sm leading-relaxed">
-                <li className="w-1/2 float-left mb-[10px]">
+                <li className="w-1/2 float-left mb-10px">
                   <span>Mã ISBN: </span>
                   <strong itemProp="sku">9786049991301</strong>
                 </li>
                 <li
-                  className="w-1/2 float-left mb-[10px]"
+                  className="w-1/2 float-left mb-10px"
                   itemScope
                   itemType="http://schema.org/ItemAvailability"
                 >
@@ -91,16 +91,16 @@ export function MainContent() {
                   <strong itemProp="supersededBy">Còn hàng</strong>
                   <em />
                 </li>
-                <li className="w-1/2 float-left mb-[10px]">
+                <li className="w-1/2 float-left mb-10px">
                   <span>Loại sách: </span>
                   <strong itemProp="model">Tản văn</strong>
                 </li>
-                <li className="w-1/2 float-left mb-[10px]">
+                <li className="w-1/2 float-left mb-10px">
                   <span>Nhà xuất bản: </span>
                   <strong itemProp="name">NXB Văn học</strong>
                 </li>
                 <li
-                  className="pb-[10px] border-b border-b-gray-300 w-1/2 float-left mb-[10px]"
+                  className="pb-10px border-b border-b-gray-300 w-1/2 float-left mb-10px"
                   itemProp="brand"
                   itemScope
                   itemType="http://schema.org/Organization"
@@ -112,7 +112,7 @@ export function MainContent() {
                 </li>
               </ul>
               {/* MÔ TẢ NGẮN */}
-              <div className="w-full float-left mb-4 pb-[10px] border-b border-b-gray-300 text-sm">
+              <div className="w-full float-left mb-4 pb-10px border-b border-b-gray-300 text-sm">
                 <div className="w-full float-left relative">
                   <label className="m-0 float-left block max-w-full font-bold">
                     Giới thiệu sản phẩm
@@ -206,7 +206,7 @@ export function MainContent() {
               {/* CHIA SẺ MẠNG XÃ HỘI */}
               <div className="w-full float-left">
                 <ul className="p-0 m-0 list-none">
-                  <li className="mr-[10px] float-left inline-block mb-0">
+                  <li className="mr-10px float-left inline-block mb-0">
                     <a
                       className="text-sky-700 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-700 hover:border-sky-700 hover:text-white"
                       href="https://www.facebook.com/Nh%C3%A0-xu%E1%BA%A5t-b%E1%BA%A3n-V%C4%83n-h%E1%BB%8Dc-475715752558826/"
@@ -216,7 +216,7 @@ export function MainContent() {
                       </span>
                     </a>
                   </li>
-                  <li className="mr-[10px] float-left inline-block mb-0">
+                  <li className="mr-10px float-left inline-block mb-0">
                     <a
                       className="text-sky-400 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-400 hover:border-sky-400 hover:text-white"
                       href="https://twitter.com/"
@@ -226,7 +226,7 @@ export function MainContent() {
                       </span>
                     </a>
                   </li>
-                  <li className="mr-[10px] float-left inline-block mb-0">
+                  <li className="mr-10px float-left inline-block mb-0">
                     <a
                       className="text-red-500 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white"
                       href="https://plus.google.com/"

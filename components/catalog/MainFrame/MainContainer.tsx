@@ -19,7 +19,7 @@ export function MainContainer() {
           <div className="flex justify-end items-center w-full float-left bg-gray-100 text-red-700">
             <div
               id="sort-by"
-              className="w-52 relative float-left py-[5px] px-[10px] text-sm text-left before:absolute before:content-['Sắp_xếp'] before:-left-12 before:top-1/2 before:-translate-y-1/2"
+              className="w-52 relative float-left py-[5px] px-10px text-sm text-left before:absolute before:content-['Sắp_xếp'] before:-left-12 before:top-1/2 before:-translate-y-1/2"
             >
               <div className="border border-gray-300 w-full float-left relative">
                 <select className="w-full float-left h-8 borde border-transparent px-4 appearance-none bg-white outline-none">

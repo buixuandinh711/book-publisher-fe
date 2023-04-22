@@ -6,7 +6,7 @@ export function PrivacySection() {
           <div className="w-full float-left">
             <div className="w-1/4 float-left relative px-4">
               <div className="border-r border-gray-300 w-full float-left inline-flex items-center">
-                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-[10px] text-center flex justify-center items-center rounded-full border-[5px] border-white border-double">
+                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-10px text-center flex justify-center items-center rounded-full border-[5px] border-white border-double">
                   <img
                     src="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_1.png?1632297125018"
                     data-lazyload="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_1.png?1632297125018"
@@ -26,7 +26,7 @@ export function PrivacySection() {
             </div>
             <div className="w-1/4 float-left relative px-4">
               <div className="border-r border-gray-300 w-full float-left inline-flex items-center">
-                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-[10px] text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_2">
+                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-10px text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_2">
                   <img
                     src="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_2.png?1632297125018"
                     data-lazyload="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_2.png?1632297125018"
@@ -46,7 +46,7 @@ export function PrivacySection() {
             </div>
             <div className="w-1/4 float-left relative px-4">
               <div className="border-r border-gray-300 w-full float-left inline-flex items-center ">
-                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-[10px] text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_3">
+                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-10px text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_3">
                   <img
                     src="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_3.png?1632297125018"
                     data-lazyload="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_3.png?1632297125018"
@@ -66,7 +66,7 @@ export function PrivacySection() {
             </div>
             <div className="w-1/4 float-left relative px-4">
               <div className="w-full float-left inline-flex items-center ">
-                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-[10px] text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_4">
+                <div className="bg-blue-500 w-[60px] h-[60px] float-left mr-10px text-center flex justify-center items-center rounded-full border-[5px] border-white border-double privacy_bg_icon_4">
                   <img
                     src="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_4.png?1632297125018"
                     data-lazyload="//bizweb.dktcdn.net/thumb/icon/100/370/339/themes/744741/assets/privacy_icon_4.png?1632297125018"

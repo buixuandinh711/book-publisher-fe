@@ -24,6 +24,7 @@ module.exports = {
         1: "1px",
         105: "105px",
         34: "34px",
+        auto: "auto",
       },
       inset: {
         "6px": "6px",
@@ -32,6 +33,7 @@ module.exports = {
       spacing: {
         "6px": "6px",
         "5px": "5px",
+        "10px": "10px",
       },
       borderWidth: {
         10: "10px",

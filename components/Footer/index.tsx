@@ -37,7 +37,7 @@ export function Footer() {
                     </a>
                   </div>
                   <div className="w-full float-left">
-                    <div className="mb-[10px] text-black text-sm">
+                    <div className="mb-10px text-black text-sm">
                       MÃ SỐ DOANH NGHIỆP: 0100111514
                     </div>
                     <div className="text-black w-full float-left text-sm">
@@ -45,46 +45,46 @@ export function Footer() {
                       <br />
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
-                        className="pr-[10px]"
+                        className="pr-10px"
                       />
                       <b className="font-bold">Trụ sở:</b> 18 Nguyễn Trường Tộ -
                       Ba Đình - Hà Nội
                       <br />
-                      <FontAwesomeIcon icon={faPhone} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faPhone} className="pr-10px" />
                       <b className="font-bold">Điện thoại:</b> 024.37161518 -
                       024.37163409
                       <br />{" "}
-                      <FontAwesomeIcon icon={faFax} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faFax} className="pr-10px" />
                       <b className="font-bold">Fax:</b> 024.38294781
                       <br />
-                      <FontAwesomeIcon icon={faGlobe} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faGlobe} className="pr-10px" />
                       <b className="font-bold">Website: </b>www.nxbvanhoc.com;
                       www.nxbvanhoc.com.vn
                       <br />
                       <FontAwesomeIcon
                         icon={faEnvelope}
-                        className="pr-[10px]"
+                        className="pr-10px"
                       />
                       <b className="font-bold">E-mail: </b>info@nxbvanhoc.com.vn
                       <br />
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
-                        className="pr-[10px]"
+                        className="pr-10px"
                       />
                       <b className="font-bold">
                         {" "}
                         Chi nhánh tại TP. Hồ Chí Minh
                       </b>
                       : 290/20 Nam Kỳ Khởi Nghĩa - Quận 3<br />
-                      <FontAwesomeIcon icon={faPhone} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faPhone} className="pr-10px" />
                       <b className="font-bold">Điện thoại:</b> 0983128138
                       <br />{" "}
-                      <FontAwesomeIcon icon={faFax} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faFax} className="pr-10px" />
                       <b className="font-bold">Fax:</b> 028.38483481
                       <br />
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
-                        className="pr-[10px]"
+                        className="pr-10px"
                       />
                       <b className="font-bold">
                         {" "}
@@ -92,7 +92,7 @@ export function Footer() {
                       </b>
                       : 344 đường Trưng Nữ Vương - TP. Đà Nẵng
                       <br />
-                      <FontAwesomeIcon icon={faPhone} className="pr-[10px]" />
+                      <FontAwesomeIcon icon={faPhone} className="pr-10px" />
                       <b className="font-bold">Điện thoại - Fax:</b> 0236.
                       3888333 <br />
                       <b />
@@ -106,7 +106,7 @@ export function Footer() {
                     <span>Chính sách</span>
                   </h4>
                   <ul className="mb-4 leading-4 w-full float-left p-0 list-none m-0">
-                    <li className="pb-[10px] w-full float-left text-gray-800">
+                    <li className="pb-10px w-full float-left text-gray-800">
                       <a
                         href="/chinh-sach-bao-mat"
                         className="float-left text-sm text-black"
@@ -128,10 +128,10 @@ export function Footer() {
                     <span>Hướng dẫn</span>
                   </h4>
                   <ul className="mb-4 leading-4 w-full float-left p-0 list-none m-0">
-                    <li className="pb-[10px] w-full float-left text-gray-800">
+                    <li className="pb-10px w-full float-left text-gray-800">
                       <a href="/huong-dan">Hướng dẫn mua hàng</a>
                     </li>
-                    <li className="pb-[10px] w-full float-left text-gray-800">
+                    <li className="pb-10px w-full float-left text-gray-800">
                       <a href="/huong-dan">Hướng dẫn thanh toán</a>
                     </li>
                     <li className="w-full float-left text-gray-800">
@@ -140,7 +140,7 @@ export function Footer() {
                   </ul>
                   <div className="w-full float-left mt-4">
                     <ul className="p-0 m-0 list-none">
-                      <li className="mr-[10px] float-left inline-block mb-0">
+                      <li className="mr-10px float-left inline-block mb-0">
                         <a
                           className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-700 hover:border-sky-700 hover:text-white"
                           href="https://www.facebook.com/Nh%C3%A0-xu%E1%BA%A5t-b%E1%BA%A3n-V%C4%83n-h%E1%BB%8Dc-475715752558826/"
@@ -153,7 +153,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-[10px] float-left inline-block mb-0">
+                      <li className="mr-10px float-left inline-block mb-0">
                         <a
                           className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-400 hover:border-sky-400 hover:text-white"
                           href="https://twitter.com/"
@@ -166,7 +166,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-[10px] float-left inline-block mb-0">
+                      <li className="mr-10px float-left inline-block mb-0">
                         <a
                           className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white"
                           href="https://plus.google.com/"
@@ -179,7 +179,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-[10px] float-left inline-block mb-0">
+                      <li className="mr-10px float-left inline-block mb-0">
                         <a
                           className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-600 hover:border-red-600 hover:text-white"
                           href="https://www.youtube.com"

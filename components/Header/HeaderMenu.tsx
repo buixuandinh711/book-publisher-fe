@@ -40,7 +40,7 @@ export function HeaderMenu() {
                   <ul className="text-base hidden group-hover:block min-w-[210px] m-0 p-0 drop-shadow-lg border border-gray-300 absolute top-full left-0 z-50 float-left text-left list-none bg-white">
                     <li className="border-b border-b-gray-300 relative">
                       <a
-                        className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                         href="/sach-moi"
                       >
                         Sách mới
@@ -69,7 +69,7 @@ export function HeaderMenu() {
 
                     <li className="border-b border-b-gray-300 relative">
                       <a
-                        className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                         href="/van-hoc-kinh-dien"
                       >
                         Sách văn học kinh điển
@@ -78,7 +78,7 @@ export function HeaderMenu() {
 
                     <li className="dropdown-submenu border-b border-b-gray-300 relative">
                       <a
-                        className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                         href="/sach-lien-ket-xuat-ban-moi"
                       >
                         Sách liên kết xuất bản{" "}
@@ -86,14 +86,14 @@ export function HeaderMenu() {
                       </a>
                       {/* <ul className="dropdown-menu">
                         <li className="nav-item-lv3">
-                          <a className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black" href="/sach-tac-gia">
+                          <a className="relative py-10px px-5 block clear-both font-normal leading-snug text-black" href="/sach-tac-gia">
                             Sách liên kết tác giả
                           </a>
                         </li>
 
                         <li className="nav-item-lv3">
                           <a
-                            className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                            className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                             href="/sach-lien-ket-xuat-ban-moi"
                           >
                             Sách liên kết với các công ty sách
@@ -104,7 +104,7 @@ export function HeaderMenu() {
 
                     <li className="border-b border-b-gray-300 relative">
                       <a
-                        className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                         href="/sach-giam-gia"
                       >
                         Sách giảm giá
@@ -113,7 +113,7 @@ export function HeaderMenu() {
 
                     <li className="relative">
                       <a
-                        className="relative py-[10px] px-5 block clear-both font-normal leading-snug text-black"
+                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
                         href="/"
                       >
                         Sách quý hiếm
