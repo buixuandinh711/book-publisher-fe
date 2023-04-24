@@ -1,14 +1,16 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { BookCart } from "../BookCart";
+import { BookCart, BookCartProps } from "../BookCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleLeft,
-  faAngleRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-export function BookCarousel() {
+export interface BookCarouselProps {
+  header: string;
+  booksList: BookCartProps[];
+}
+
+export function BookCarousel({ header, booksList }: BookCarouselProps) {
   return (
     <div className="w-full float-left">
       <div className="w-full float-left">
@@ -18,29 +20,20 @@ export function BookCarousel() {
             title="Sách giảm giá"
             className="font-bold text-lg py-[5px] pr-[15px] relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-[15px] after:-bottom-[3px] after:h-[3px]"
           >
-            <span>Sách giảm giá</span>
+            <span>{header}</span>
           </a>
         </h2>
       </div>
       <div className="w-full float-left">
         <Slider
-          slidesToShow={6}
+          slidesToShow={booksList.length < 6 ? booksList.length : 6}
           prevArrow={<PrevArrow />}
           nextArrow={<NextArrow />}
+          variableWidth
         >
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
-          <BookCart />
+          {booksList.map((book) => (
+            <BookCart {...book} key={book.id} />
+          ))}
         </Slider>
       </div>
     </div>
