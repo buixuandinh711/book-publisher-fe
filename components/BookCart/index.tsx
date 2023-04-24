@@ -36,7 +36,7 @@ export function BookCart({
         </Link>
       </div>
       <div className="w-full float-left z-10 relative pb-3 min-h-105">
-        <h3 className="min-h-34 overflow-hidden text-ellipsis line-clamp-2 w-full float-left text-base text-red-700 text-center my-3 leading-normal">
+        <h3 className="min-h-[50px] overflow-hidden text-ellipsis line-clamp-2 w-full float-left text-base text-red-700 text-center my-3 leading-normal">
           <Link
             href={`/detail/${id}`}
             title={name}

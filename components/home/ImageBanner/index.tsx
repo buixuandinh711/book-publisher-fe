@@ -13,7 +13,7 @@ export function ImageBanner({ bannersList }: ImageBannerProps) {
     <section className="py-8 cursor-pointer w-full float-left">
       <div className="container">
         <div className="-mx-4">
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-around">
             {bannersList.map((banner) => (
               <a href={banner.link} title={banner.title}>
                 <img src={banner.imageSrc} />
