@@ -3,7 +3,7 @@ import Link from "next/link";
 export interface BookCartProps {
   id: number;
   name: string;
-  imageSrc: string;
+  image: string;
   originalPrice: number;
   discountPrice: number;
   discountPercent: number;
@@ -12,7 +12,7 @@ export interface BookCartProps {
 export function BookCart({
   id,
   name,
-  imageSrc,
+  image,
   originalPrice,
   discountPrice,
   discountPercent,
@@ -29,7 +29,7 @@ export function BookCart({
           className="h-56 flex items-center justify-center text-center"
         >
           <img
-            src={imageSrc}
+            src={image}
             alt="Sắc nặng hồn thanh nhẹ"
             className="align-middle border-0 max-w-full max-h-full w-auto h-52 mx-auto object-cover"
           />

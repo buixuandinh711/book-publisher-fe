@@ -14,8 +14,8 @@ export function ImageBanner({ bannersList }: ImageBannerProps) {
       <div className="container">
         <div className="-mx-4">
           <div className="flex gap-4 justify-around">
-            {bannersList.map((banner) => (
-              <a href={banner.link} title={banner.title}>
+            {bannersList.map((banner, index) => (
+              <a href={banner.link} title={banner.title} key={index}>
                 <img src={banner.imageSrc} />
               </a>
             ))}

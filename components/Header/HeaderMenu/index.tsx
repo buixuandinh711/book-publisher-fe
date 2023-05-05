@@ -37,7 +37,7 @@ export function HeaderMenu() {
                       className="absolute right-5px top-1/2 transform: -translate-y-1/2"
                     />
                   </Link>
-                  <ul className="text-base hidden group-hover:block min-w-[210px] m-0 p-0 drop-shadow-lg border border-gray-300 absolute top-full left-0 z-50 float-left text-left list-none bg-white">
+                  <ul className="text-base group-hover:block hidden min-w-[210px] m-0 p-0 drop-shadow-lg border border-gray-300 absolute top-full left-0 z-50 float-left text-left list-none bg-white">
                     <li className="border-b border-b-gray-300 relative">
                       <a
                         className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"

@@ -12,7 +12,7 @@ export function BookOverview() {
                     data-tab="product_tab_1"
                   >
                     <a
-                      href="javascript:;"
+                      href=""
                       className="bg-red-700 text-white font-bold text-sm py-10px px-4 float-left relative z-10 leading-relaxed"
                     >
                       <span>Mô tả</span>
@@ -23,7 +23,7 @@ export function BookOverview() {
                     data-tab="product_tab_2"
                   >
                     <a
-                      href="javascript:;"
+                      href=""
                       className="bg-white text-red-700 font-bold text-sm py-10px px-4 float-left relative z-10 leading-relaxed"
                     >
                       <span>Đại lý</span>
@@ -35,7 +35,7 @@ export function BookOverview() {
                     data-tab="product_tab_3"
                   >
                     <a
-                      href="javascript:;"
+                      href=""
                       className="bg-white text-red-700 font-bold text-sm py-10px px-4 float-left relative z-10 leading-relaxed"
                     >
                       <span>Hướng dẫn mua hàng</span>
@@ -47,7 +47,7 @@ export function BookOverview() {
                     data-tab="product_tab_4"
                   >
                     <a
-                      href="javascript:;"
+                      href=""
                       className="bg-white text-red-700 font-bold text-sm py-10px px-4 float-left relative z-10 leading-relaxed"
                     >
                       <span>Tags</span>
@@ -59,7 +59,7 @@ export function BookOverview() {
                     data-tab="product_tab_5"
                   >
                     <a
-                      href="javascript:;"
+                      href=""
                       className="bg-white text-red-700 font-bold text-sm py-10px px-4 float-left relative z-10 leading-relaxed"
                     >
                       <span>Đánh giá</span>

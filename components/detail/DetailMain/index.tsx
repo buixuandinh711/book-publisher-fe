@@ -1,3 +1,4 @@
+import { BookCartProps } from "@/components/BookCart";
 import {
   faFacebookF,
   faGooglePlus,
@@ -6,7 +7,31 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function DetailMain() {
+export interface DetailMainProps extends BookCartProps {
+  isbn: string;
+  category: string;
+  author: string;
+  publicationYear: number;
+  description: string;
+  additionProps: {
+    name: string;
+    value: string;
+  }[];
+}
+
+export function DetailMain({
+  name,
+  image,
+  originalPrice,
+  discountPrice,
+  discountPercent,
+  isbn,
+  category,
+  author,
+  publicationYear,
+  description,
+  additionProps,
+}: DetailMainProps) {
   return (
     <div className="container">
       <div className="-px-4">
@@ -14,19 +39,19 @@ export function DetailMain() {
           <div className="-px-4">
             <div className="w-1/2 float-left relative px-4">
               <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
-                -20%
+                {`-${discountPercent}%`}
               </div>
               <div className="h-[521x] bg-gray-100 mb-4">
                 <a
-                  href="//bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/cam-on-nguoi-den-chang-tiec-nguoi-di.jpg?v=1677640434387"
+                  href={image}
                   data-rel="prettyPhoto[product-gallery]"
                   className="flex justify-center items-center h-full"
                 >
                   <div className="!w-full !h-full flex justify-center items-center">
                     <img
                       id="img_01"
-                      src="//bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/cam-on-nguoi-den-chang-tiec-nguoi-di.jpg?v=1677640434387"
-                      alt="Cảm ơn người đến, chẳng tiếc người đi"
+                      src={image}
+                      alt={name}
                       className="w-auto max-w-full inline-block h-auto static max-h-full align-middle"
                     />
                   </div>
@@ -48,28 +73,21 @@ export function DetailMain() {
                 className="text-2xl mb-4 w-full float-left font-bold"
                 itemProp="name"
               >
-                Cảm ơn người đến, chẳng tiếc người đi
+                {name}
               </h1>
               <div className="mb-10px w-full float-left">
-                <div
-                  className="bizweb-product-reviews-badge"
-                  data-id={29817309}
-                />
+                <div className="bizweb-product-reviews-badge" />
               </div>
-              <div
-                className="mb-4 w-full float-left"
-                itemScope
-                itemType="http://schema.org/Offer"
-              >
+              <div className="mb-4 w-full float-left">
                 <span className="text-2xl text-black font-bold">
                   <span className="" itemProp="price">
-                    100.000₫
+                    {`${discountPrice}₫`}
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
                 <span className="text-lg text-black ml-10px">
                   <span className="line-through" itemProp="priceSpecification">
-                    125.000₫
+                    {`${originalPrice}₫`}
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
@@ -80,20 +98,16 @@ export function DetailMain() {
               <ul className="p-0 w-full float-left m-0 text-sm leading-relaxed">
                 <li className="w-1/2 float-left mb-10px">
                   <span>Mã ISBN: </span>
-                  <strong itemProp="sku">9786049991301</strong>
+                  <strong itemProp="sku">{isbn || "Đang cập nhật"}</strong>
                 </li>
-                <li
-                  className="w-1/2 float-left mb-10px"
-                  itemScope
-                  itemType="http://schema.org/ItemAvailability"
-                >
+                <li className="w-1/2 float-left mb-10px">
                   <span>Tình trạng: </span>
                   <strong itemProp="supersededBy">Còn hàng</strong>
                   <em />
                 </li>
                 <li className="w-1/2 float-left mb-10px">
                   <span>Loại sách: </span>
-                  <strong itemProp="model">Tản văn</strong>
+                  <strong itemProp="model">{category}</strong>
                 </li>
                 <li className="w-1/2 float-left mb-10px">
                   <span>Nhà xuất bản: </span>
@@ -120,15 +134,18 @@ export function DetailMain() {
                   {/* <em className="fa fa-minus" aria-hidden="true" /> */}
                 </div>
                 <div className="block w-full float-left text-xs mt-2">
-                  <p className="mb-[15px]">
-                    ✓ Tác giả: Tiểu Quỹ (Châu Mỹ Anh dịch)
-                  </p>
-                  <p className="mb-[15px]">✓ Năm&nbsp;xuất bản: 2023</p>
-                  <p className="mb-[15px]">
+                  <p className="mb-[15px]">{`✓ Tác giả: ${author}`}</p>
+                  <p className="mb-[15px]">{`✓ Năm xuất bản: ${publicationYear}`}</p>
+                  {additionProps.map((item, index) => (
+                    <p className="mb-[15px]" key={index}>
+                      {`✓ ${item.name}: ${item.value}`}
+                    </p>
+                  ))}
+                  {/* <p className="mb-[15px]">
                     ✓ Kích thước: 14,5&nbsp;x 20,5&nbsp;cm
                   </p>
                   <p className="mb-[15px]">✓ Số trang: 330</p>
-                  <p className="mb-[15px]">✓ Loại bìa: Bìa mềm</p>
+                  <p className="mb-[15px]">✓ Loại bìa: Bìa mềm</p> */}
                 </div>
               </div>
               {/* END MÔ TẢ NGẮN */}

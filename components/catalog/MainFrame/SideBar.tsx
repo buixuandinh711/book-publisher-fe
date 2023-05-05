@@ -8,7 +8,7 @@ export function SideBar() {
         <div className="w-full float-left mb-5">
           <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
             <a
-              href="javascript:;"
+              href=""
               className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
             >
               <span>Danh mục sản phẩm</span>
@@ -201,7 +201,7 @@ export function SideBar() {
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
               <a
-                href="javascript:;"
+                href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Giá sản phẩm</span>
@@ -302,7 +302,7 @@ export function SideBar() {
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
               <a
-                href="javascript:;"
+                href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Loại tác phẩm</span>
@@ -1348,7 +1348,7 @@ export function SideBar() {
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
               <a
-                href="javascript:;"
+                href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Đơn vị liên kết xuất bản</span>
@@ -3027,7 +3027,7 @@ export function SideBar() {
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
               <a
-                href="javascript:;"
+                href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Độ tuổi</span>
@@ -3117,7 +3117,7 @@ export function SideBar() {
         <div className="module-header">
           <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
             <a
-              href="javascript:;"
+              href=""
               className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
             >
               <span>Sản phẩm bán chạy</span>

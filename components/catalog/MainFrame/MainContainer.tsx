@@ -1,6 +1,63 @@
-import { BookCart } from "@/components/BookCart";
+import { BookCart, BookCartProps } from "@/components/BookCart";
 import { faAngleDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const newBoosList: BookCartProps[] = [
+  {
+    id: 1,
+    name: "Tự sự một người đặc biệt",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/tu-su-mot-nguoi-dac-biet.jpg?v=1666687371933",
+    originalPrice: 88000,
+    discountPrice: 70400,
+    discountPercent: 20,
+  },
+  {
+    id: 2,
+    name: "Truyện ngắn hay 2022",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/truyen-ngan-hay-2022.png?v=1663055389627",
+    originalPrice: 120000,
+    discountPrice: 96000,
+    discountPercent: 20,
+  },
+  {
+    id: 3,
+    name: "Sách nặng hồn thanh nhẹ",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/sac-nang-hon-thanh-nhe-bia-1.jpg?v=1669364038113",
+    originalPrice: 88000,
+    discountPrice: 70400,
+    discountPercent: 20,
+  },
+  {
+    id: 4,
+    name: "Từ sự mất ngủ của ruồi",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/tu-su-mat-ngu-cua-ruoi.png?v=1661920070393",
+    originalPrice: 66000,
+    discountPrice: 52800,
+    discountPercent: 20,
+  },
+  {
+    id: 5,
+    name: "Nông dân với địa chủ",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/1.png?v=1661748946813",
+    originalPrice: 69000,
+    discountPrice: 55200,
+    discountPercent: 20,
+  },
+  {
+    id: 6,
+    name: "Đới Đăng",
+    image:
+      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/20220722-101045.jpg?v=1658459565027",
+    originalPrice: 260000,
+    discountPrice: 208000,
+    discountPercent: 20,
+  },
+];
 
 export function MainContainer() {
   return (
@@ -45,18 +102,9 @@ export function MainContainer() {
           <section className="w-full float-left block">
             <div className="-mx-4">
               <div className="mb-8 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-flow-row gap-y-8">
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
-                <BookCart />
+                {newBoosList.map((book) => (
+                  <BookCart {...book} />
+                ))}
               </div>
             </div>
             <div className="text-xs-right">
@@ -73,7 +121,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       1
                     </a>
@@ -81,7 +129,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       2
                     </a>
@@ -89,7 +137,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       3
                     </a>
@@ -97,7 +145,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       ...
                     </a>
@@ -105,7 +153,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       72
                     </a>
@@ -113,7 +161,7 @@ export function MainContainer() {
                   <li className="float-left inline">
                     <a
                       className="-ml-[1px] w-10 h-10 text-sm border rounded-tr-md rounded-br-md border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white"
-                      href="javascript:;"
+                      href=""
                     >
                       »
                     </a>
