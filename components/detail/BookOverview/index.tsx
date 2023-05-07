@@ -1,4 +1,8 @@
-export function BookOverview() {
+export interface BookOverviewProps {
+  description: string;
+}
+
+export function BookOverview({ description }: BookOverviewProps) {
   return (
     <div className="w-full float-left mb-8">
       <div className="container">
@@ -72,32 +76,11 @@ export function BookOverview() {
                   className="opacity-100 visible h-auto block py-8 px-4 text-xs w-full float-left border border-gray-300 overflow-hidden"
                 >
                   <div className="rte">
-                    <p style={{ textAlign: "justify" }}>
-                      “Có một triết lý hiển nhiên và quen thuộc là một anh chàng
-                      đơn thân giàu có hẳn phải cần một người vợ”. Đó là câu mở
-                      đầu đáng nhớ của “Kiêu hãnh và định kiến” - cuốn tiểu
-                      thuyết nổi tiếng hàng đầu thế giới được Jane Austen viết
-                      khi mới vừa đôi mươi.
-                    </p>
-                    <p style={{ textAlign: "justify" }}>
-                      Được đặt trong bối cảnh những năm 1800, tại thị trấn hư
-                      cấu Merton, “Kiêu hãnh và định kiến” là câu chuyện tình
-                      yêu giàu cảm xúc của năm cô con gái nhà Bennett, đặc biệt
-                      là chuyện tình giữa Elizabeth Bennet - cô con gái thứ hai,
-                      và Fitzwilliam Darcy - một quý tộc giàu có và nhiều danh
-                      vọng.
-                    </p>
-                    <p style={{ textAlign: "justify" }}>
-                      Tính kiêu hãnh về giai cấp và tài sản của mình cùng định
-                      kiến về vị thế thấp kém của gia đình Bennett khiến Darcy
-                      lúc đầu muốn tránh xa Elizabeth, trong khi sự kiêu hãnh vì
-                      lòng tự trọng của Elizabeth cũng như định kiến về cung
-                      cách trưởng giả của Darcy đã khiến cô trở thành một người
-                      con gái đặc biệt và duy nhất trong mắt Darcy. Elizabeth
-                      xinh đẹp, với cá tính nhạy bén, dí dỏm và cứng cỏi, được
-                      xem là một trong những nhân vật lôi cuốn nhất trong nền
-                      văn học Anh.
-                    </p>
+                    {description.split("\n").map((content, index) => (
+                      <p className="mb-4" key={index}>
+                        {content}
+                      </p>
+                    ))}
                   </div>
                 </div>
                 <div

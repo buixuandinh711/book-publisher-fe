@@ -1,7 +1,7 @@
 import { BookCartProps } from "@/components/BookCart";
+import { orUpdating } from "@/utils/utils";
 import {
   faFacebookF,
-  faGooglePlus,
   faGooglePlusG,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
@@ -12,7 +12,6 @@ export interface DetailMainProps extends BookCartProps {
   category: string;
   author: string;
   publicationYear: number;
-  description: string;
   additionProps: {
     name: string;
     value: string;
@@ -29,7 +28,6 @@ export function DetailMain({
   category,
   author,
   publicationYear,
-  description,
   additionProps,
 }: DetailMainProps) {
   return (
@@ -81,13 +79,13 @@ export function DetailMain({
               <div className="mb-4 w-full float-left">
                 <span className="text-2xl text-black font-bold">
                   <span className="" itemProp="price">
-                    {`${discountPrice}₫`}
+                    {`${discountPrice.toLocaleString()}₫`}
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
                 <span className="text-lg text-black ml-10px">
                   <span className="line-through" itemProp="priceSpecification">
-                    {`${originalPrice}₫`}
+                    {`${originalPrice.toLocaleString()}₫`}
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
@@ -113,16 +111,9 @@ export function DetailMain({
                   <span>Nhà xuất bản: </span>
                   <strong itemProp="name">NXB Văn học</strong>
                 </li>
-                <li
-                  className="pb-10px border-b border-b-gray-300 w-1/2 float-left mb-10px"
-                  itemProp="brand"
-                  itemScope
-                  itemType="http://schema.org/Organization"
-                >
-                  <span>Liên kết xuất bản: </span>
-                  <strong itemProp="name">
-                    Công ty TNHH Văn hóa và Truyền thông AZ Việt Nam
-                  </strong>
+                <li className="pb-10px border-b border-b-gray-300 w-1/2 float-left mb-4">
+                  <span>Tác giả: </span>
+                  <strong itemProp="name">{orUpdating(author)}</strong>
                 </li>
               </ul>
               {/* MÔ TẢ NGẮN */}
@@ -134,18 +125,14 @@ export function DetailMain({
                   {/* <em className="fa fa-minus" aria-hidden="true" /> */}
                 </div>
                 <div className="block w-full float-left text-xs mt-2">
-                  <p className="mb-[15px]">{`✓ Tác giả: ${author}`}</p>
-                  <p className="mb-[15px]">{`✓ Năm xuất bản: ${publicationYear}`}</p>
+                  <p className="mb-[15px]">{`✓ Năm xuất bản: ${orUpdating(
+                    publicationYear
+                  )}`}</p>
                   {additionProps.map((item, index) => (
                     <p className="mb-[15px]" key={index}>
-                      {`✓ ${item.name}: ${item.value}`}
+                      {`✓ ${item.name}: ${orUpdating(item.value)}`}
                     </p>
                   ))}
-                  {/* <p className="mb-[15px]">
-                    ✓ Kích thước: 14,5&nbsp;x 20,5&nbsp;cm
-                  </p>
-                  <p className="mb-[15px]">✓ Số trang: 330</p>
-                  <p className="mb-[15px]">✓ Loại bìa: Bìa mềm</p> */}
                 </div>
               </div>
               {/* END MÔ TẢ NGẮN */}
@@ -216,7 +203,7 @@ export function DetailMain({
               <div className="border border-gray-300 inline-block mb-5 bg-gray-100 py-4 px-2 rounded-md text-black text-sm">
                 Số điện thoại hotline:{" "}
                 <a href="tel:0904907492" className="text-red-700">
-                  0904907492{" "}
+                  0971443322{" "}
                 </a>
                 (tất cả các ngày trong tuần từ 08:00 - 20:00)
               </div>
