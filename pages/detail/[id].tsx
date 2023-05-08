@@ -13,15 +13,13 @@ export default function Catalog({
 }: {
   book: DetailMainProps & BookOverviewProps;
 }) {
-  console.log(book);
-
   return (
     <>
       <BreadScumb />
       <div className="w-full float-left pt-8">
         <DetailMain {...book} />
         <BookOverview description={book.description} />
-        <RelatedBook />
+        <RelatedBook id={book.id} />
         <RecentBook />
       </div>
     </>
@@ -31,11 +29,17 @@ export default function Catalog({
 export const getServerSideProps: GetServerSideProps<{
   book: DetailMainProps & BookOverviewProps;
 }> = async (context) => {
-  const id = context.params!.id;
-  const res = await fetch(`http://127.0.0.1:5000/books/detail/${id}`);
-  console.log(res);
+  let data = [];
+  try {
+    const id = context.params!.id;
+    const res = await fetch(
+      `http://${process.env.NEXT_PUBLIC_HOST}/books/detail/${id}`
+    );
 
-  const data = await res.json();
+    data = await res.json();
+  } catch (error) {
+    console.log(error);
+  }
 
   return {
     props: {

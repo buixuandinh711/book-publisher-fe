@@ -1,28 +1,15 @@
 import { BookCarousel } from "@/components/BookCarousel";
 import { BookCartProps } from "@/components/BookCart";
+import useSWR from "swr";
 
-const relatedBooks: BookCartProps[] = [
-  {
-    id: 1,
-    name: "Tự sự một người đặc biệt",
-    imageSrc:
-      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/tu-su-mot-nguoi-dac-biet.jpg?v=1666687371933",
-    originalPrice: 88000,
-    discountPrice: 70400,
-    discountPercent: 20,
-  },
-  {
-    id: 2,
-    name: "Truyện ngắn hay 2022",
-    imageSrc:
-      "https://bizweb.dktcdn.net/thumb/1024x1024/100/370/339/products/truyen-ngan-hay-2022.png?v=1663055389627",
-    originalPrice: 120000,
-    discountPrice: 96000,
-    discountPercent: 20,
-  },
-];
+const relatedBooks: BookCartProps[] = [];
 
-export function RelatedBook() {
+export function RelatedBook({ id }: { id: number }) {
+  const { data, error } = useSWR<BookCartProps[]>(
+    `http://${process.env.NEXT_PUBLIC_HOST}/books/relate/${id}`,
+    (apiURL: string) => fetch(apiURL).then((res) => res.json())
+  );
+
   return (
     <div className="w-full float-left mb-8 overflow-hidden">
       <div className="container">
@@ -31,7 +18,7 @@ export function RelatedBook() {
             <div className="w-full float-left">
               <BookCarousel
                 header={"Sản phẩm liên quan"}
-                booksList={relatedBooks}
+                booksList={error || !data ? [] : data}
               />
             </div>
           </div>

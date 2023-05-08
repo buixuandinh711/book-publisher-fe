@@ -18,8 +18,6 @@ export default function Home({
   discountBooks: BookCartProps[];
   popularBooks: BookCartProps[];
 }) {
-  console.log("get data", newBooks, classicBooks, discountBooks, popularBooks);
-
   return (
     <>
       <HomeSlider />
