@@ -12,10 +12,9 @@ export interface DetailMainProps extends BookCartProps {
   category: string;
   author: string;
   publicationYear: number;
-  additionProps: {
-    name: string;
-    value: string;
-  }[];
+  dimemsions: string;
+  numPages: number;
+  coverType: string;
 }
 
 export function DetailMain({
@@ -28,8 +27,12 @@ export function DetailMain({
   category,
   author,
   publicationYear,
-  additionProps,
+  dimemsions,
+  numPages,
+  coverType,
 }: DetailMainProps) {
+  console.log(discountPrice);
+  
   return (
     <div className="container">
       <div className="-px-4">
@@ -128,11 +131,15 @@ export function DetailMain({
                   <p className="mb-[15px]">{`✓ Năm xuất bản: ${orUpdating(
                     publicationYear
                   )}`}</p>
-                  {additionProps.map((item, index) => (
-                    <p className="mb-[15px]" key={index}>
-                      {`✓ ${item.name}: ${orUpdating(item.value)}`}
-                    </p>
-                  ))}
+                  <p className="mb-[15px]">
+                    {`✓ Kích thước: ${orUpdating(dimemsions)}`}
+                  </p>
+                  <p className="mb-[15px]">
+                    {`✓ Số trang: ${orUpdating(numPages)}`}
+                  </p>
+                  <p className="mb-[15px]">
+                    {`✓ Loại bìa: ${orUpdating(coverType)}`}
+                  </p>
                 </div>
               </div>
               {/* END MÔ TẢ NGẮN */}
