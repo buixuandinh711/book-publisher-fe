@@ -1,7 +1,8 @@
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
-export function SideBar() {
+export function CatalogSideBar() {
   return (
     <aside className="mb-8 relative  w-1/4 float-left min-h-[1px] px-4">
       <div className="mb-8 w-full float-left">
@@ -19,155 +20,48 @@ export function SideBar() {
           <div className="w-full float-left">
             <ul className="w-full float-left m-0 list-none pl-4">
               <li className="w-full float-left block relative">
-                <a
+                <Link
                   className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/sach-moi"
+                  href="/catalog/new"
                   title="Sách mới"
                 >
                   <span>Sách mới</span>
                   &nbsp;
                   <span className="object_count">(207)</span>
-                </a>
-                {/* <em>
-                  <i className="fa fa-plus" aria-hidden="true" />
-                </em> */}
-                {/* <ul style={{ display: "none" }} className="lv2">
-                  <li>
-                    <a
-                      className="ajaxLayer a_lv2"
-                      href="/van-hoc-trong-nuoc"
-                      title="Sách văn học Việt Nam"
-                    >
-                      <span>Sách văn học Việt Nam</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="ajaxLayer a_lv2"
-                      href="/van-hoc-nuoc-ngoai"
-                      title="Sách văn học nước ngoài"
-                    >
-                      <span>Sách văn học nước ngoài</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="ajaxLayer a_lv2"
-                      href="/sach-thieu-nhi"
-                      title="Sách thiếu nhi"
-                    >
-                      <span>Sách thiếu nhi</span>
-                    </a>
-                  </li>
-                </ul> */}
+                </Link>
               </li>
               <li className="w-full float-left block relative">
-                <a
+                <Link
                   className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/van-hoc-kinh-dien"
+                  href="/catalog/classic"
                   title="Sách văn học kinh điển"
                 >
                   <span>Sách văn học kinh điển</span>
                   &nbsp;
                   <span className="object_count">(80)</span>
-                </a>
+                </Link>
               </li>
               <li className="w-full float-left block relative">
-                <a
+                <Link
                   className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/sach-lien-ket-xuat-ban-moi"
+                  href="/catalog/popular"
                   title="Sách liên kết xuất bản"
                 >
-                  <span>Sách liên kết xuất bản</span>
+                  <span>Sách phổ biến</span>
                   &nbsp;
                   <span className="object_count">(525)</span>
-                </a>
-                {/* <em>
-                  <i className="fa fa-plus" aria-hidden="true" />
-                </em> */}
-                {/* <ul style={{ display: "none" }} className="lv2">
-                  <li>
-                    <a
-                      className="ajaxLayer a_lv2"
-                      href="/sach-tac-gia"
-                      title="Sách liên kết tác giả"
-                    >
-                      <span>Sách liên kết tác giả</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="ajaxLayer a_lv2"
-                      href="/sach-lien-ket-xuat-ban-moi"
-                      title="Sách liên kết với các công ty sách"
-                    >
-                      <span>Sách liên kết với các công ty sách</span>
-                    </a>
-                    <em>
-                      <i className="fa fa-plus" aria-hidden="true" />
-                    </em>
-                    <ul style={{ display: "none" }} className="lv3">
-                      <li>
-                        <a
-                          className="ajaxLayer a_lv3"
-                          href="/sach-lien-ket-moi"
-                          title="Sách liên kết mới"
-                        >
-                          <span>Sách liên kết mới</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="ajaxLayer a_lv3"
-                          href="/sa-ch-van-ho-c-vie-t-nam-lien-ke-t"
-                          title="Sách văn học Việt Nam liên kết"
-                        >
-                          <span>Sách văn học Việt Nam liên kết</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="ajaxLayer a_lv3"
-                          href="/sa-ch-van-ho-c-nuo-c-ngoa-i-lien-ke-t"
-                          title="Sách văn học Nước ngoài liên kết"
-                        >
-                          <span>Sách văn học Nước ngoài liên kết</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="ajaxLayer a_lv3"
-                          href="/sa-ch-thie-u-nhi-lien-ke-t"
-                          title="Sách thiêu nhi liên kết"
-                        >
-                          <span>Sách thiêu nhi liên kết</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul> */}
+                </Link>
               </li>
               <li className="w-full float-left block relative">
-                <a
+                <Link
                   className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/sach-giam-gia"
+                  href="/catalog/discount"
                   title="Sách giảm giá"
                 >
                   <span>Sách giảm giá</span>
                   &nbsp;
                   <span className="object_count">(126)</span>
-                </a>
-              </li>
-              <li className="w-full float-left block relative">
-                <a
-                  className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/"
-                  title="Sách quý hiếm"
-                >
-                  <span>Sách quý hiếm</span>
-                  &nbsp;
-                  <span className="object_count">(525)</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -175,37 +69,16 @@ export function SideBar() {
       </div>
       {/* FILTERS */}
       <div className="mb-8 w-full float-left">
-        {/* <div className="filter-container hidden">
-          <div
-            className="filter-container__selected-filter"
-            style={{ display: "none" }}
-          >
-            <div className="filter-container__selected-filter-header clearfix">
-              <span className="filter-container__selected-filter-header-title">
-                <i className="fa fa-arrow-left hidden-sm-up" /> Bạn chọn
-              </span>
-              <a
-                href="javascript:void(0)"
-                className="filter-container__clear-all"
-              >
-                Bỏ hết <i className="fa fa-angle-right" />
-              </a>
-            </div>
-            <div className="filter-container__selected-filter-list">
-              <ul />
-            </div>
-          </div>
-        </div> */}
         {/* LỌC GIÁ */}
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <a
+              <Link
                 href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Giá sản phẩm</span>
-              </a>
+              </Link>
             </h2>
           </div>
           <div className="w-full float-left bg-gray-100 py-4 pr-1">
@@ -301,12 +174,12 @@ export function SideBar() {
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <a
+              <Link
                 href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Loại tác phẩm</span>
-              </a>
+              </Link>
             </h2>
           </div>
           <div className="w-full float-left bg-gray-100 py-4 pr-1">
@@ -1347,12 +1220,12 @@ export function SideBar() {
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <a
+              <Link
                 href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Đơn vị liên kết xuất bản</span>
-              </a>
+              </Link>
             </h2>
           </div>
           <div className="w-full float-left bg-gray-100 py-4 pr-1">
@@ -3026,12 +2899,12 @@ export function SideBar() {
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
             <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <a
+              <Link
                 href=""
                 className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
               >
                 <span>Độ tuổi</span>
-              </a>
+              </Link>
             </h2>
           </div>
           <div className="w-full float-left bg-gray-100 py-4 pr-1">
@@ -3116,12 +2989,12 @@ export function SideBar() {
       {/* <div className="sidebar-item sidebar-menu sidebar-collection-menu">
         <div className="module-header">
           <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-            <a
+            <Link
               href=""
               className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
             >
               <span>Sản phẩm bán chạy</span>
-            </a>
+            </Link>
           </h2>
         </div>
         <div className="sidebar-menu-content module-content padding-0">
@@ -3145,7 +3018,7 @@ export function SideBar() {
                 <div className="owl-item active" style={{ width: 233 }}>
                   <div className="item">
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/ho-xuan-huong-tieng-vong"
                         title="Hồ Xuân Hương tiếng vọng"
@@ -3155,15 +3028,15 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/ho-xuan-huong-tieng-vong.jpg?v=1669608992000"
                           alt="Hồ Xuân Hương tiếng vọng"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a
+                          <Link
                             href="/ho-xuan-huong-tieng-vong"
                             title="Hồ Xuân Hương tiếng vọng"
                           >
                             <span>Hồ Xuân Hương tiếng vọng</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">
@@ -3176,7 +3049,7 @@ export function SideBar() {
                       </div>
                     </div>
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/napoleon-bonaparte"
                         title="Napoléon Bonaparte"
@@ -3186,15 +3059,15 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/images.jpg?v=1623140283000"
                           alt="Napoléon Bonaparte"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a
+                          <Link
                             href="/napoleon-bonaparte"
                             title="Napoléon Bonaparte"
                           >
                             <span>Napoléon Bonaparte</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">
@@ -3207,7 +3080,7 @@ export function SideBar() {
                       </div>
                     </div>
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/chu-be-ti-hon"
                         title="Chú bé tí hon"
@@ -3217,12 +3090,12 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/chu-be-ti-hon.jpg?v=1582693899637"
                           alt="Chú bé tí hon"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a href="/chu-be-ti-hon" title="Chú bé tí hon">
+                          <Link href="/chu-be-ti-hon" title="Chú bé tí hon">
                             <span>Chú bé tí hon</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">
@@ -3239,7 +3112,7 @@ export function SideBar() {
                 <div className="owl-item" style={{ width: 233 }}>
                   <div className="item">
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/co-be-quang-khan-do"
                         title="Cô bé quàng khăn đỏ"
@@ -3249,15 +3122,15 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/co-be-quang-khan-do.jpg?v=1582693785597"
                           alt="Cô bé quàng khăn đỏ"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a
+                          <Link
                             href="/co-be-quang-khan-do"
                             title="Cô bé quàng khăn đỏ"
                           >
                             <span>Cô bé quàng khăn đỏ</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">
@@ -3270,7 +3143,7 @@ export function SideBar() {
                       </div>
                     </div>
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/ba-chu-lon-con"
                         title="Ba chú lợn con"
@@ -3280,12 +3153,12 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/ba-chu-lon-con.jpg?v=1582693743287"
                           alt="Ba chú lợn con"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a href="/ba-chu-lon-con" title="Ba chú lợn con">
+                          <Link href="/ba-chu-lon-con" title="Ba chú lợn con">
                             <span>Ba chú lợn con</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">
@@ -3298,7 +3171,7 @@ export function SideBar() {
                       </div>
                     </div>
                     <div className="product-item product-sidebar">
-                      <a
+                      <Link
                         className="product-image"
                         href="/goldilocks-va-ba-chu-gau"
                         title="Goldilocks và ba chú gấu"
@@ -3308,15 +3181,15 @@ export function SideBar() {
                           src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/goldilocks-va-ba-chu-gau.jpg?v=1582693584137"
                           alt="Goldilocks và ba chú gấu"
                         />
-                      </a>
+                      </Link>
                       <div className="product-info">
                         <h3 className="product-name">
-                          <a
+                          <Link
                             href="/goldilocks-va-ba-chu-gau"
                             title="Goldilocks và ba chú gấu"
                           >
                             <span>Goldilocks và ba chú&nbsp;gấu</span>
-                          </a>
+                          </Link>
                         </h3>
                         <div className="price-box price-loop-style res-item">
                           <span className="special-price">

@@ -35,7 +35,7 @@ export function HomeSlider() {
               <div className="owl-item cloned">
                 <div className="item image-item">
                   <a
-                    href="https://nxbvanhoc.com.vn/van-hoc-kinh-dien"
+                    href="https://nxbvanhoc.com.vn/catalog/classic"
                     title="Văn học kinh điển"
                     className="clearfix"
                   >
@@ -94,7 +94,7 @@ export function HomeSlider() {
               <div className="owl-item active">
                 <div className="item image-item">
                   <a
-                    href="https://nxbvanhoc.com.vn/van-hoc-kinh-dien"
+                    href="https://nxbvanhoc.com.vn/catalog/classic"
                     title="Văn học kinh điển"
                     className="clearfix"
                   >

@@ -11,20 +11,20 @@ export function HeaderMenu() {
             <nav className="bg-red-700">
               <ul id="nav" className="relative pl-0 mb-0 list-none">
                 <li className="float-left relative">
-                  <a
+                  <Link
                     className="text-white bg-red-700 py-5px pr-5 pl-4 relative uppercase leading-8 block"
                     href="/"
                   >
                     Trang chủ
-                  </a>
+                  </Link>
                 </li>
                 <li className="float-left relative">
-                  <a
+                  <Link
                     className="text-white bg-red-700  py-5px pr-5 pl-4 relative uppercase leading-8 block"
                     href="/gioi-thieu"
                   >
                     Giới thiệu
-                  </a>
+                  </Link>
                 </li>
                 <li className="float-left relative group">
                   <Link
@@ -39,91 +39,45 @@ export function HeaderMenu() {
                   </Link>
                   <ul className="text-base group-hover:block hidden min-w-[210px] m-0 p-0 drop-shadow-lg border border-gray-300 absolute top-full left-0 z-50 float-left text-left list-none bg-white">
                     <li className="border-b border-b-gray-300 relative">
-                      <a
+                      <Link
                         className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                        href="/sach-moi"
+                        href="/catalog/new"
                       >
                         Sách mới
-                        {/* <i className="fa fa-caret-right"></i> */}
-                      </a>
-                      {/* <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="/van-hoc-trong-nuoc">
-                            Sách văn học Việt Nam
-                          </a>
-                        </li>
-
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="/van-hoc-nuoc-ngoai">
-                            Sách văn học nước ngoài
-                          </a>
-                        </li>
-
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="/sach-thieu-nhi">
-                            Sách thiếu nhi
-                          </a>
-                        </li>
-                      </ul> */}
+                      </Link>
                     </li>
 
                     <li className="border-b border-b-gray-300 relative">
-                      <a
+                      <Link
                         className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                        href="/van-hoc-kinh-dien"
+                        href="/catalog/classic"
                       >
                         Sách văn học kinh điển
-                      </a>
+                      </Link>
                     </li>
 
                     <li className="dropdown-submenu border-b border-b-gray-300 relative">
-                      <a
+                      <Link
                         className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                        href="/sach-lien-ket-xuat-ban-moi"
+                        href="/catalog/popular"
                       >
-                        Sách liên kết xuất bản{" "}
-                        {/* <i className="fa fa-caret-right"></i> */}
-                      </a>
-                      {/* <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="relative py-10px px-5 block clear-both font-normal leading-snug text-black" href="/sach-tac-gia">
-                            Sách liên kết tác giả
-                          </a>
-                        </li>
-
-                        <li className="nav-item-lv3">
-                          <a
-                            className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                            href="/sach-lien-ket-xuat-ban-moi"
-                          >
-                            Sách liên kết với các công ty sách
-                          </a>
-                        </li>
-                      </ul> */}
+                        Sách phổ biến
+                      </Link>
                     </li>
 
                     <li className="border-b border-b-gray-300 relative">
-                      <a
+                      <Link
                         className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                        href="/sach-giam-gia"
+                        href="/catalog/discount"
                       >
                         Sách giảm giá
-                      </a>
-                    </li>
-
-                    <li className="relative">
-                      <a
-                        className="relative py-10px px-5 block clear-both font-normal leading-snug text-black"
-                        href="/"
-                      >
-                        Sách quý hiếm
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
 
                 <li className="float-left relative">
-                  <a
+                  <Link
                     href="/"
                     className="text-white bg-red-700  py-5px pr-5 pl-4 relative uppercase leading-8 block"
                   >
@@ -133,41 +87,41 @@ export function HeaderMenu() {
                       color="white"
                       className="absolute right-5px top-1/2 transform: -translate-y-1/2"
                     />
-                  </a>
+                  </Link>
                   {/* <ul className="dropdown-menu">
                     <li className="nav-item-lv2">
-                      <a className="nav-link" href="/tin-tuc">
+                      <Link className="nav-link" href="/tin-tuc">
                         Tin tức
-                      </a>
+                      </Link>
                     </li>
 
                     <li className="nav-item-lv2">
-                      <a className="nav-link" href="/thong-bao">
+                      <Link className="nav-link" href="/thong-bao">
                         Thông báo
-                      </a>
+                      </Link>
                     </li>
 
                     <li className="nav-item-lv2">
-                      <a className="nav-link" href="/thong-cao-bao-chi-2">
+                      <Link className="nav-link" href="/thong-cao-bao-chi-2">
                         Thông cáo báo chí
-                      </a>
+                      </Link>
                     </li>
 
                     <li className="nav-item-lv2">
-                      <a className="nav-link" href="/thong-tin-phat-hanh">
+                      <Link className="nav-link" href="/thong-tin-phat-hanh">
                         Thông tin phát hành
-                      </a>
+                      </Link>
                     </li>
                   </ul> */}
                 </li>
 
                 <li className="float-left relative">
-                  <a
+                  <Link
                     className="text-white bg-red-700  py-5px pr-5 pl-4 relative uppercase leading-8 block"
                     href="/lien-he"
                   >
                     Liên hệ
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

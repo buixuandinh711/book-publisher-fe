@@ -6,6 +6,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 
 export interface DetailMainProps extends BookCartProps {
   isbn: string;
@@ -31,8 +32,6 @@ export function DetailMain({
   numPages,
   coverType,
 }: DetailMainProps) {
-  console.log(discountPrice);
-  
   return (
     <div className="container">
       <div className="-px-4">
@@ -49,11 +48,13 @@ export function DetailMain({
                   className="flex justify-center items-center h-full"
                 >
                   <div className="!w-full !h-full flex justify-center items-center">
-                    <img
+                    <Image
                       id="img_01"
                       src={image}
                       alt={name}
                       className="w-auto max-w-full inline-block h-auto static max-h-full align-middle"
+                      fill
+                      sizes="(max-width: 1080px) 40vw"
                     />
                   </div>
                 </a>

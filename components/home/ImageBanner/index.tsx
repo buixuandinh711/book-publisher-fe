@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 interface Banner {
   link: string;
   title: string;
@@ -15,9 +18,19 @@ export function ImageBanner({ bannersList }: ImageBannerProps) {
         <div className="-mx-4">
           <div className="flex gap-4 justify-around">
             {bannersList.map((banner, index) => (
-              <a href={banner.link} title={banner.title} key={index}>
-                <img src={banner.imageSrc} />
-              </a>
+              <Link
+                href={banner.link}
+                title={banner.title}
+                key={index}
+                className="block relative grow min-h-[200px]"
+              >
+                <Image
+                  src={banner.imageSrc}
+                  alt={banner.title}
+                  fill
+                  sizes={`(max-width: 1080px) ${70 / bannersList.length}vw`}
+                />
+              </Link>
             ))}
           </div>
         </div>

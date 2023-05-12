@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import Image from "next/image";
 
 export function CategorySection() {
   return (
@@ -16,12 +18,13 @@ export function CategorySection() {
               nextArrow={<NextArrow />}
             >
               <div>
-                <div className="relative max-w-[270px] mx-auto">
-                  <img
-                    src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_1_image.jpg?1632297125018"
-                    data-lazyload="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_1_image.jpg?1632297125018"
-                    alt="Sách mới"
+                <div className="relative max-w-[270px] mx-auto w-[263px] h-[393px]">
+                  <Image
+                    src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859436/book-publisher/category_new.jpg"
                     className="leading-[1.7] tracking-[0.25px] text-sm align-middle max-w-full h-auto max-h-full w-auto mx-auto my-0 border-0 border-none"
+                    alt="Category New Book"
+                    fill
+                    sizes="(max-width: 1080px) 25vw"
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
@@ -40,17 +43,18 @@ export function CategorySection() {
                 </div>
               </div>
               <div>
-                <div className="relative max-w-[270px] mx-auto">
-                  <img
-                    src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_2_image.jpg?1632297125018"
-                    data-lazyload="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_2_image.jpg?1632297125018"
-                    alt="Sách văn học kinh điển"
+                <div className="relative max-w-[270px] mx-auto w-[263px] h-[393px]">
+                  <Image
+                    src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859472/book-publisher/category_classic.jpg"
                     className="leading-[1.7] tracking-[0.25px] text-sm align-middle max-w-full h-auto max-h-full w-auto mx-auto my-0 border-0 border-none"
+                    alt="Category Classic Book"
+                    fill
+                    sizes="(max-width: 1080px) 25vw"
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
                       <a
-                        href="/van-hoc-kinh-dien"
+                        href="/catalog/classic"
                         title="Sách văn học kinh điển"
                         className="text-white text-shadow"
                       >
@@ -64,17 +68,18 @@ export function CategorySection() {
                 </div>
               </div>
               <div>
-                <div className="relative max-w-[270px] mx-auto">
-                  <img
-                    src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_3_image.jpg?1632297125018"
-                    data-lazyload="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_3_image.jpg?1632297125018"
-                    alt="Sách liên kết xuất bản"
+                <div className="relative max-w-[270px] mx-auto w-[263px] h-[393px]">
+                  <Image
+                    src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859497/book-publisher/category_link.jpg"
                     className="leading-[1.7] tracking-[0.25px] text-sm align-middle max-w-full h-auto max-h-full w-auto mx-auto my-0 border-0 border-none"
+                    alt="Category Popular Book"
+                    fill
+                    sizes="(max-width: 1080px) 25vw"
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
                       <a
-                        href="/sach-lien-ket-xuat-ban-moi"
+                        href="/catalog/popular"
                         title="Sách liên kết xuất bản"
                         className="text-white text-shadow"
                       >
@@ -88,17 +93,18 @@ export function CategorySection() {
                 </div>
               </div>
               <div>
-                <div className="relative max-w-[270px] mx-auto">
-                  <img
-                    src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_4_image.jpg?1632297125018"
-                    data-lazyload="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_4_image.jpg?1632297125018"
-                    alt="Sách giảm giá"
+                <div className="relative max-w-[270px] mx-auto w-[263px] h-[393px]">
+                  <Image
+                    src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859514/book-publisher/category_discount.jpg"
                     className="leading-[1.7] tracking-[0.25px] text-sm align-middle max-w-full h-auto max-h-full w-auto mx-auto my-0 border-0 border-none"
+                    alt="Category Discount Book"
+                    fill
+                    sizes="(max-width: 1080px) 25vw"
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
                       <a
-                        href="/sach-giam-gia"
+                        href="/catalog/discount"
                         title="Sách giảm giá"
                         className="text-white text-shadow"
                       >
@@ -112,22 +118,23 @@ export function CategorySection() {
                 </div>
               </div>
               <div>
-                <div className="relative max-w-[270px] mx-auto">
-                  <img
-                    src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_5_image.jpg?1632297125018"
-                    data-lazyload="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/category_5_image.jpg?1632297125018"
-                    alt="Sách quý hiếm"
+                <div className="relative max-w-[270px] mx-auto w-[263px] h-[393px]">
+                  <Image
+                    src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683861724/book-publisher/category_rare.jpg"
                     className="leading-[1.7] tracking-[0.25px] text-sm align-middle max-w-full h-auto max-h-full w-auto mx-auto my-0 border-0 border-none"
+                    alt="Category Rare Book"
+                    fill
+                    sizes="(max-width: 1080px) 25vw"
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
-                      <a
+                      <Link
                         href="/"
                         title="Sách quý hiếm"
                         className="text-white text-shadow"
                       >
                         Sách quý hiếm
-                      </a>
+                      </Link>
                     </h2>
                     <span className="text-base font-semibold uppercase mt-10px text-white">
                       126 sản phẩm
