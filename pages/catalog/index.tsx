@@ -5,7 +5,7 @@ import {
   CatalogMainProps,
 } from "@/components/catalog/CatalogMain";
 import { CatalogSideBar } from "@/components/catalog/CatalogSideBar";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 export default function Catalog(props: CatalogMainProps) {
   return (
@@ -24,18 +24,33 @@ export default function Catalog(props: CatalogMainProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<
-  CatalogMainProps
-> = async () => {
+  CatalogMainProps,
+  { page: string }
+> = async (context: GetServerSidePropsContext<{ page: string }>) => {
   let data;
 
+  const { page } = context.query;
+
+  let query = "";
+
+  if (page && typeof page === "string") {
+    query = new URLSearchParams({ page }).toString();
+  }
+
   try {
-    const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books`);
+    const res = await fetch(
+      `http://${process.env.NEXT_PUBLIC_HOST}/books?${query}`
+    );
     data = await res.json();
   } catch (error) {
     console.log(error);
   }
 
   return {
-    props: data,
+    props: {
+      booksList: data.results,
+      currentPage: parseInt(data.currentPage),
+      totalPages: parseInt(data.totalPages),
+    },
   };
 };
