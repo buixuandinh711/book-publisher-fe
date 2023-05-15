@@ -41,33 +41,24 @@ export function DetailMain({
               <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
                 {`-${discountPercent}%`}
               </div>
-              <div className="h-[521x] bg-gray-100 mb-4">
+              <div className="h-[521px] bg-gray-100 mb-4">
                 <a
                   href={image}
-                  data-rel="prettyPhoto[product-gallery]"
                   className="flex justify-center items-center h-full"
                 >
-                  <div className="!w-full !h-full flex justify-center items-center">
+                  <div className="!w-full !h-full flex justify-center items-center relative">
                     <Image
                       id="img_01"
                       src={image}
                       alt={name}
-                      className="w-auto max-w-full inline-block h-auto static max-h-full align-middle"
+                      className="w-auto max-w-full inline-block h-auto static max-h-full align-middle object-contain"
                       fill
                       sizes="(max-width: 1080px) 40vw"
+                      placeholder="blur"
+                      blurDataURL="/image-loader.gif"
                     />
                   </div>
                 </a>
-                <div className="hidden">
-                  <div className="item">
-                    <a
-                      href="https://bizweb.dktcdn.net/100/370/339/products/cam-on-nguoi-den-chang-tiec-nguoi-di.jpg?v=1677640434387"
-                      data-image="https://bizweb.dktcdn.net/100/370/339/products/cam-on-nguoi-den-chang-tiec-nguoi-di.jpg?v=1677640434387"
-                      data-zoom-image="https://bizweb.dktcdn.net/100/370/339/products/cam-on-nguoi-den-chang-tiec-nguoi-di.jpg?v=1677640434387"
-                      data-rel="prettyPhoto[product-gallery]"
-                    ></a>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="w-1/2 float-left relative px-4 text-red-700">

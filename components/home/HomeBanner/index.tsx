@@ -14,7 +14,7 @@ export function HomeBanner() {
                   className="my-0 mx-auto w-auto block max-w-full h-auto max-h-full align-middle overflow-clip"
                   alt="New Books"
                   fill
-                  sizes="(max-width: 1080px) 30vw"
+                  sizes="(max-width: 1080px) 25vw"
                 />
                 <Link
                   className="absolute py-1 px-5 bottom-7 font-bold text-red-700 border-2 border-white left-1/2 transform: -translate-x-1/2 bg-white opacity-80 uppercase z-10"
@@ -31,7 +31,7 @@ export function HomeBanner() {
                   className="my-0 mx-auto w-auto block max-w-full h-auto max-h-full align-middle overflow-clip"
                   alt="Discount Books"
                   fill
-                  sizes="(max-width: 1080px) 30vw"
+                  sizes="(max-width: 1080px) 25vw"
                 />
                 {/* <div className="banner_title">
                   <span></span>
@@ -51,7 +51,7 @@ export function HomeBanner() {
                   className="my-0 mx-auto w-auto block max-w-full h-auto max-h-full align-middle overflow-clip"
                   alt="Linked book"
                   fill
-                  sizes="(max-width: 1080px) 30vw"
+                  sizes="(max-width: 1080px) 25vw"
                 />
                 {/* <div className="banner_title">
                   <span></span>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export interface BookCartProps {
@@ -26,12 +27,16 @@ export function BookCart({
         <Link
           href={`/detail/${id}`}
           title={name}
-          className="h-56 flex items-center justify-center text-center"
+          className="h-56 flex items-center justify-center text-center relative"
         >
-          <img
+          <Image
             src={image}
-            alt="Sắc nặng hồn thanh nhẹ"
+            alt={name}
             className="align-middle border-0 max-w-full max-h-full w-auto h-52 mx-auto object-cover"
+            fill
+            sizes="(max-width: 1080px) 10vw"
+            placeholder="blur"
+            blurDataURL="/image-loader.gif"
           />
         </Link>
       </div>

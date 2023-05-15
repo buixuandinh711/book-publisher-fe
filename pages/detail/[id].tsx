@@ -15,7 +15,7 @@ export default function Catalog({
 }) {
   return (
     <>
-      <BreadScumb />
+      <BreadScumb current={{ name: book.name, link: `${book.id}` }} />
       <div className="w-full float-left pt-8">
         <DetailMain {...book} />
         <BookOverview description={book.description} />
