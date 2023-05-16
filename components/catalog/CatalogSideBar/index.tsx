@@ -2,7 +2,19 @@ import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
-export function CatalogSideBar() {
+export interface CatalogSideBarProps {
+  newBooksCount: number;
+  classicBooksCount: number;
+  discountBooksCount: number;
+  popularBooksCount: number;
+}
+
+export function CatalogSideBar({
+  newBooksCount,
+  classicBooksCount,
+  discountBooksCount,
+  popularBooksCount,
+}: CatalogSideBarProps) {
   return (
     <aside className="mb-8 relative  w-1/4 float-left min-h-[1px] px-4">
       <div className="mb-8 w-full float-left">
@@ -27,7 +39,7 @@ export function CatalogSideBar() {
                 >
                   <span>Sách mới</span>
                   &nbsp;
-                  <span className="object_count">(207)</span>
+                  <span className="object_count">{`(${newBooksCount})`}</span>
                 </Link>
               </li>
               <li className="w-full float-left block relative">
@@ -38,7 +50,7 @@ export function CatalogSideBar() {
                 >
                   <span>Sách văn học kinh điển</span>
                   &nbsp;
-                  <span className="object_count">(80)</span>
+                  <span className="object_count">{`(${classicBooksCount})`}</span>
                 </Link>
               </li>
               <li className="w-full float-left block relative">
@@ -49,7 +61,7 @@ export function CatalogSideBar() {
                 >
                   <span>Sách phổ biến</span>
                   &nbsp;
-                  <span className="object_count">(525)</span>
+                  <span className="object_count">{`(${popularBooksCount})`}</span>
                 </Link>
               </li>
               <li className="w-full float-left block relative">
@@ -60,7 +72,7 @@ export function CatalogSideBar() {
                 >
                   <span>Sách giảm giá</span>
                   &nbsp;
-                  <span className="object_count">(126)</span>
+                  <span className="object_count">{`(${discountBooksCount})`}</span>
                 </Link>
               </li>
             </ul>
