@@ -11,6 +11,8 @@ const breadScumbMapping = {
   popular: { name: "Popular Books", link: "/catalog/popular" },
   discount: { name: "Discount Books", link: "/catalog/discount" },
   detail: { name: "Catalog", link: "/catalog" },
+  login: { name: "Log in", link: "/account/login" },
+  register: { name: "Register", link: "/account/register" },
 };
 
 const getBreadScumb = (key: string) => {

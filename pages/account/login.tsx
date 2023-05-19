@@ -1,7 +1,7 @@
 import { BreadScumb } from "@/components/BreadCrumb";
-import { LoginMain } from "@/components/login/LoginMain";
+import { LoginMain } from "@/components/account/LoginMain";
 
-export default function Catalog() {
+export default function Login() {
   return (
     <>
       <BreadScumb />

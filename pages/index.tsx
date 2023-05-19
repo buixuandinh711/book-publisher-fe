@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<{
   discountBooks: BookCartProps[];
   popularBooks: BookCartProps[];
 }> = async () => {
-  const res = await fetch("http://127.0.0.1:5000/books/home");
+  const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books/home`);
   const data = await res.json();
 
   return {
