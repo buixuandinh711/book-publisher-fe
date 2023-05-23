@@ -9,7 +9,7 @@ export function CatalogPagination({
   totalPages: number;
 }) {
   const router = useRouter();
-  const currentPath = router.pathname;
+  const currentPath = router.asPath.split("?")[0];
 
   return (
     <div className="text-xs-right">

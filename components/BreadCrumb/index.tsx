@@ -33,7 +33,8 @@ export function BreadScumb({
   current?: { name: string; link: string };
 }) {
   const router = useRouter();
-  const paths = router.asPath.split("/");
+  const pathsWithoutQuery = router.asPath.split("?")[0];
+  const paths = pathsWithoutQuery.split("/");
 
   return (
     <section className="w-full float-left border-b border-b-gray-300">
