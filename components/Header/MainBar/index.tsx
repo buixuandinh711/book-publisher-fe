@@ -1,33 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
-import {
-  faSearch,
-  faShoppingCart,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons"; // import the icons you need
+import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
+import Link from "next/link";
+import Image from "next/image";
+import { use, useContext } from "react";
+import { UserActionType, UserContext, UserDispatchContext } from "@/contexts/UserContext";
 
 export function MainBar() {
+  const user = useContext(UserContext);
+  const userDispatch = useContext(UserDispatchContext);
+
   return (
     <div className="relative w-full float-left flex items-center p-0 bg-white">
       <div className="container">
         <div className="flex items-center -mx-4">
-          {/* <div className="menu-bar hidden-md hidden-lg">
-            <a href="#nav-mobile">
-              <i className="fa fa-align-justify"></i>
-            </a>
-          </div> */}
           <div className="w-1/3 float-left ml-0 relative min-h-1 px-4">
             <div className="h-24 flex content-start items-center">
-              <a
+              <Link
                 title="NHÀ XUẤT BẢN VĂN HỌC"
                 href="/"
-                className="text-red-700 no-underline bg-transparent"
+                className="text-red-700 no-underline bg-transparent relative w-[360px] h-[57px]"
               >
-                <img
+                <Image
                   className="block max-w-full h-auto border-0 max-h-full align-middle"
-                  src="https://bizweb.dktcdn.net/100/370/339/themes/744741/assets/logo.png?1632297125018"
+                  src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1684837345/book-publisher/header_logo.png "
                   alt="Logo NHÀ XUẤT BẢN VĂN HỌC"
+                  fill
+                  sizes="(max-width: 1080px) 30vw"
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="w-1/3 float-left ml-0 relative min-h-1 px-4 inline-flex items-center">
@@ -45,20 +45,11 @@ export function MainBar() {
                   title="Nhập từ khoá cần tìm"
                   placeholder="Nhập từ khóa cần tìm ..."
                 />
-                {/* <input
-                  type="hidden"
-                  className="form-control"
-                  name="type"
-                  value="article,product"
-                /> */}
                 <button
                   className="absolute h-auto top-0 -right-10 bottom-0 z-10 w-6 text-sm bg-transparent text-red-700 flex justify-center items-center leading-10 px-5 text-center"
                   type="submit"
                 >
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    className="inline-block text-sm"
-                  ></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faSearch} className="inline-block text-sm"></FontAwesomeIcon>
                 </button>
               </div>
             </form>
@@ -69,19 +60,42 @@ export function MainBar() {
                 <FontAwesomeIcon icon={faUser} className="text-lg" />
               </div>
               <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
-                <span className="font-bold text-base leading-none">
-                  Tài khoản
+                <span className="font-bold text-sm leading-none overflow-ellipsis">
+                  {user.isLogin ? user.name : "Tài khoản"}
                 </span>
                 <span className="leading-none">
-                  <a
-                    href="/account/login"
-                    className="mr-2 relative text-sm leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
-                  >
-                    Đăng nhập
-                  </a>
-                  <a href="/account/register" className="text-sm leading-none">
-                    Đăng ký
-                  </a>
+                  {user.isLogin ? (
+                    <>
+                      <Link
+                        href="/account/login"
+                        className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+                      >
+                        Tài khoản
+                      </Link>
+                      <button
+                        className="text-xs leading-none"
+                        onClick={() => {
+                          if (userDispatch) {
+                            userDispatch({ type: UserActionType.LOGOUT });
+                          }
+                        }}
+                      >
+                        Thoát
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/account/login"
+                        className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+                      >
+                        Đăng nhập
+                      </Link>
+                      <Link href="/account/register" className="text-xs leading-none">
+                        Đăng ký
+                      </Link>
+                    </>
+                  )}
                 </span>
               </div>
             </div>
@@ -96,18 +110,13 @@ export function MainBar() {
                     ></FontAwesomeIcon>
                   </div>
                   <div className="cursor-pointer w-calc[100% - 50px] float-left h-10 flex justify-center flex-col flex-nowrap">
-                    <span className="font-bold text-base text-red-700 leading-none">
-                      Giỏ hàng
-                    </span>
+                    <span className="font-bold text-sm text-red-700 leading-none">Giỏ hàng</span>
                     <span className="leading-none">
-                      <span
-                        className="font-bold text-base text-red-700 leading-none"
-                        id="cart-total"
-                      >
+                      <span className="font-bold text-sm text-red-700 leading-none" id="cart-total">
                         0
                       </span>
                       &nbsp;
-                      <span className="text-sm leading-none">Sản phẩm</span>
+                      <span className="text-xs leading-none">Sản phẩm</span>
                     </span>
                   </div>
                 </div>
