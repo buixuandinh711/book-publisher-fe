@@ -1,4 +1,5 @@
 import { BookCartProps } from "@/components/BookCart";
+import { CartModal } from "@/components/CartModal";
 import { CategorySection } from "@/components/home/CategorySection";
 import { HomeBanner } from "@/components/home/HomeBanner";
 import { HomeSlider } from "@/components/home/HomeSlider";
@@ -67,6 +68,7 @@ export default function Home({
       />
       <SectionWithCarousel header="Sách giảm giá" booksList={discountBooks} />
       <PrivacySection />
+      <CartModal/>
     </>
   );
 }
