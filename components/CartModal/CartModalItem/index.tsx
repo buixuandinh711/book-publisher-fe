@@ -28,7 +28,7 @@ export function CartModalItem() {
               </a>
             </p>
             <p className="text-xs">
-              <a href="javascript:;" className="remove-item-cart" title="Xóa" data-id={69812916}>
+              <a className="remove-item-cart" title="Xóa" data-id={69812916}>
                 <FontAwesomeIcon icon={faClose} /> Xóa
               </a>
             </p>

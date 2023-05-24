@@ -1,5 +1,7 @@
+import { CartActionType, CartDispatchContext } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useContext } from "react";
 
 export interface BookCartProps {
   id: number;
@@ -10,14 +12,15 @@ export interface BookCartProps {
   discountPercent: number;
 }
 
-export function BookCart({
-  id,
-  name,
-  image,
-  originalPrice,
-  discountPrice,
-  discountPercent,
-}: BookCartProps) {
+export function BookCart({ id, name, image, originalPrice, discountPrice, discountPercent }: BookCartProps) {
+  const cartDispatch = useContext(CartDispatchContext);
+
+  const openCartModal = useCallback(() => {
+    if (cartDispatch) {
+      cartDispatch({ type: CartActionType.ADD_TO_CART });
+    }
+  }, [cartDispatch]);
+
   return (
     <div className="text-left relative overflow-hidden bg-white w-[190px] px-4 mx-auto">
       <div className="relative w-full float-left">
@@ -42,45 +45,30 @@ export function BookCart({
       </div>
       <div className="w-full float-left z-10 relative pb-3 min-h-105">
         <h3 className="min-h-[50px] overflow-hidden text-ellipsis line-clamp-2 w-full float-left text-base text-red-700 text-center my-3 leading-normal">
-          <Link
-            href={`/detail/${id}`}
-            title={name}
-            className="text-red-700 font-semibold"
-          >
+          <Link href={`/detail/${id}`} title={name} className="text-red-700 font-semibold">
             {name}
           </Link>
         </h3>
         <div className="min-h-[37px] flex items-center justify-center flex-col leading-normal w-full float-left">
           <div className="text-lg text-black font-bold">
-            <span className="price product-price">
-              {discountPrice.toLocaleString()}
-            </span>
+            <span className="price product-price">{discountPrice.toLocaleString()}</span>
           </div>
           <div className="m-0 text-sm text-black line-through">
-            <span className="price product-price-old">
-              {originalPrice.toLocaleString()}
-            </span>
+            <span className="price product-price-old">{originalPrice.toLocaleString()}</span>
           </div>
         </div>
       </div>
       <div className="inline-flex justify-center w-full float-left">
-        <form
-          action="/cart/add"
-          method="post"
-          className=""
-          data-id="product-actions-28639343"
-          encType="multipart/form-data"
-        >
-          <div>
-            <input type="hidden" name="variantId" defaultValue={76671181} />
-            <button
-              className="bg-red-700 text-white border-none relative text-base px-7 cursor-pointer inline-block h-10 leading-[40px] text-center whitespace-nowrap outline-none font-normal tracking-normal"
-              title="Mua hàng"
-            >
-              <span>Mua hàng</span>
-            </button>
-          </div>
-        </form>
+        <div>
+          <input type="hidden" name="variantId" defaultValue={76671181} />
+          <button
+            className="bg-red-700 text-white border-none relative text-base px-7 cursor-pointer inline-block h-10 leading-[40px] text-center whitespace-nowrap outline-none font-normal tracking-normal"
+            title="Mua hàng"
+            onClick={openCartModal}
+          >
+            <span>Mua hàng</span>
+          </button>
+        </div>
       </div>
     </div>
   );

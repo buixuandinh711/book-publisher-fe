@@ -1,12 +1,7 @@
 import { BreadScumb } from "@/components/BreadCrumb";
-import {
-  CatalogMain,
-  CatalogMainProps,
-} from "@/components/catalog/CatalogMain";
-import {
-  CatalogSideBar,
-  CatalogSideBarProps,
-} from "@/components/catalog/CatalogSideBar";
+import { CartModal } from "@/components/CartModal";
+import { CatalogMain, CatalogMainProps } from "@/components/catalog/CatalogMain";
+import { CatalogSideBar, CatalogSideBarProps } from "@/components/catalog/CatalogSideBar";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 export default function Catalog({
@@ -27,6 +22,7 @@ export default function Catalog({
           </div>
         </div>
       </section>
+      <CartModal />
     </>
   );
 }
@@ -39,9 +35,7 @@ export const getServerSideProps: GetServerSideProps<
     catalogSideBarProps: CatalogSideBarProps;
   },
   { slug: string[]; page: string }
-> = async (
-  context: GetServerSidePropsContext<{ slug: string[]; page: string }>
-) => {
+> = async (context: GetServerSidePropsContext<{ slug: string[]; page: string }>) => {
   let data;
 
   const { page, slug } = context.query;
@@ -64,23 +58,13 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   try {
-    const bookPromise = fetch(
-      `http://${process.env.NEXT_PUBLIC_HOST}/books${category}?${query}`
-    );
+    const bookPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books${category}?${query}`);
 
-    const bookCountPromise = fetch(
-      `http://${process.env.NEXT_PUBLIC_HOST}/books//category-count`
-    );
+    const bookCountPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books//category-count`);
 
-    const [booksRes, bookCountRes] = await Promise.all([
-      bookPromise,
-      bookCountPromise,
-    ]);
+    const [booksRes, bookCountRes] = await Promise.all([bookPromise, bookCountPromise]);
 
-    const [booksData, bookCountData] = await Promise.all([
-      booksRes.json(),
-      bookCountRes.json(),
-    ]);
+    const [booksData, bookCountData] = await Promise.all([booksRes.json(), bookCountRes.json()]);
 
     return {
       props: {

@@ -2,20 +2,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CartModalItem } from "./CartModalItem";
 import {
   faArrowRightLong,
-  faCarTunnel,
   faCaretLeft,
   faCaretRight,
   faCheck,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { CartActionType, CartContext, CartDispatchContext } from "@/contexts/CartContext";
 
 export function CartModal() {
+  const cart = useContext(CartContext);
+  const cartDispatch = useContext(CartDispatchContext);
+
+  if (!cart.isModalOpen) return <></>;
+
   return (
     <div
       id="popup-cart"
-      className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-50 outline-none bg-black bg-opacity-40"
+      className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-10 outline-none bg-black bg-opacity-40"
+      onClick={() => {
+        if (cartDispatch) {
+          cartDispatch({ type: CartActionType.CLOSE_CART_MODAL });
+        }
+      }}
     >
-      <div id="popup-cart-desktop" className="w-[750px] bg-white float-none mx-auto mt-[10%] p-5 relative rounded-md">
+      <div
+        id="popup-cart-desktop"
+        className="w-[750px] bg-white float-none mx-auto mt-[10%] p-5 relative rounded-md z-20"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <div className="mb-[10px] text-base pr-4 text-red-700">
           <FontAwesomeIcon icon={faCheck} className="font-bold" /> Bạn đã thêm {'"'}
           <span className="cart-popup-name">
@@ -74,7 +91,7 @@ export function CartModal() {
             </div>
           </div>
         </div>
-        <a title="Close" className="quickview-close close-window" href="javascript:;">
+        <a title="Close" className="quickview-close close-window">
           <i className="fa  fa-close" />
         </a>
       </div>

@@ -34,10 +34,7 @@ export default function Home({
           },
         ]}
       />
-      <SectionWithCarousel
-        header="Văn học kinh điển"
-        booksList={classicBooks}
-      />
+      <SectionWithCarousel header="Văn học kinh điển" booksList={classicBooks} />
       <ImageBanner
         bannersList={[
           {
@@ -68,7 +65,7 @@ export default function Home({
       />
       <SectionWithCarousel header="Sách giảm giá" booksList={discountBooks} />
       <PrivacySection />
-      <CartModal/>
+      <CartModal />
     </>
   );
 }
