@@ -1,12 +1,11 @@
 import { BookCartProps } from "@/components/BookCart";
+import { CartDispatchContext } from "@/contexts/CartContext";
 import { orUpdating } from "@/utils/utils";
-import {
-  faFacebookF,
-  faGooglePlusG,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faGooglePlusG, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faArrowRightLong, faCaretRight, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { ChangeEvent, Dispatch, SetStateAction, useContext, useState } from "react";
 
 export interface DetailMainProps extends BookCartProps {
   isbn: string;
@@ -19,6 +18,7 @@ export interface DetailMainProps extends BookCartProps {
 }
 
 export function DetailMain({
+  id,
   name,
   image,
   originalPrice,
@@ -32,6 +32,9 @@ export function DetailMain({
   numPages,
   coverType,
 }: DetailMainProps) {
+  const [counter, setCounter] = useState("");
+  const cartDispatch = useContext(CartDispatchContext);
+
   return (
     <div className="container">
       <div className="-px-4">
@@ -42,10 +45,7 @@ export function DetailMain({
                 {`-${discountPercent}%`}
               </div>
               <div className="h-[521px] bg-gray-100 mb-4">
-                <a
-                  href={image}
-                  className="flex justify-center items-center h-full"
-                >
+                <a href={image} className="flex justify-center items-center h-full">
                   <div className="!w-full !h-full flex justify-center items-center relative">
                     <Image
                       id="img_01"
@@ -62,10 +62,7 @@ export function DetailMain({
               </div>
             </div>
             <div className="w-1/2 float-left relative px-4 text-red-700">
-              <h1
-                className="text-2xl mb-4 w-full float-left font-bold"
-                itemProp="name"
-              >
+              <h1 className="text-2xl mb-4 w-full float-left font-bold" itemProp="name">
                 {name}
               </h1>
               <div className="mb-10px w-full float-left">
@@ -114,88 +111,58 @@ export function DetailMain({
               {/* MÔ TẢ NGẮN */}
               <div className="w-full float-left mb-4 pb-10px border-b border-b-gray-300 text-sm">
                 <div className="w-full float-left relative">
-                  <label className="m-0 float-left block max-w-full font-bold">
-                    Giới thiệu sản phẩm
-                  </label>
+                  <label className="m-0 float-left block max-w-full font-bold">Giới thiệu sản phẩm</label>
                   {/* <em className="fa fa-minus" aria-hidden="true" /> */}
                 </div>
                 <div className="block w-full float-left text-xs mt-2">
-                  <p className="mb-[15px]">{`✓ Năm xuất bản: ${orUpdating(
-                    publicationYear
-                  )}`}</p>
-                  <p className="mb-[15px]">
-                    {`✓ Kích thước: ${orUpdating(dimemsions)}`}
-                  </p>
-                  <p className="mb-[15px]">
-                    {`✓ Số trang: ${orUpdating(numPages)}`}
-                  </p>
-                  <p className="mb-[15px]">
-                    {`✓ Loại bìa: ${orUpdating(coverType)}`}
-                  </p>
+                  <p className="mb-[15px]">{`✓ Năm xuất bản: ${orUpdating(publicationYear)}`}</p>
+                  <p className="mb-[15px]">{`✓ Kích thước: ${orUpdating(dimemsions)}`}</p>
+                  <p className="mb-[15px]">{`✓ Số trang: ${orUpdating(numPages)}`}</p>
+                  <p className="mb-[15px]">{`✓ Loại bìa: ${orUpdating(coverType)}`}</p>
                 </div>
               </div>
               {/* END MÔ TẢ NGẮN */}
               <div className="w-full float-left">
-                <form
-                  encType="multipart/form-data"
-                  id="add-to-cart-form"
-                  action="/cart/add"
-                  method="post"
-                  className="w-full float-left"
-                >
+                <div className="w-full float-left">
                   <div className="box-variant fw clearfix ">
-                    <input
-                      type="hidden"
-                      name="variantId"
-                      defaultValue={82829982}
-                    />
+                    <input type="hidden" name="variantId" defaultValue={82829982} />
                   </div>
                   <div className="w-[calc(100%-215px)] mr-4 float-left">
                     <div className="p-0 mb-4 inline-block w-full float-left border-none">
                       <label className="w-24 float-left overflow-hidden leading-[40px] max-w-full font-bold text-sm">
                         Số lượng
                       </label>
-                      <button
-                        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
-                        type="button"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        className="w-[calc(100%-188px)] h-10 float-left -mx-[1px] text-center border border-gray-300 min-h-[40px] p-1 text-gray-900 bg-white align-middle"
-                        title="Số lượng"
-                        defaultValue={1}
-                        maxLength={3}
-                        id="qty"
-                        name="quantity"
-                      />
-                      <button
-                        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
-                        type="button"
-                      >
-                        +
-                      </button>
+                      <BookCounter counter={counter} setCounter={setCounter} />
                     </div>
                   </div>
                   {/* BUTTON ACTIONS */}
-                  <input
-                    className="hidden"
-                    type="hidden"
-                    name="variantId"
-                    defaultValue={82829982}
-                  />
+                  <input className="hidden" type="hidden" name="variantId" defaultValue={82829982} />
                   <div className="w-48 float-left mb-4">
                     <button
-                      type="submit"
                       className="w-full float-left bg-red-700 text-white relative text-base cursor-pointer inline-block h-10 leading-[40px] text-center font-normal"
-                      title="Mua hàng"
+                      title="Add to cart"
+                      onClick={() => {
+                        if (cartDispatch) {
+                          let addedAmount = parseInt(counter);
+                          if (Number.isNaN(addedAmount)) {
+                            addedAmount = 1;
+                          }
+                          cartDispatch({
+                            type: "ADD_WITH_AMOUNT",
+                            book: { id, name, image, price: discountPrice },
+                            amount: addedAmount,
+                          });
+                        }
+                      }}
                     >
-                      <span>Mua hàng</span>
+                      <span>
+                        Add To Cart
+                        <FontAwesomeIcon icon={faCaretRight } className="ml-1"/>
+                      </span>
                     </button>
                   </div>
                   {/* END BUTTON ACTIONS */}
-                </form>
+                </div>
                 {/* TAG SẢN PHẨM */}
                 {/* END TAG */}
               </div>
@@ -234,10 +201,7 @@ export function DetailMain({
                       className="text-red-500 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white"
                       href="https://plus.google.com/"
                     >
-                      <span
-                        className="icon icon-google-plus"
-                        aria-hidden="true"
-                      >
+                      <span className="icon icon-google-plus" aria-hidden="true">
                         <FontAwesomeIcon icon={faGooglePlusG} />
                       </span>
                     </a>
@@ -250,5 +214,56 @@ export function DetailMain({
         </div>
       </div>
     </div>
+  );
+}
+
+function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dispatch<SetStateAction<string>> }) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    if (inputValue.trim() === "" || !Number.isNaN(parseInt(inputValue))) {
+      setCounter(inputValue);
+    }
+  };
+
+  return (
+    <>
+      <button
+        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
+        type="button"
+        onClick={() => {
+          setCounter((prev) => {
+            if (prev.trim() === "" || parseInt(prev) <= 1) {
+              return prev;
+            }
+            return (parseInt(prev) - 1).toString();
+          });
+        }}
+      >
+        -
+      </button>
+      <input
+        type="text"
+        className="w-[calc(100%-188px)] h-10 float-left -mx-[1px] text-center border border-gray-300 min-h-[40px] p-1 text-gray-900 bg-white align-middle"
+        title="Số lượng"
+        maxLength={3}
+        value={counter}
+        onChange={handleInputChange}
+        placeholder="1"
+      />
+      <button
+        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
+        type="button"
+        onClick={() => {
+          setCounter((prev) => {
+            if (prev.trim() === "") {
+              return "2";
+            }
+            return (parseInt(prev) + 1).toString();
+          });
+        }}
+      >
+        +
+      </button>
+    </>
   );
 }
