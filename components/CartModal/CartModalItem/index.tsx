@@ -1,17 +1,33 @@
+import { CartAction, CartDispatchContext, CartItem } from "@/contexts/CartContext";
 import { faClose, faPlus, faSubtract } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
+import { Dispatch, useContext } from "react";
 
-export function CartModalItem() {
+export function CartModalItem({ book: { id, name, image, price }, quantity }: CartItem) {
+  const cartDispatch = useContext(CartDispatchContext);
+
   return (
     <div className="w-full border-b border-dotted text-sm text-red-700">
       <div className="flex items-start -mr-3 py-2">
         <div className="w-1/2 text-left flex px-2">
           <div className="item-image">
-            <a className="block w-20 h-max relative" href="/copy-of-thep-da-toi-the-day" title="Thép đã tôi thế đấy">
+            <Link
+              className="block w-20 h-max relative"
+              href={`/detail/${id}`}
+              title={name}
+              onClick={() => {
+                if (cartDispatch) {
+                  cartDispatch({
+                    type: "CLOSE_CART_MODAL",
+                  });
+                }
+              }}
+            >
               <Image
                 alt="Thép đã tôi thế đấy"
-                src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683188454/book-publisher/truyen-ngan-dac-sac-nga.jpg"
+                src={image}
                 placeholder="blur"
                 blurDataURL="/image-loader.gif"
                 width="0"
@@ -19,32 +35,50 @@ export function CartModalItem() {
                 sizes="10vw"
                 className="w-20 h-auto"
               />
-            </a>
+            </Link>
           </div>
           <div className="ml-2">
             <p className="item-name">
-              <a href="/copy-of-thep-da-toi-the-day" title="Thép đã tôi thế đấy">
-                Thép đã tôi thế đấy
-              </a>
+              <Link
+                href={`/detail/${id}`}
+                title={name}
+                onClick={() => {
+                  if (cartDispatch) {
+                    cartDispatch({
+                      type: "CLOSE_CART_MODAL",
+                    });
+                  }
+                }}
+              >
+                {name}
+              </Link>
             </p>
             <p className="text-xs">
-              <a className="remove-item-cart" title="Xóa" data-id={69812916}>
+              <button
+                className="remove-item-cart"
+                title="Xóa"
+                onClick={() => {
+                  if (cartDispatch) {
+                    cartDispatch({ type: "REMOVE_ITEM", bookId: id });
+                  }
+                }}
+              >
                 <FontAwesomeIcon icon={faClose} /> Xóa
-              </a>
+              </button>
             </p>
           </div>
         </div>
         <div className="w-[15%] text-center text-black">
           <div className="item-price">
-            <span className="price">96.000₫</span>
+            <span className="price">{`${price}₫`}</span>
           </div>
         </div>
         <div className="w-[15%] text-center">
-          <QuantityControl />
+          <QuantityControl id={id} quantity={quantity} cartDispatch={cartDispatch}/>
         </div>
         <div className="w-1/5 text-center">
           <span className="cart-price">
-            <span className="font-bold">96.000₫</span>
+            <span className="font-bold">{`${price * quantity}₫`}</span>
           </span>
         </div>
       </div>
@@ -52,19 +86,44 @@ export function CartModalItem() {
   );
 }
 
-function QuantityControl() {
+function QuantityControl({
+  id,
+  quantity,
+  cartDispatch,
+}: {
+  id: number;
+  quantity: number;
+  cartDispatch: Dispatch<CartAction> | null;
+}) {
   return (
     <div className="h-6 w-[74px] flex mx-auto items-stretch justify-center">
-      <span className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-l border-gray-300">
+      <button
+        className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-l border-gray-300"
+        onClick={() => {
+          if (cartDispatch) {
+            cartDispatch({ type: "DECREASE_ITEM_QUANTITY", bookId: id });
+          }
+        }}
+      >
         <FontAwesomeIcon icon={faSubtract} size="xs" />
-      </span>
+      </button>
       <input
         className="basis-0 grow flex items-center justify-center min-w-0 text-center outline-none border border-gray-300"
+        type="text"
         placeholder="0"
+        value={quantity}
+        onChange={() => {}}
       />
-      <span className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-r border-gray-300">
+      <button
+        className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-r border-gray-300"
+        onClick={() => {
+          if (cartDispatch) {
+            cartDispatch({ type: "INCREASE_ITEM_QUANTITY", bookId: id });
+          }
+        }}
+      >
         <FontAwesomeIcon icon={faPlus} size="xs" />
-      </span>
+      </button>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { CartActionType, CartDispatchContext } from "@/contexts/CartContext";
+import { CartDispatchContext } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useContext } from "react";
@@ -17,9 +17,9 @@ export function BookCart({ id, name, image, originalPrice, discountPrice, discou
 
   const openCartModal = useCallback(() => {
     if (cartDispatch) {
-      cartDispatch({ type: CartActionType.ADD_TO_CART });
+      cartDispatch({ type: "ADD_TO_CART", book: { id, name, image, price: discountPrice } });
     }
-  }, [cartDispatch]);
+  }, [cartDispatch, discountPrice, id, image, name]);
 
   return (
     <div className="text-left relative overflow-hidden bg-white w-[190px] px-4 mx-auto">

@@ -5,10 +5,12 @@ import {
   faCaretLeft,
   faCaretRight,
   faCheck,
+  faClose,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { CartActionType, CartContext, CartDispatchContext } from "@/contexts/CartContext";
+import { CartContext, CartDispatchContext } from "@/contexts/CartContext";
+import Link from "next/link";
 
 export function CartModal() {
   const cart = useContext(CartContext);
@@ -22,7 +24,7 @@ export function CartModal() {
       className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-10 outline-none bg-black bg-opacity-40"
       onClick={() => {
         if (cartDispatch) {
-          cartDispatch({ type: CartActionType.CLOSE_CART_MODAL });
+          cartDispatch({ type: "CLOSE_CART_MODAL" });
         }
       }}
     >
@@ -36,9 +38,9 @@ export function CartModal() {
         <div className="mb-[10px] text-base pr-4 text-red-700">
           <FontAwesomeIcon icon={faCheck} className="font-bold" /> Bạn đã thêm {'"'}
           <span className="cart-popup-name">
-            <a href="/nhung-tam-long-cao-ca-2" title="Những tấm lòng cao cả" className="text-red-500">
+            <Link href="/nhung-tam-long-cao-ca-2" title="Những tấm lòng cao cả" className="text-red-500">
               Những tấm lòng cao cả
-            </a>
+            </Link>
           </span>
           {'"'} vào giỏ hàng
         </div>
@@ -60,11 +62,9 @@ export function CartModal() {
             <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Thành tiền</div>
           </div>
           <div className="w-full max-h-72 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-b">
-            <CartModalItem />
-            <CartModalItem />
-            <CartModalItem />
-            <CartModalItem />
-            <CartModalItem />
+            {cart.cartItems.map((item) => (
+              <CartModalItem {...item} key={item.book.id} />
+            ))}
           </div>
           <div className="w-full text-red-700">
             <div className="w-full px-[10px] py-4 flex justify-between items-center">
@@ -73,7 +73,13 @@ export function CartModal() {
               </div>
               <div className="text-base font-bold">
                 <p>
-                  Thành tiền: <span className="total-price">368.000₫</span>
+                  Thành tiền:{" "}
+                  <span className="total-price">
+                    {`${cart.cartItems.reduce(
+                      (accumulator, item) => accumulator + item.book.price * item.quantity,
+                      0
+                    )}`}
+                  </span>
                 </p>
               </div>
             </div>
@@ -91,9 +97,17 @@ export function CartModal() {
             </div>
           </div>
         </div>
-        <a title="Close" className="quickview-close close-window">
-          <i className="fa  fa-close" />
-        </a>
+        <button
+          title="Close"
+          className="absolute top-2 right-4 h-min"
+          onClick={() => {
+            if (cartDispatch) {
+              cartDispatch({ type: "CLOSE_CART_MODAL" });
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faClose} className="text-red-700" />
+        </button>
       </div>
     </div>
   );
