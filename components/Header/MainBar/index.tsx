@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the 
 import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 import Link from "next/link";
 import Image from "next/image";
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { UserContext, UserDispatchContext } from "@/contexts/UserContext";
+import { CartPopUp } from "./CartPopUp";
 
 export function MainBar() {
   const authInfo = useContext(UserContext);
@@ -113,8 +114,8 @@ export function MainBar() {
               </div>
             </div>
 
-            <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md">
-              <div className="w-36 z-10 text-center float-left rounded-md">
+            <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md group">
+              <div className="w-36 z-50 text-center float-left rounded-md">
                 <div className="w-full float-left">
                   <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
                     <FontAwesomeIcon
@@ -133,13 +134,7 @@ export function MainBar() {
                     </span>
                   </div>
                 </div>
-                {/* <div className="top-cart-content hidden-sm hidden-xs">
-                  <ul id="cart-sidebar" className="mini-products-list count_li">
-                    <div className="no-item">
-                      <p>Không có sản phẩm nào trong giỏ hàng.</p>
-                    </div>
-                  </ul>
-                </div> */}
+                <CartPopUp />
               </div>
             </div>
           </div>

@@ -26,7 +26,7 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
               }}
             >
               <Image
-                alt="Thép đã tôi thế đấy"
+                alt={name}
                 src={image}
                 placeholder="blur"
                 blurDataURL="/image-loader.gif"
