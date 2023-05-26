@@ -3,10 +3,10 @@ import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-ic
 import Link from "next/link";
 import Image from "next/image";
 import { use, useContext } from "react";
-import { UserActionType, UserContext, UserDispatchContext } from "@/contexts/UserContext";
+import { UserContext, UserDispatchContext } from "@/contexts/UserContext";
 
 export function MainBar() {
-  const user = useContext(UserContext);
+  const authInfo = useContext(UserContext);
   const userDispatch = useContext(UserDispatchContext);
 
   return (
@@ -61,10 +61,10 @@ export function MainBar() {
               </div>
               <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
                 <span className="font-bold text-sm leading-none overflow-ellipsis">
-                  {user.isLogin ? user.name : "Tài khoản"}
+                  {authInfo.isLogin ? authInfo.user?.name : "Tài khoản"}
                 </span>
                 <span className="leading-none">
-                  {user.isLogin ? (
+                  {authInfo.isLogin ? (
                     <>
                       <Link
                         href="/account/login"
@@ -76,7 +76,7 @@ export function MainBar() {
                         className="text-xs leading-none"
                         onClick={() => {
                           if (userDispatch) {
-                            userDispatch({ type: UserActionType.LOGOUT });
+                            userDispatch({ type: "LOGOUT" });
                           }
                         }}
                       >

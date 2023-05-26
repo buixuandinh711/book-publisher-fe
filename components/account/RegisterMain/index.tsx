@@ -1,4 +1,4 @@
-import { UserActionType, UserDispatchContext } from "@/contexts/UserContext";
+import { UserDispatchContext } from "@/contexts/UserContext";
 import { nameRegex, passwordRegex } from "@/utils/constant";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
@@ -58,13 +58,15 @@ export function RegisterMain() {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
+
                   },
                   body: formData.toString(),
+                  credentials: "include",
                 });
                 if (response.ok) {
                   const user = await response.json();
                   if (userDispatch) {
-                    userDispatch({ type: UserActionType.LOGIN, payload: user });
+                    userDispatch({ type: "LOGIN", user });
                   }
                   router.replace("/");
                 } else {
