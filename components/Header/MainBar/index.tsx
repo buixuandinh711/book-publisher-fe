@@ -75,9 +75,22 @@ export function MainBar() {
                       <button
                         className="text-xs leading-none"
                         onClick={() => {
-                          if (userDispatch) {
-                            userDispatch({ type: "LOGOUT" });
-                          }
+                          const logout = async () => {
+                            const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/logout`, {
+                              method: "GET",
+                              credentials: "include",
+                            });
+                            if (response.ok) {
+                              if (userDispatch) {
+                                userDispatch({ type: "LOGOUT" });
+                              }
+                            } else {
+                              console.log("Log out failed");
+                            }
+                          };
+                          logout().catch((err) => {
+                            console.log(err);
+                          });
                         }}
                       >
                         Thoát

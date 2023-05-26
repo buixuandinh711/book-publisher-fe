@@ -60,8 +60,7 @@ export function LoginMain() {
                         }
                         router.replace("/");
                       } else {
-                        console.log("Register failed");
-                        console.log(await response.text());
+                        console.log("Log in failed");
                       }
                     } catch (error) {
                       console.log(error);
