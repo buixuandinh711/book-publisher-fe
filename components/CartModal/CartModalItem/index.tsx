@@ -70,15 +70,15 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
         </div>
         <div className="w-[15%] text-center text-black">
           <div className="item-price">
-            <span className="price">{`${price}₫`}</span>
+            <span className="price">{`${price.toLocaleString()}₫`}</span>
           </div>
         </div>
         <div className="w-[15%] text-center">
-          <QuantityControl id={id} quantity={quantity} cartDispatch={cartDispatch}/>
+          <QuantityControl id={id} quantity={quantity} cartDispatch={cartDispatch} />
         </div>
         <div className="w-1/5 text-center">
           <span className="cart-price">
-            <span className="font-bold">{`${price * quantity}₫`}</span>
+            <span className="font-bold">{`${(price * quantity).toLocaleString()}₫`}</span>
           </span>
         </div>
       </div>

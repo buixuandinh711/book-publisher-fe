@@ -1,4 +1,5 @@
 import { Dispatch, ReactNode, createContext, useReducer } from "react";
+import { number } from "yup";
 
 export type CartAction =
   | { type: "ADD_TO_CART"; book: CartBook }
@@ -6,7 +7,8 @@ export type CartAction =
   | { type: "INCREASE_ITEM_QUANTITY"; bookId: number }
   | { type: "DECREASE_ITEM_QUANTITY"; bookId: number }
   | { type: "REMOVE_ITEM"; bookId: number }
-  | { type: "ADD_WITH_AMOUNT"; book: CartBook; amount: number };
+  | { type: "ADD_WITH_AMOUNT"; book: CartBook; amount: number }
+  | { type: "UPDATE_QUANTITY"; id: number; newQuantity: number };
 
 export interface CartBook {
   id: number;
@@ -61,7 +63,6 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "INCREASE_ITEM_QUANTITY": {
       return {
         ...state,
-        isModalOpen: true,
         cartItems: state.cartItems.map((item) => {
           if (item.book.id === action.bookId) {
             return {
@@ -87,7 +88,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         .filter((item) => item.book.id !== action.bookId || item.quantity > 0);
       return {
         ...state,
-        isModalOpen: newCartItems.length > 0,
+        isModalOpen: state.isModalOpen && newCartItems.length > 0,
         cartItems: newCartItems,
       };
     }
@@ -95,7 +96,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       const newCartItems = state.cartItems.filter((item) => item.book.id !== action.bookId);
       return {
         ...state,
-        isModalOpen: newCartItems.length > 0,
+        isModalOpen: state.isModalOpen && newCartItems.length > 0,
         cartItems: newCartItems,
       };
     }
@@ -123,6 +124,20 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           cartItems: state.cartItems.concat({ book, quantity: action.amount }),
         };
       }
+    }
+    case "UPDATE_QUANTITY": {
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) => {
+          if (item.book.id === action.id) {
+            return {
+              ...item,
+              quantity: action.newQuantity,
+            };
+          }
+          return item;
+        }),
+      };
     }
   }
 }

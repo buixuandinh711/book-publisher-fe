@@ -244,7 +244,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
       <input
         type="text"
         className="w-[calc(100%-188px)] h-10 float-left -mx-[1px] text-center border border-gray-300 min-h-[40px] p-1 text-gray-900 bg-white align-middle"
-        title="Số lượng"
+        title="Amount"
         maxLength={3}
         value={counter}
         onChange={handleInputChange}

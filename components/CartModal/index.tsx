@@ -75,10 +75,10 @@ export function CartModal() {
                 <p>
                   Thành tiền:{" "}
                   <span className="total-price">
-                    {`${cart.cartItems.reduce(
+                    {cart.cartItems.reduce(
                       (accumulator, item) => accumulator + item.book.price * item.quantity,
                       0
-                    )}`}
+                    ).toLocaleString()}₫
                   </span>
                 </p>
               </div>
