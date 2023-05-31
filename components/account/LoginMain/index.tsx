@@ -1,6 +1,7 @@
 import { UserDispatchContext } from "@/contexts/UserContext";
 import { passwordRegex } from "@/utils/constant";
 import { Field, Form, Formik, FormikHelpers } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import * as Yup from "yup";
@@ -25,12 +26,12 @@ export function LoginMain() {
   return (
     <section className="w-full float-left py-8 text-red-700 text-sm">
       <div className="container">
-        <h1 className="mb-8 text-2xl font-bold uppercase w-full float-left leading-snug">Đăng nhập tài khoản</h1>
+        <h1 className="mb-8 text-2xl font-bold uppercase w-full float-left leading-snug">Log in to your account</h1>
         <div className="-mx-4">
           <div className="w-1/2 float-left relative px-4">
             <div className="mb-8">
               <div id="login">
-                <p className="mb-4">Nếu bạn đã có tài khoản, đăng nhập tại đây.</p>
+                <p className="mb-4">If you already have an account, log in here.</p>
                 <Formik
                   initialValues={{
                     email: "",
@@ -51,7 +52,6 @@ export function LoginMain() {
                         },
                         body: formData.toString(),
                         credentials: "include",
-                        
                       });
                       if (response.ok) {
                         const user = await response.json();
@@ -107,30 +107,29 @@ export function LoginMain() {
                           <button
                             className="bg-red-700 text-white border border-red-700 rounded-md min-w-[160px] relative cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
                             type="submit"
-                            value="Đăng nhập"
+                            value="Log in"
                           >
-                            <span>Đăng nhập</span>
+                            <span>Log in</span>
                           </button>
-                          <button
+                          <Link
                             className="bg-white text-red-700 border border-red-700 rounded-md min-w-[160px] ml-2 relative px-8 cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
-                            type="submit"
-                            value="Đăng nhập"
+                            href="/account/register"
                           >
-                            <span>Đăng ký</span>
-                          </button>
+                            <span>Sign up</span>
+                          </Link>
                         </div>
                       </div>
                     </Form>
                   )}
                 </Formik>
 
-                <span className="mt-8 block float-left underline cursor-pointer">Bạn quên mật khẩu?</span>
+                <span className="mt-8 block float-left underline cursor-pointer">Forgot your password?</span>
               </div>
             </div>
           </div>
           <div className="w-1/2 float-left relative px-4 border-l border-gray-300 hidden">
             <div id="recover-password" className="w-full float-left">
-              <p className="mb-4">Bạn quên mật khẩu? Nhập địa chỉ email để lấy lại mật khẩu qua email.</p>
+              <p className="mb-4">Forgot your password? Enter your email address to reset your password via email.</p>
               <form method="post" action="/account/recover" id="recover_customer_password" acceptCharset="UTF-8">
                 <input name="FormType" type="hidden" defaultValue="recover_customer_password" />
                 <input name="utf8" type="hidden" defaultValue="true" />
@@ -151,9 +150,9 @@ export function LoginMain() {
                   <button
                     className="bg-red-700 text-white border border-red-700 rounded-md min-w-[160px] relative cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
                     type="submit"
-                    value="Lấy lại mật khẩu"
+                    value="Reset Password"
                   >
-                    <span>Lấy lại mật khẩu</span>
+                    <span>Reset Password</span>
                   </button>
                 </div>
               </form>
