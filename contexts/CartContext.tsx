@@ -1,5 +1,5 @@
-import { Dispatch, ReactNode, createContext, useReducer } from "react";
-import { number } from "yup";
+import { Dispatch, ReactNode, createContext, useEffect, useReducer } from "react";
+import { useDebounce } from "use-debounce";
 
 export type CartAction =
   | { type: "ADD_TO_CART"; book: CartBook }
@@ -147,6 +147,29 @@ export const CartDispatchContext = createContext<Dispatch<CartAction> | null>(nu
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, cartDispatch] = useReducer(cartReducer, { isModalOpen: false, cartItems: [] });
+  const [debouncedCart] = useDebounce(cart, 1000);
+
+  useEffect(() => {
+    const postCart = async () => {
+      const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/update-cart`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          cart: debouncedCart.cartItems.map((item) => ({ item: item.book.id, quantity: item.quantity })),
+        }),
+      });
+      if (res.ok) {
+        console.log("Update successfully");
+      }
+    };
+    postCart().catch((err) => {
+      console.log(err);
+    });
+  }, [debouncedCart]);
 
   return (
     <CartContext.Provider value={cart}>
