@@ -11,10 +11,13 @@ import {
 import { useContext } from "react";
 import { CartContext, CartDispatchContext } from "@/contexts/CartContext";
 import Link from "next/link";
+import { useCartQuery } from "@/contexts/slices/apiSlice";
+import Image from "next/image";
 
 export function CartModal() {
   const cart = useContext(CartContext);
   const cartDispatch = useContext(CartDispatchContext);
+  const cartQuery = useCartQuery({});
 
   if (!cart.isModalOpen) return <></>;
 
@@ -62,9 +65,20 @@ export function CartModal() {
             <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Thành tiền</div>
           </div>
           <div className="w-full max-h-72 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-b">
-            {cart.cartItems.map((item) => (
-              <CartModalItem {...item} key={item.book.id} />
-            ))}
+            {cartQuery.isLoading ? (
+              <Image
+                alt="Loading"
+                src="/image-loader.gif"
+                placeholder="blur"
+                width="0"
+                height="0"
+                sizes="10vw"
+                className="w-[100px] h-auto max-h-full align-middle object-contain"
+              />
+            ) : (
+              cartQuery.isSuccess &&
+              cartQuery.data.map((item) => <CartModalItem book={{ ...item.book, price: 100000 }} quantity={item.quantity} key={item.book.id} />)
+            )}
           </div>
           <div className="w-full text-red-700">
             <div className="w-full px-[10px] py-4 flex justify-between items-center">
@@ -75,10 +89,10 @@ export function CartModal() {
                 <p>
                   Thành tiền:{" "}
                   <span className="total-price">
-                    {cart.cartItems.reduce(
-                      (accumulator, item) => accumulator + item.book.price * item.quantity,
-                      0
-                    ).toLocaleString()}₫
+                    {cart.cartItems
+                      .reduce((accumulator, item) => accumulator + item.book.price * item.quantity, 0)
+                      .toLocaleString()}
+                    ₫
                   </span>
                 </p>
               </div>

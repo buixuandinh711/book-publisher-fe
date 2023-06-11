@@ -6,6 +6,18 @@ interface User {
   email: string;
 }
 
+export interface CartBook {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+}
+
+export interface CartItem {
+  book: CartBook;
+  quantity: number;
+}
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `http://${process.env.NEXT_PUBLIC_HOST}` }),
@@ -63,7 +75,15 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    cart: builder.query<CartItem[], {}>({
+      query: () => ({
+        url: "/user/cart",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
-export const { useUserQuery, useLoginMutation, useRegisterMutation, useLogoutMutation } = apiSlice;
+export const { useUserQuery, useLoginMutation, useRegisterMutation, useLogoutMutation, useCartQuery } = apiSlice;
