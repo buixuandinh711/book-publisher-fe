@@ -1,0 +1,69 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({ baseUrl: `http://${process.env.NEXT_PUBLIC_HOST}` }),
+  tagTypes: ["User"],
+  endpoints: (builder) => ({
+    user: builder.query<User, {}>({
+      query: () => ({
+        url: "/user/login-cookie",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["User"],
+    }),
+    login: builder.mutation<{}, { email: string; password: string }>({
+      query: ({ email, password }) => {
+        const formData = new URLSearchParams();
+        formData.append("email", email);
+        formData.append("password", password);
+        return {
+          url: "/user/login",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData.toString(),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
+    register: builder.mutation<{}, { name: string; email: string; password: string }>({
+      query: ({ name, email, password }) => {
+        const formData = new URLSearchParams();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("password", password);
+
+        return {
+          url: "/user/register",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData.toString(),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/user/logout",
+        method: "GET",
+        credentials: "include",
+      }),
+      invalidatesTags: ["User"],
+    }),
+  }),
+});
+
+export const { useUserQuery, useLoginMutation, useRegisterMutation, useLogoutMutation } = apiSlice;

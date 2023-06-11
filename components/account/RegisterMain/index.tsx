@@ -1,4 +1,5 @@
 import { UserDispatchContext } from "@/contexts/UserContext";
+import { useRegisterMutation } from "@/contexts/slices/apiSlice";
 import { nameRegex, passwordRegex } from "@/utils/constant";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
@@ -30,7 +31,7 @@ const SignupSchema = Yup.object().shape({
 
 export function RegisterMain() {
   const router = useRouter();
-  const userDispatch = useContext(UserDispatchContext);
+  const [register] = useRegisterMutation();
 
   return (
     <section className="w-full float-left py-8 text-red-700 text-sm">
@@ -54,24 +55,12 @@ export function RegisterMain() {
               formData.append("password", values.password);
 
               try {
-                const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/register`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-
-                  },
-                  body: formData.toString(),
-                  credentials: "include",
-                });
-                if (response.ok) {
-                  const user = await response.json();
-                  if (userDispatch) {
-                    userDispatch({ type: "LOGIN", user });
-                  }
-                  router.replace("/");
-                } else {
-                  console.log("Register failed");
-                }
+                await register({
+                  name: `${values.firstName} ${values.lastName}`,
+                  email: values.email,
+                  password: values.password,
+                }).unwrap();
+                router.replace("/");
               } catch (error) {
                 console.log(error);
               }

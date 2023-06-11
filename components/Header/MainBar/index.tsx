@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useContext } from "react";
 import { UserContext, UserDispatchContext } from "@/contexts/UserContext";
 import { CartPopUp } from "./CartPopUp";
+import { useLoginMutation, useLogoutMutation, useUserQuery } from "@/contexts/slices/apiSlice";
 
 export function MainBar() {
-  const authInfo = useContext(UserContext);
-  const userDispatch = useContext(UserDispatchContext);
+  const userQuery = useUserQuery({});
+  const [logout] = useLogoutMutation();
 
   return (
     <div className="relative w-full float-left flex items-center p-0 bg-white">
@@ -62,10 +63,10 @@ export function MainBar() {
               </div>
               <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
                 <span className="font-bold text-sm leading-none overflow-ellipsis">
-                  {authInfo.isLogin ? authInfo.user?.name : "Tài khoản"}
+                  {userQuery.isSuccess ? userQuery.data.name : "Tài khoản"}
                 </span>
                 <span className="leading-none">
-                  {authInfo.isLogin ? (
+                  {userQuery.isSuccess ? (
                     <>
                       <Link
                         href="/account/login"
@@ -75,23 +76,10 @@ export function MainBar() {
                       </Link>
                       <button
                         className="text-xs leading-none"
-                        onClick={() => {
-                          const logout = async () => {
-                            const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/logout`, {
-                              method: "GET",
-                              credentials: "include",
-                            });
-                            if (response.ok) {
-                              if (userDispatch) {
-                                userDispatch({ type: "LOGOUT" });
-                              }
-                            } else {
-                              console.log("Log out failed");
-                            }
-                          };
-                          logout().catch((err) => {
-                            console.log(err);
-                          });
+                        onClick={async () => {
+                          try {
+                            await logout({}).unwrap();
+                          } catch (error) {}
                         }}
                       >
                         Thoát
