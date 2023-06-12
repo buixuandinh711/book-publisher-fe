@@ -9,19 +9,20 @@ import {
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { CartContext, CartDispatchContext } from "@/contexts/CartContext";
+import { CartDispatchContext } from "@/contexts/CartContext";
 import Link from "next/link";
 import { useCartQuery } from "@/contexts/slices/apiSlice";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/contexts/store";
+import { closeCartModal } from "@/contexts/slices/cartSlice";
 
 export function CartModal() {
-  const cart = useContext(CartContext);
+  const cart = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
   const cartDispatch = useContext(CartDispatchContext);
   const cartQuery = useCartQuery({});
 
   if (!cart.isModalOpen) return <></>;
-
-  console.log(cartQuery);
 
   return (
     <div
@@ -92,8 +93,8 @@ export function CartModal() {
                 <p>
                   Thành tiền:{" "}
                   <span className="total-price">
-                    {cart.cartItems
-                      .reduce((accumulator, item) => accumulator + item.book.price * item.quantity, 0)
+                    {cartQuery
+                      .data!.reduce((accumulator, item) => accumulator + item.book.price * item.quantity, 0)
                       .toLocaleString()}
                     ₫
                   </span>
@@ -118,9 +119,7 @@ export function CartModal() {
           title="Close"
           className="absolute top-2 right-4 h-min"
           onClick={() => {
-            if (cartDispatch) {
-              cartDispatch({ type: "CLOSE_CART_MODAL" });
-            }
+            dispatch(closeCartModal());
           }}
         >
           <FontAwesomeIcon icon={faClose} className="text-red-700" />

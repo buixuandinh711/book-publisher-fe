@@ -1,4 +1,7 @@
 import { CartDispatchContext } from "@/contexts/CartContext";
+import { useAddToCartMutation } from "@/contexts/slices/apiSlice";
+import { openCartModal } from "@/contexts/slices/cartSlice";
+import { useAppDispatch } from "@/contexts/store";
 import { calculateDiscountPercentage, ceilToNearest5 } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,13 +16,17 @@ export interface BookCartProps {
 }
 
 export function BookCart({ id, name, image, originalPrice, currentPrice }: BookCartProps) {
-  const cartDispatch = useContext(CartDispatchContext);
+  const dispatch = useAppDispatch();
+  const [addToCart] = useAddToCartMutation({});
 
-  const openCartModal = useCallback(() => {
-    if (cartDispatch) {
-      cartDispatch({ type: "ADD_TO_CART", book: { id, name, image, price: currentPrice } });
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({ id }).unwrap();
+      dispatch(openCartModal());
+    } catch (error) {
+      console.log("Failed to add item to cart");
     }
-  }, [cartDispatch, id, image, name, currentPrice]);
+  };
 
   return (
     <div className="text-left relative overflow-hidden bg-white w-[190px] px-4 mx-auto">
@@ -66,7 +73,7 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
           <button
             className="bg-red-700 text-white border-none relative text-base px-7 cursor-pointer inline-block h-10 leading-[40px] text-center whitespace-nowrap outline-none font-normal tracking-normal"
             title="Mua hàng"
-            onClick={openCartModal}
+            onClick={handleAddToCart}
           >
             <span>Mua hàng</span>
           </button>

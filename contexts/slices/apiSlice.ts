@@ -21,7 +21,7 @@ export interface CartItem {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `http://${process.env.NEXT_PUBLIC_HOST}` }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Cart"],
   endpoints: (builder) => ({
     user: builder.query<User, {}>({
       query: () => ({
@@ -81,9 +81,30 @@ export const apiSlice = createApi({
         method: "GET",
         credentials: "include",
       }),
-      providesTags: ["User"],
+      providesTags: ["User", "Cart"],
+    }),
+    addToCart: builder.mutation<{}, { id: string }>({
+      query: ({ id }) => {
+        return {
+          url: "/user/add-to-cart",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemId: id }),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Cart"],
     }),
   }),
 });
 
-export const { useUserQuery, useLoginMutation, useRegisterMutation, useLogoutMutation, useCartQuery } = apiSlice;
+export const {
+  useUserQuery,
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useCartQuery,
+  useAddToCartMutation,
+} = apiSlice;
