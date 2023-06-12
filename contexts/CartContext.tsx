@@ -4,14 +4,14 @@ import { useDebounce } from "use-debounce";
 export type CartAction =
   | { type: "ADD_TO_CART"; book: CartBook }
   | { type: "CLOSE_CART_MODAL" }
-  | { type: "INCREASE_ITEM_QUANTITY"; bookId: number }
-  | { type: "DECREASE_ITEM_QUANTITY"; bookId: number }
-  | { type: "REMOVE_ITEM"; bookId: number }
+  | { type: "INCREASE_ITEM_QUANTITY"; bookId: string }
+  | { type: "DECREASE_ITEM_QUANTITY"; bookId: string }
+  | { type: "REMOVE_ITEM"; bookId: string }
   | { type: "ADD_WITH_AMOUNT"; book: CartBook; amount: number }
-  | { type: "UPDATE_QUANTITY"; id: number; newQuantity: number };
+  | { type: "UPDATE_QUANTITY"; id: string; newQuantity: number };
 
 export interface CartBook {
-  id: number;
+  id: string;
   name: string;
   image: string;
   price: number;
@@ -149,27 +149,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, cartDispatch] = useReducer(cartReducer, { isModalOpen: false, cartItems: [] });
   const [debouncedCart] = useDebounce(cart, 1000);
 
-  useEffect(() => {
-    const postCart = async () => {
-      const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/update-cart`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          cart: debouncedCart.cartItems.map((item) => ({ item: item.book.id, quantity: item.quantity })),
-        }),
-      });
-      if (res.ok) {
-        console.log("Update successfully");
-      }
-    };
-    postCart().catch((err) => {
-      console.log(err);
-    });
-  }, [debouncedCart]);
+  // useEffect(() => {
+  //   const postCart = async () => {
+  //     const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/update-cart`, {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",
+  //       body: JSON.stringify({
+  //         cart: debouncedCart.cartItems.map((item) => ({ item: item.book.id, quantity: item.quantity })),
+  //       }),
+  //     });
+  //     if (res.ok) {
+  //       console.log("Update successfully");
+  //     }
+  //   };
+  //   postCart().catch((err) => {
+  //     console.log(err);
+  //   });
+  // }, [debouncedCart]);
 
   return (
     <CartContext.Provider value={cart}>

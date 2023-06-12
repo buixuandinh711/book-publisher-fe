@@ -21,6 +21,8 @@ export function CartModal() {
 
   if (!cart.isModalOpen) return <></>;
 
+  console.log(cartQuery);
+
   return (
     <div
       id="popup-cart"
@@ -69,7 +71,6 @@ export function CartModal() {
               <Image
                 alt="Loading"
                 src="/image-loader.gif"
-                placeholder="blur"
                 width="0"
                 height="0"
                 sizes="10vw"
@@ -77,7 +78,9 @@ export function CartModal() {
               />
             ) : (
               cartQuery.isSuccess &&
-              cartQuery.data.map((item) => <CartModalItem book={{ ...item.book, price: 100000 }} quantity={item.quantity} key={item.book.id} />)
+              cartQuery.data.map((item) => (
+                <CartModalItem book={{ ...item.book, price: 100000 }} quantity={item.quantity} key={item.book.id} />
+              ))
             )}
           </div>
           <div className="w-full text-red-700">

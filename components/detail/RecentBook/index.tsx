@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 export function RecentBook() {
   return (
@@ -53,9 +54,14 @@ function Cart() {
           href="/combo-nhung-cau-chuyen-boi-duong-cac-chi-so-iq-lq-mq-aq-eq"
           className="h-32 flex justify-center items-center text-center"
         >
-          <img
-            src="https://bizweb.dktcdn.net/thumb/compact/100/370/339/products/1e418a1b-9bf9-4f7a-8144-dd98bb71246e.jpg"
-            alt="Combo Những câu chuyện bồi dưỡng các chỉ số IQ - LQ - MQ - AQ - EQ"
+          <Image
+            alt="NHÀ XUẤT BẢN VĂN HỌC"
+            src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683188455/book-publisher/tho-ho-xuan-huong.jpg"
+            placeholder="blur"
+            blurDataURL="/image-loader.gif"
+            width="0"
+            height="0"
+            sizes="10vw"
             className="w-auto mx-auto block h-auto max-w-full max-h-full"
           />
         </a>

@@ -91,7 +91,7 @@ function QuantityControl({
   quantity,
   cartDispatch,
 }: {
-  id: number;
+  id: string;
   quantity: number;
   cartDispatch: Dispatch<CartAction> | null;
 }) {

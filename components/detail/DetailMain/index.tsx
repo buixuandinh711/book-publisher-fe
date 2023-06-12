@@ -1,6 +1,6 @@
 import { BookCartProps } from "@/components/BookCart";
 import { CartDispatchContext } from "@/contexts/CartContext";
-import { orUpdating } from "@/utils/utils";
+import { calculateDiscountPercentage, orUpdating } from "@/utils/utils";
 import { faFacebookF, faGooglePlusG, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRightLong, faCaretRight, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,8 +22,7 @@ export function DetailMain({
   name,
   image,
   originalPrice,
-  discountPrice,
-  discountPercent,
+  currentPrice,
   isbn,
   category,
   author,
@@ -41,14 +40,15 @@ export function DetailMain({
         <div className="mb-8 w-full float-left relative  px-4">
           <div className="-px-4">
             <div className="w-1/2 float-left relative px-4">
-              <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
-                {`-${discountPercent}%`}
-              </div>
+              {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
+                <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
+                  {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
+                </div>
+              )}
               <div className="h-[521px] bg-gray-100 mb-4">
                 <a href={image} className="flex justify-center items-center h-full">
                   <div className="!w-full !h-full flex justify-center items-center relative">
                     <Image
-                      id="img_01"
                       src={image}
                       alt={name}
                       className="w-auto max-w-full inline-block h-auto static max-h-full align-middle object-contain"
@@ -71,7 +71,7 @@ export function DetailMain({
               <div className="mb-4 w-full float-left">
                 <span className="text-2xl text-black font-bold">
                   <span className="" itemProp="price">
-                    {`${discountPrice.toLocaleString()}₫`}
+                    {`${currentPrice.toLocaleString()}₫`}
                   </span>
                   <meta itemProp="priceCurrency" content="VND" />
                 </span>
@@ -149,7 +149,7 @@ export function DetailMain({
                           }
                           cartDispatch({
                             type: "ADD_WITH_AMOUNT",
-                            book: { id, name, image, price: discountPrice },
+                            book: { id, name, image, price: currentPrice },
                             amount: addedAmount,
                           });
                         }
@@ -157,7 +157,7 @@ export function DetailMain({
                     >
                       <span>
                         Add To Cart
-                        <FontAwesomeIcon icon={faCaretRight } className="ml-1"/>
+                        <FontAwesomeIcon icon={faCaretRight} className="ml-1" />
                       </span>
                     </button>
                   </div>
