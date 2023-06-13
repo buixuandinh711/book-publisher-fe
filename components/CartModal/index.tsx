@@ -19,6 +19,10 @@ export function CartModal() {
   const dispatch = useAppDispatch();
   const cartQuery = useCartQuery({});
 
+  const handleContinueShopping = () => {
+    dispatch(closeCartModal());
+  };
+
   if (!cart.isModalOpen) return <></>;
 
   return (
@@ -37,30 +41,31 @@ export function CartModal() {
         }}
       >
         <div className="mb-[10px] text-base pr-4 text-red-700">
-          <FontAwesomeIcon icon={faCheck} className="font-bold" /> Bạn đã thêm {'"'}
+          <FontAwesomeIcon icon={faCheck} className="font-bold" /> You have added {'"'}
           <span className="cart-popup-name">
             <Link href="/nhung-tam-long-cao-ca-2" title="Những tấm lòng cao cả" className="text-red-500">
-              Những tấm lòng cao cả
+              Những tấm lòng cao cả (The Noble Hearts)
             </Link>
           </span>
-          {'"'} vào giỏ hàng
+          {'"'} to the cart.
         </div>
         <div className="text-sm mb-[10px] cursor-pointer text-red-700">
-          <FontAwesomeIcon icon={faShoppingCart} /> Giỏ hàng của bạn (<span className="cart-popup-count">3</span> sản
-          phẩm) <FontAwesomeIcon icon={faCaretRight} />
+          <FontAwesomeIcon icon={faShoppingCart} /> Your Cart (
+          <span id="cart-modal-item-count">{cartQuery.data?.length}</span> items){" "}
+          <FontAwesomeIcon icon={faCaretRight} />
         </div>
         <div className="content-popup-cart">
           <div className="w-full flex">
             <div className="w-1/2 text-left bg-red-700 text-white py-1 px-2 text-sm border-r border-r-whited rounded-tl">
-              Sản phẩm
+              Product
             </div>
             <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Đơn giá
+              Price
             </div>
             <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Số lượng
+              Quantity
             </div>
-            <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Thành tiền</div>
+            <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Total</div>
           </div>
           <div className="w-full max-h-72 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-b">
             {cartQuery.isLoading ? (
@@ -75,18 +80,18 @@ export function CartModal() {
             ) : (
               cartQuery.isSuccess &&
               cartQuery.data.map((item) => (
-                <CartModalItem book={{ ...item.book, currentPrice: 100000 }} quantity={item.quantity} key={item.book.id} />
+                <CartModalItem book={{ ...item.book }} quantity={item.quantity} key={item.book.id} />
               ))
             )}
           </div>
           <div className="w-full text-red-700">
             <div className="w-full px-[10px] py-4 flex justify-between items-center">
               <div className="text-sm">
-                <p>Giao hàng trên toàn quốc</p>
+                <p>Shipping nationwide</p>
               </div>
               <div className="text-base font-bold">
                 <p>
-                  Thành tiền:{" "}
+                  Total:{" "}
                   <span className="total-price">
                     {cartQuery
                       .data!.reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0)
@@ -97,14 +102,17 @@ export function CartModal() {
               </div>
             </div>
             <div className="w-full flex justify-between items-center">
-              <a className="m-[10px] text-sm" title="Tiếp tục mua hàng">
+              <button className="m-[10px] text-sm" title="Continue Shopping" onClick={handleContinueShopping}>
+                <FontAwesomeIcon icon={faCaretLeft} /> Continue Shopping
+              </button>
+
+              <a
+                className="p-[10px] text-sm bg-red-700 text-white rounded"
+                title="Proceed to Checkout"
+                href="/checkout"
+              >
                 <span>
-                  <FontAwesomeIcon icon={faCaretLeft} /> Tiếp tục mua hàng
-                </span>
-              </a>
-              <a className="p-[10px] text-sm bg-red-700 text-white rounded" title="Tiến hành đặt hàng" href="/checkout">
-                <span>
-                  Tiến hành đặt hàng <FontAwesomeIcon icon={faArrowRightLong} />
+                  Proceed to Checkout <FontAwesomeIcon icon={faArrowRightLong} />
                 </span>
               </a>
             </div>

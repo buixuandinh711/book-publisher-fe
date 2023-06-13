@@ -1,14 +1,27 @@
-import { CartItem, useAddToCartMutation, useDecreaseCartItemMutation } from "@/contexts/slices/apiSlice";
+import {
+  CartItem,
+  useAddToCartMutation,
+  useDecreaseCartItemMutation,
+  useRemoveCartItemMutation,
+} from "@/contexts/slices/apiSlice";
 import { closeCartModal } from "@/contexts/slices/cartSlice";
 import { useAppDispatch } from "@/contexts/store";
 import { faClose, faPlus, faSubtract } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch } from "react";
 
 export function CartModalItem({ book: { id, name, image, currentPrice: price }, quantity }: CartItem) {
   const dispatch = useAppDispatch();
+  const [removeCartItem] = useRemoveCartItemMutation();
+
+  const handleRemoveCartItem = async () => {
+    try {
+      await removeCartItem({ itemId: id }).unwrap();
+    } catch (error: unknown) {
+      console.log((error as { message: string }).message);
+    }
+  };
 
   return (
     <div className="w-full border-b border-dotted text-sm text-red-700">
@@ -48,14 +61,8 @@ export function CartModalItem({ book: { id, name, image, currentPrice: price }, 
               </Link>
             </p>
             <p className="text-xs">
-              <button
-                className="remove-item-cart"
-                title="Xóa"
-                onClick={() => {
-                  // TODO: remove cart item
-                }}
-              >
-                <FontAwesomeIcon icon={faClose} /> Xóa
+              <button className="remove-item-cart" title="Remove" onClick={handleRemoveCartItem}>
+                <FontAwesomeIcon icon={faClose} /> Remove
               </button>
             </p>
           </div>

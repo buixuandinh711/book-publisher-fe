@@ -1,4 +1,9 @@
-import { CartItem } from "@/contexts/slices/apiSlice";
+import {
+  CartItem,
+  useAddToCartMutation,
+  useDecreaseCartItemMutation,
+  useRemoveCartItemMutation,
+} from "@/contexts/slices/apiSlice";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -6,6 +11,16 @@ import Link from "next/link";
 import { ChangeEvent } from "react";
 
 export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, quantity }: CartItem) {
+  const [removeCartItem] = useRemoveCartItemMutation();
+
+  const handleRemoveCartItem = async () => {
+    try {
+      await removeCartItem({ itemId: id }).unwrap();
+    } catch (error: unknown) {
+      console.log((error as { message: string }).message);
+    }
+  };
+
   return (
     <li className="w-full py-[10px] border-t border-t-gray-300 first:border-none hover:bg-gray-50">
       <div className="flex relative">
@@ -30,15 +45,9 @@ export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, 
           <div className="text-base font-bold pb-[2px]">
             <span className="price">{`${price.toLocaleString()}₫`}</span>
           </div>
-          <BookCounter quantity={quantity} book={{ id, name, image, currentPrice: price }} />
+          <BookCounter quantity={quantity} id={id} />
         </div>
-        <button
-          onClick={() => {
-            // if (cartDispatch) {
-            //   cartDispatch({ type: "REMOVE_ITEM", bookId: id });
-            // }
-          }}
-        >
+        <button onClick={handleRemoveCartItem}>
           <FontAwesomeIcon icon={faClose} className="text-red-700 absolute top-1 right-4" />
         </button>
       </div>
@@ -46,8 +55,7 @@ export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, 
   );
 }
 
-function BookCounter({ book: { id, name, image, currentPrice: price }, quantity }: CartItem) {
-
+function BookCounter({ id, quantity }: { id: string; quantity: number }) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     if (inputValue.trim() === "" || !Number.isNaN(parseInt(inputValue))) {
@@ -65,15 +73,30 @@ function BookCounter({ book: { id, name, image, currentPrice: price }, quantity 
     }
   };
 
+  const [decreaseCartItem] = useDecreaseCartItemMutation();
+  const [addToCart] = useAddToCartMutation();
+
+  const handleDecreaseQuantity = async () => {
+    try {
+      await decreaseCartItem({ itemId: id }).unwrap();
+    } catch (error) {
+      console.log("Failed to decrease cart item");
+    }
+  };
+
+  const handleIncreaseQuantity = async () => {
+    try {
+      await addToCart({ itemId: id }).unwrap();
+    } catch (error) {
+      console.log("Failed to increase cart item");
+    }
+  };
+
   return (
     <>
       <button
         className="w-7 h-7 float-left bg-white border border-gray-300 text-center text-red-700"
-        onClick={() => {
-          // if (cartDispatch) {
-          //   cartDispatch({ type: "DECREASE_ITEM_QUANTITY", bookId: id });
-          // }
-        }}
+        onClick={handleDecreaseQuantity}
       >
         -
       </button>
@@ -83,16 +106,12 @@ function BookCounter({ book: { id, name, image, currentPrice: price }, quantity 
         title="Số lượng"
         maxLength={3}
         value={quantity}
-        onChange={handleInputChange}
+        // onChange={}
         placeholder="1"
       />
       <button
         className="w-7 h-7 float-left bg-white border border-gray-300 text-center text-red-700"
-        onClick={() => {
-          // if (cartDispatch) {
-          //   cartDispatch({ type: "INCREASE_ITEM_QUANTITY", bookId: id });
-          // }
-        }}
+        onClick={handleIncreaseQuantity}
       >
         +
       </button>
