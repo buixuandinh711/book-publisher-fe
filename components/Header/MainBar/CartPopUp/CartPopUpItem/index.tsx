@@ -105,7 +105,7 @@ function BookCounter({ id, quantity }: { id: string; quantity: number }) {
         className="w-10 h-7 float-left -mx-[1px] text-center border border-gray-300 min-h-[28px] p-1 text-gray-900 bg-white align-middle text-sm"
         title="Số lượng"
         maxLength={3}
-        value={quantity}
+        defaultValue={quantity}
         // onChange={}
         placeholder="1"
       />

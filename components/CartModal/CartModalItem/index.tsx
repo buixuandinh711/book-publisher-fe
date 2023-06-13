@@ -29,7 +29,7 @@ export function CartModalItem({ book: { id, name, image, currentPrice: price }, 
         <div className="w-1/2 text-left flex px-2">
           <div className="item-image">
             <Link
-              className="block w-20 h-max relative"
+              className="w-20 h-20 relative flex justify-center"
               href={`/detail/${id}`}
               title={name}
               onClick={() => {
@@ -40,11 +40,11 @@ export function CartModalItem({ book: { id, name, image, currentPrice: price }, 
                 alt={name}
                 src={image}
                 placeholder="blur"
-                blurDataURL="/image-loader.gif"
+                blurDataURL="/small-loader.gif"
                 width="0"
                 height="0"
                 sizes="5vw"
-                className="w-20 h-auto"
+                className="w-auto h-20 object-contain"
               />
             </Link>
           </div>

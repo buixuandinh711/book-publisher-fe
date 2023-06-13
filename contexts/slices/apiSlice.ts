@@ -125,6 +125,20 @@ export const apiSlice = createApi({
       },
       invalidatesTags: ["Cart"],
     }),
+    updateCartItem: builder.mutation<{}, { itemId: string; quantity: number }>({
+      query: ({ itemId, quantity }) => {
+        return {
+          url: "/user/update-cart-item",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemId, quantity }),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -137,4 +151,5 @@ export const {
   useAddToCartMutation,
   useDecreaseCartItemMutation,
   useRemoveCartItemMutation,
+  useUpdateCartItemMutation
 } = apiSlice;
