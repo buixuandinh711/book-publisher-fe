@@ -83,15 +83,15 @@ export const apiSlice = createApi({
       }),
       providesTags: ["User", "Cart"],
     }),
-    addToCart: builder.mutation<{}, { itemId: string }>({
-      query: ({ itemId }) => {
+    addToCart: builder.mutation<{}, { itemId: string; amount?: number }>({
+      query: ({ itemId, amount }) => {
         return {
           url: "/user/add-to-cart",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ itemId }),
+          body: JSON.stringify({ itemId, amount }),
           credentials: "include",
         };
       },
@@ -151,5 +151,5 @@ export const {
   useAddToCartMutation,
   useDecreaseCartItemMutation,
   useRemoveCartItemMutation,
-  useUpdateCartItemMutation
+  useUpdateCartItemMutation,
 } = apiSlice;

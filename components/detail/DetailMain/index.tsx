@@ -19,7 +19,7 @@ export interface DetailMainProps extends BookCartProps {
   category: string;
   author: string;
   publicationYear: number;
-  dimemsions: string;
+  dimensions: string;
   numPages: number;
   coverType: string;
 }
@@ -34,7 +34,7 @@ export function DetailMain({
   category,
   author,
   publicationYear,
-  dimemsions,
+  dimensions,
   numPages,
   coverType,
 }: DetailMainProps) {
@@ -54,7 +54,7 @@ export function DetailMain({
                   category,
                   author,
                   publicationYear,
-                  dimemsions,
+                  dimensions,
                   numPages,
                   coverType,
                 }}
@@ -83,7 +83,7 @@ function BookImage({
   return (
     <div className="w-1/2 float-left relative px-4">
       {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
-        <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-50 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
+        <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-10 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
           {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
         </div>
       )}
@@ -114,7 +114,7 @@ function BookInfo({
   category,
   author,
   publicationYear,
-  dimemsions,
+  dimensions,
   numPages,
   coverType,
 }: {
@@ -125,7 +125,7 @@ function BookInfo({
   category: string;
   author: string;
   publicationYear: number;
-  dimemsions: string;
+  dimensions: string;
   numPages: number;
   coverType: string;
 }) {
@@ -152,73 +152,61 @@ function BookInfo({
         </span>
       </div>
       <div className="w-full float-left mb-10px text-sm">
-        * <em>Giá sản phẩm chưa bao gồm VAT</em>
+        * <em>Product price does not include VAT</em>
       </div>
       <ul className="p-0 w-full float-left m-0 text-sm leading-relaxed">
         <li className="w-1/2 float-left mb-10px">
-          <span>Mã ISBN: </span>
-          <strong itemProp="sku">{isbn || "Đang cập nhật"}</strong>
+          <span>ISBN: </span>
+          <strong itemProp="sku">{isbn || "Updating"}</strong>
         </li>
         <li className="w-1/2 float-left mb-10px">
-          <span>Tình trạng: </span>
-          <strong itemProp="supersededBy">Còn hàng</strong>
+          <span>Status: </span>
+          <strong itemProp="supersededBy">In stock</strong>
           <em />
         </li>
         <li className="w-1/2 float-left mb-10px">
-          <span>Loại sách: </span>
+          <span>Category: </span>
           <strong itemProp="model">{category}</strong>
         </li>
         <li className="w-1/2 float-left mb-10px">
-          <span>Nhà xuất bản: </span>
-          <strong itemProp="name">NXB Văn học</strong>
+          <span>Publisher: </span>
+          <strong itemProp="name">Publisher ABC</strong>
         </li>
         <li className="pb-10px border-b border-b-gray-300 w-1/2 float-left mb-4">
-          <span>Tác giả: </span>
+          <span>Author: </span>
           <strong itemProp="name">{orUpdating(author)}</strong>
         </li>
       </ul>
-      {/* MÔ TẢ NGẮN */}
+      {/* SHORT DESCRIPTION */}
       <div className="w-full float-left mb-4 pb-10px border-b border-b-gray-300 text-sm">
         <div className="w-full float-left relative">
-          <label className="m-0 float-left block max-w-full font-bold">Giới thiệu sản phẩm</label>
+          <label className="m-0 float-left block max-w-full font-bold">Product Introduction</label>
           {/* <em className="fa fa-minus" aria-hidden="true" /> */}
         </div>
         <div className="block w-full float-left text-xs mt-2">
-          <p className="mb-[15px]">{`✓ Năm xuất bản: ${orUpdating(publicationYear)}`}</p>
-          <p className="mb-[15px]">{`✓ Kích thước: ${orUpdating(dimemsions)}`}</p>
-          <p className="mb-[15px]">{`✓ Số trang: ${orUpdating(numPages)}`}</p>
-          <p className="mb-[15px]">{`✓ Loại bìa: ${orUpdating(coverType)}`}</p>
+          <p className="mb-[15px]">{`✓ Publication Year: ${orUpdating(publicationYear)}`}</p>
+          <p className="mb-[15px]">{`✓ Dimensions: ${orUpdating(dimensions)}`}</p>
+          <p className="mb-[15px]">{`✓ Number of Pages: ${orUpdating(numPages)}`}</p>
+          <p className="mb-[15px]">{`✓ Cover Type: ${orUpdating(coverType)}`}</p>
         </div>
       </div>
-      {/* END MÔ TẢ NGẮN */}
+      {/* END SHORT DESCRIPTION */}
     </>
   );
 }
 
 function AddToCart({ id }: { id: string }) {
-  const [counter, setCounter] = useState("0");
-  const cartQuery = useCartQuery({});
+  const [counter, setCounter] = useState("1");
   const dispatch = useAppDispatch();
-  const [updateCartItem] = useUpdateCartItemMutation();
-
-  useEffect(() => {
-    if (cartQuery.isSuccess) {
-      const foundItem = cartQuery.data.find((item) => item.book.id === id);
-      if (foundItem) {
-        setCounter(foundItem.quantity.toString());
-      } else {
-        setCounter("0");
-      }
-    }
-  }, [cartQuery, id, setCounter]);
+  const [addToCart] = useAddToCartMutation();
 
   const handleAddToCart = async () => {
-    let quantity = parseInt(counter);
-    if (Number.isNaN(quantity)) {
+    let amount = parseInt(counter);
+    if (Number.isNaN(amount) || amount < 1) {
       return;
     }
     try {
-      await updateCartItem({ itemId: id, quantity }).unwrap();
+      await addToCart({ itemId: id, amount }).unwrap();
       dispatch(openCartModal());
     } catch (error: unknown) {
       console.log("Failed to update cart item", (error as { massage: string }).massage);
@@ -232,7 +220,7 @@ function AddToCart({ id }: { id: string }) {
         <div className="w-[calc(100%-215px)] mr-4 float-left">
           <div className="p-0 mb-4 inline-block w-full float-left border-none">
             <label className="w-24 float-left overflow-hidden leading-[40px] max-w-full font-bold text-sm">
-              Số lượng
+              Amount
             </label>
             <BookCounter counter={counter} setCounter={setCounter} />
           </div>
@@ -265,7 +253,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
   return (
     <>
       <button
-        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
+        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap hover:bg-red-700 hover:text-white active:bg-red-800 transition-colors duration-200"
         type="button"
         onClick={() => {
           setCounter((prev) => {
@@ -288,7 +276,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
         placeholder="0"
       />
       <button
-        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap"
+        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap hover:bg-red-700 hover:text-white active:bg-red-800 transition-colors duration-200"
         type="button"
         onClick={() => {
           setCounter((prev) => {
@@ -309,19 +297,19 @@ function Media() {
   return (
     <>
       <div className="border border-gray-300 inline-block mb-5 bg-gray-100 py-4 px-2 rounded-md text-black text-sm">
-        Số điện thoại hotline:{" "}
+        Hotline phone number:{" "}
         <a href="tel:0904907492" className="text-red-700">
           0971443322{" "}
         </a>
-        (tất cả các ngày trong tuần từ 08:00 - 20:00)
+        (every day of the week from 08:00 - 20:00)
       </div>
-      {/* CHIA SẺ MẠNG XÃ HỘI */}
+      {/* SOCIAL MEDIA SHARING */}
       <div className="w-full float-left">
         <ul className="p-0 m-0 list-none">
           <li className="mr-10px float-left inline-block mb-0">
             <a
               className="text-sky-700 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-700 hover:border-sky-700 hover:text-white"
-              href="https://www.facebook.com/Nh%C3%A0-xu%E1%BA%A5t-b%E1%BA%A3n-V%C4%83n-h%E1%BB%8Dc-475715752558826/"
+              href="https://www.facebook.com/PublisherABC/"
             >
               <span className="icon icon-facebook" aria-hidden="true">
                 <FontAwesomeIcon icon={faFacebookF} />
@@ -350,7 +338,7 @@ function Media() {
           </li>
         </ul>
       </div>
-      {/* END CHIA SẺ */}
+      {/* END SOCIAL MEDIA SHARING */}
     </>
   );
 }
