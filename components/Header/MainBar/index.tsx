@@ -2,10 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the 
 import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 import Link from "next/link";
 import Image from "next/image";
-import { useContext } from "react";
-import { UserContext, UserDispatchContext } from "@/contexts/UserContext";
 import { CartPopUp } from "./CartPopUp";
-import { useLoginMutation, useLogoutMutation, useUserQuery } from "@/contexts/slices/apiSlice";
+import { useLogoutMutation, useUserQuery } from "@/contexts/slices/apiSlice";
 
 export function MainBar() {
   const userQuery = useUserQuery({});

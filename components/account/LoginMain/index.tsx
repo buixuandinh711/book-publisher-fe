@@ -1,10 +1,8 @@
-import { UserDispatchContext } from "@/contexts/UserContext";
 import { useLoginMutation } from "@/contexts/slices/apiSlice";
 import { passwordRegex } from "@/utils/constant";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import * as Yup from "yup";
 
 interface FormValues {

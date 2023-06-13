@@ -1,11 +1,9 @@
-import { CartDispatchContext } from "@/contexts/CartContext";
 import { useAddToCartMutation } from "@/contexts/slices/apiSlice";
 import { openCartModal } from "@/contexts/slices/cartSlice";
 import { useAppDispatch } from "@/contexts/store";
-import { calculateDiscountPercentage, ceilToNearest5 } from "@/utils/utils";
+import { calculateDiscountPercentage } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useContext } from "react";
 
 export interface BookCartProps {
   id: string;
@@ -21,7 +19,7 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
 
   const handleAddToCart = async () => {
     try {
-      await addToCart({ id }).unwrap();
+      await addToCart({ itemId: id }).unwrap();
       dispatch(openCartModal());
     } catch (error) {
       console.log("Failed to add item to cart");

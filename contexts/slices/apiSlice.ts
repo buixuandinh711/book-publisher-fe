@@ -10,7 +10,7 @@ export interface CartBook {
   id: string;
   name: string;
   image: string;
-  price: number;
+  currentPrice: number;
 }
 
 export interface CartItem {
@@ -83,15 +83,29 @@ export const apiSlice = createApi({
       }),
       providesTags: ["User", "Cart"],
     }),
-    addToCart: builder.mutation<{}, { id: string }>({
-      query: ({ id }) => {
+    addToCart: builder.mutation<{}, { itemId: string }>({
+      query: ({ itemId }) => {
         return {
           url: "/user/add-to-cart",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ itemId: id }),
+          body: JSON.stringify({ itemId }),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Cart"],
+    }),
+    decreaseCartItem: builder.mutation<{}, { itemId: string }>({
+      query: ({ itemId }) => {
+        return {
+          url: "/user/decrease-cart-item",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemId }),
           credentials: "include",
         };
       },
@@ -107,4 +121,5 @@ export const {
   useLogoutMutation,
   useCartQuery,
   useAddToCartMutation,
+  useDecreaseCartItemMutation,
 } = apiSlice;

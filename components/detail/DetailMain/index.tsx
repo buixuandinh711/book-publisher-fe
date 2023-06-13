@@ -1,11 +1,10 @@
 import { BookCartProps } from "@/components/BookCart";
-import { CartDispatchContext } from "@/contexts/CartContext";
 import { calculateDiscountPercentage, orUpdating } from "@/utils/utils";
 import { faFacebookF, faGooglePlusG, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faArrowRightLong, faCaretRight, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction, useContext, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 export interface DetailMainProps extends BookCartProps {
   isbn: string;
@@ -32,7 +31,6 @@ export function DetailMain({
   coverType,
 }: DetailMainProps) {
   const [counter, setCounter] = useState("");
-  const cartDispatch = useContext(CartDispatchContext);
 
   return (
     <div className="container">
@@ -142,17 +140,15 @@ export function DetailMain({
                       className="w-full float-left bg-red-700 text-white relative text-base cursor-pointer inline-block h-10 leading-[40px] text-center font-normal"
                       title="Add to cart"
                       onClick={() => {
-                        if (cartDispatch) {
-                          let addedAmount = parseInt(counter);
-                          if (Number.isNaN(addedAmount)) {
-                            addedAmount = 1;
-                          }
-                          cartDispatch({
-                            type: "ADD_WITH_AMOUNT",
-                            book: { id, name, image, price: currentPrice },
-                            amount: addedAmount,
-                          });
+                        let addedAmount = parseInt(counter);
+                        if (Number.isNaN(addedAmount)) {
+                          addedAmount = 1;
                         }
+                        // cartDispatch({
+                        //   type: "ADD_WITH_AMOUNT",
+                        //   book: { id, name, image, price: currentPrice },
+                        //   amount: addedAmount,
+                        // });
                       }}
                     >
                       <span>

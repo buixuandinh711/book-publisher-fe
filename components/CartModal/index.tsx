@@ -8,8 +8,6 @@ import {
   faClose,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { CartDispatchContext } from "@/contexts/CartContext";
 import Link from "next/link";
 import { useCartQuery } from "@/contexts/slices/apiSlice";
 import Image from "next/image";
@@ -19,19 +17,16 @@ import { closeCartModal } from "@/contexts/slices/cartSlice";
 export function CartModal() {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
-  const cartDispatch = useContext(CartDispatchContext);
   const cartQuery = useCartQuery({});
 
   if (!cart.isModalOpen) return <></>;
 
   return (
     <div
-      id="popup-cart"
+      id="cart-modal"
       className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-10 outline-none bg-black bg-opacity-40"
       onClick={() => {
-        if (cartDispatch) {
-          cartDispatch({ type: "CLOSE_CART_MODAL" });
-        }
+        dispatch(closeCartModal());
       }}
     >
       <div
@@ -80,7 +75,7 @@ export function CartModal() {
             ) : (
               cartQuery.isSuccess &&
               cartQuery.data.map((item) => (
-                <CartModalItem book={{ ...item.book, price: 100000 }} quantity={item.quantity} key={item.book.id} />
+                <CartModalItem book={{ ...item.book, currentPrice: 100000 }} quantity={item.quantity} key={item.book.id} />
               ))
             )}
           </div>
@@ -94,7 +89,7 @@ export function CartModal() {
                   Thành tiền:{" "}
                   <span className="total-price">
                     {cartQuery
-                      .data!.reduce((accumulator, item) => accumulator + item.book.price * item.quantity, 0)
+                      .data!.reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0)
                       .toLocaleString()}
                     ₫
                   </span>
