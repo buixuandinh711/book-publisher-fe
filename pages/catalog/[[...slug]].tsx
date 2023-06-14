@@ -43,10 +43,11 @@ export const getServerSideProps: GetServerSideProps<
   let category = "";
 
   if (slug !== undefined) {
-    if (slug.length !== 1 || !availablePage.includes(slug[0]))
+    if (slug.length !== 1 || !availablePage.includes(slug[0])) {
       return {
         notFound: true,
       };
+    }
 
     category = "/" + slug[0];
   }
@@ -60,9 +61,13 @@ export const getServerSideProps: GetServerSideProps<
   try {
     const bookPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books${category}?${query}`);
 
-    const bookCountPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books//category-count`);
+    const bookCountPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books/category-count`);
 
     const [booksRes, bookCountRes] = await Promise.all([bookPromise, bookCountPromise]);
+
+    if (!booksRes.ok || !bookCountRes.ok) {
+      throw new Error("Failed to load data");
+    }
 
     const [booksData, bookCountData] = await Promise.all([booksRes.json(), bookCountRes.json()]);
 
@@ -80,18 +85,6 @@ export const getServerSideProps: GetServerSideProps<
     console.log(error);
   }
   return {
-    props: {
-      catalogMainProps: {
-        booksList: [],
-        currentPage: 1,
-        totalPages: 1,
-      },
-      catalogSideBarProps: {
-        newBookCount: 0,
-        classicBooksCount: 0,
-        discountBooksCount: 0,
-        popularBooksCount: 0,
-      },
-    },
+    notFound: true,
   };
 };
