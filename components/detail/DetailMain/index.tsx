@@ -59,7 +59,7 @@ export function DetailMain({
                   coverType,
                 }}
               />
-              <AddToCart id={id} />
+              <AddToCart id={id} name={name} />
               <Media />
             </div>
           </div>
@@ -195,7 +195,7 @@ function BookInfo({
   );
 }
 
-function AddToCart({ id }: { id: string }) {
+function AddToCart({ id, name }: { id: string; name: string }) {
   const [counter, setCounter] = useState("1");
   const dispatch = useAppDispatch();
   const [addToCart] = useAddToCartMutation();
@@ -207,7 +207,7 @@ function AddToCart({ id }: { id: string }) {
     }
     try {
       await addToCart({ itemId: id, amount }).unwrap();
-      dispatch(openCartModal());
+      dispatch(openCartModal({ itemId: id, name }));
     } catch (error: unknown) {
       console.log("Failed to update cart item", (error as { massage: string }).massage);
     }

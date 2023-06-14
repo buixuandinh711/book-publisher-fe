@@ -20,7 +20,7 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
   const handleAddToCart = async () => {
     try {
       await addToCart({ itemId: id }).unwrap();
-      dispatch(openCartModal());
+      dispatch(openCartModal({ itemId: id, name }));
     } catch (error) {
       console.log("Failed to add item to cart");
     }

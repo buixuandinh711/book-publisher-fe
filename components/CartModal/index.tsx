@@ -43,8 +43,15 @@ export function CartModal() {
         <div className="mb-[10px] text-base pr-4 text-red-700">
           <FontAwesomeIcon icon={faCheck} className="font-bold" /> You have added {'"'}
           <span className="cart-popup-name">
-            <Link href="/nhung-tam-long-cao-ca-2" title="Những tấm lòng cao cả" className="text-red-500">
-              Những tấm lòng cao cả (The Noble Hearts)
+            <Link
+              href={`detail/${cart.recentAdded?.itemId}`}
+              title={cart.recentAdded?.name}
+              className="text-red-500"
+              onClick={() => {
+                dispatch(closeCartModal());
+              }}
+            >
+              {cart.recentAdded?.name}
             </Link>
           </span>
           {'"'} to the cart.
