@@ -1,32 +1,39 @@
-import { CartDispatchContext } from "@/contexts/CartContext";
+import { useAddToCartMutation } from "@/contexts/slices/apiSlice";
+import { openCartModal } from "@/contexts/slices/cartSlice";
+import { useAppDispatch } from "@/contexts/store";
+import { calculateDiscountPercentage } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useContext } from "react";
 
 export interface BookCartProps {
-  id: number;
+  id: string;
   name: string;
   image: string;
   originalPrice: number;
-  discountPrice: number;
-  discountPercent: number;
+  currentPrice: number;
 }
 
-export function BookCart({ id, name, image, originalPrice, discountPrice, discountPercent }: BookCartProps) {
-  const cartDispatch = useContext(CartDispatchContext);
+export function BookCart({ id, name, image, originalPrice, currentPrice }: BookCartProps) {
+  const dispatch = useAppDispatch();
+  const [addToCart] = useAddToCartMutation({});
 
-  const openCartModal = useCallback(() => {
-    if (cartDispatch) {
-      cartDispatch({ type: "ADD_TO_CART", book: { id, name, image, price: discountPrice } });
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({ itemId: id }).unwrap();
+      dispatch(openCartModal({ itemId: id, name }));
+    } catch (error) {
+      console.log("Failed to add item to cart");
     }
-  }, [cartDispatch, discountPrice, id, image, name]);
+  };
 
   return (
     <div className="text-left relative overflow-hidden bg-white w-[190px] px-4 mx-auto">
       <div className="relative w-full float-left">
-        <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-10 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
-          {`-${discountPercent}%`}
-        </div>
+        {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
+          <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-10 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
+            {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
+          </div>
+        )}
         <Link
           href={`/detail/${id}`}
           title={name}
@@ -51,7 +58,7 @@ export function BookCart({ id, name, image, originalPrice, discountPrice, discou
         </h3>
         <div className="min-h-[37px] flex items-center justify-center flex-col leading-normal w-full float-left">
           <div className="text-lg text-black font-bold">
-            <span className="price product-price">{discountPrice.toLocaleString()}</span>
+            <span className="price product-price">{currentPrice.toLocaleString()}</span>
           </div>
           <div className="m-0 text-sm text-black line-through">
             <span className="price product-price-old">{originalPrice.toLocaleString()}</span>
@@ -64,7 +71,7 @@ export function BookCart({ id, name, image, originalPrice, discountPrice, discou
           <button
             className="bg-red-700 text-white border-none relative text-base px-7 cursor-pointer inline-block h-10 leading-[40px] text-center whitespace-nowrap outline-none font-normal tracking-normal"
             title="Mua hàng"
-            onClick={openCartModal}
+            onClick={handleAddToCart}
           >
             <span>Mua hàng</span>
           </button>

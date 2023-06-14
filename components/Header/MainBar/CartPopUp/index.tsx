@@ -1,11 +1,37 @@
-import { useContext } from "react";
+import { useCartQuery } from "@/contexts/slices/apiSlice";
 import { CartPopUpItem } from "./CartPopUpItem";
-import { CartContext } from "@/contexts/CartContext";
+import Image from "next/image";
 
 export function CartPopUp() {
-  const cart = useContext(CartContext);
+  const cartQuery = useCartQuery({});
 
-  if (cart.cartItems.length < 1) {
+  if (cartQuery.isLoading)
+    return (
+      <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
+        <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
+          <Image
+            alt="Loading"
+            src="/image-loader.gif"
+            width="0"
+            height="0"
+            sizes="10vw"
+            className="w-[100px] h-auto max-h-full align-middle object-contain"
+          />
+        </div>
+      </div>
+    );
+
+  if (!cartQuery.isSuccess) {
+    return (
+      <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
+        <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
+          Failed to load your cart, please retry
+        </div>
+      </div>
+    );
+  }
+
+  if (cartQuery.data.length < 1) {
     return (
       <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
         <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
@@ -19,7 +45,7 @@ export function CartPopUp() {
     <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
       <div id="cart-sidebar" className="py-5 w-[360px] overflow-hidden">
         <ul className="w-full max-h-[380px] overflow-x-hidden overflow-y-auto pl-4">
-          {cart.cartItems.map((item) => (
+          {cartQuery.data.map((item) => (
             <CartPopUpItem {...item} key={item.book.id} />
           ))}
         </ul>
@@ -27,8 +53,8 @@ export function CartPopUp() {
           <div className="text-base py-3 flex items-center justify-between">
             <strong className="font-bold text-black">{"Total: "}</strong>
             <span className="mr-1 font-bold text-red-700">
-              {cart.cartItems
-                .reduce((accumulator, item) => accumulator + item.book.price * item.quantity, 0)
+              {cartQuery.data
+                .reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0)
                 .toLocaleString()}
               ₫
             </span>

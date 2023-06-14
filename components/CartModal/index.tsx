@@ -8,24 +8,29 @@ import {
   faClose,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { CartContext, CartDispatchContext } from "@/contexts/CartContext";
 import Link from "next/link";
+import { useCartQuery } from "@/contexts/slices/apiSlice";
+import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/contexts/store";
+import { closeCartModal } from "@/contexts/slices/cartSlice";
 
 export function CartModal() {
-  const cart = useContext(CartContext);
-  const cartDispatch = useContext(CartDispatchContext);
+  const cart = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const cartQuery = useCartQuery({});
+
+  const handleContinueShopping = () => {
+    dispatch(closeCartModal());
+  };
 
   if (!cart.isModalOpen) return <></>;
 
   return (
     <div
-      id="popup-cart"
+      id="cart-modal"
       className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-10 outline-none bg-black bg-opacity-40"
       onClick={() => {
-        if (cartDispatch) {
-          cartDispatch({ type: "CLOSE_CART_MODAL" });
-        }
+        dispatch(closeCartModal());
       }}
     >
       <div
@@ -36,62 +41,85 @@ export function CartModal() {
         }}
       >
         <div className="mb-[10px] text-base pr-4 text-red-700">
-          <FontAwesomeIcon icon={faCheck} className="font-bold" /> Bạn đã thêm {'"'}
+          <FontAwesomeIcon icon={faCheck} className="font-bold" /> You have added {'"'}
           <span className="cart-popup-name">
-            <Link href="/nhung-tam-long-cao-ca-2" title="Những tấm lòng cao cả" className="text-red-500">
-              Những tấm lòng cao cả
+            <Link
+              href={`detail/${cart.recentAdded?.itemId}`}
+              title={cart.recentAdded?.name}
+              className="text-red-500"
+              onClick={() => {
+                dispatch(closeCartModal());
+              }}
+            >
+              {cart.recentAdded?.name}
             </Link>
           </span>
-          {'"'} vào giỏ hàng
+          {'"'} to the cart.
         </div>
         <div className="text-sm mb-[10px] cursor-pointer text-red-700">
-          <FontAwesomeIcon icon={faShoppingCart} /> Giỏ hàng của bạn (<span className="cart-popup-count">3</span> sản
-          phẩm) <FontAwesomeIcon icon={faCaretRight} />
+          <FontAwesomeIcon icon={faShoppingCart} /> Your Cart (
+          <span id="cart-modal-item-count">{cartQuery.data?.length}</span> items){" "}
+          <FontAwesomeIcon icon={faCaretRight} />
         </div>
         <div className="content-popup-cart">
           <div className="w-full flex">
             <div className="w-1/2 text-left bg-red-700 text-white py-1 px-2 text-sm border-r border-r-whited rounded-tl">
-              Sản phẩm
+              Product
             </div>
             <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Đơn giá
+              Price
             </div>
             <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Số lượng
+              Quantity
             </div>
-            <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Thành tiền</div>
+            <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Total</div>
           </div>
           <div className="w-full max-h-72 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-b">
-            {cart.cartItems.map((item) => (
-              <CartModalItem {...item} key={item.book.id} />
-            ))}
+            {cartQuery.isLoading ? (
+              <Image
+                alt="Loading"
+                src="/image-loader.gif"
+                width="0"
+                height="0"
+                sizes="10vw"
+                className="w-[100px] h-auto max-h-full align-middle object-contain"
+              />
+            ) : (
+              cartQuery.isSuccess &&
+              cartQuery.data.map((item) => (
+                <CartModalItem book={{ ...item.book }} quantity={item.quantity} key={item.book.id} />
+              ))
+            )}
           </div>
           <div className="w-full text-red-700">
             <div className="w-full px-[10px] py-4 flex justify-between items-center">
               <div className="text-sm">
-                <p>Giao hàng trên toàn quốc</p>
+                <p>Shipping nationwide</p>
               </div>
               <div className="text-base font-bold">
                 <p>
-                  Thành tiền:{" "}
+                  Total:{" "}
                   <span className="total-price">
-                    {cart.cartItems.reduce(
-                      (accumulator, item) => accumulator + item.book.price * item.quantity,
-                      0
-                    ).toLocaleString()}₫
+                    {cartQuery
+                      .data!.reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0)
+                      .toLocaleString()}
+                    ₫
                   </span>
                 </p>
               </div>
             </div>
             <div className="w-full flex justify-between items-center">
-              <a className="m-[10px] text-sm" title="Tiếp tục mua hàng">
+              <button className="m-[10px] text-sm" title="Continue Shopping" onClick={handleContinueShopping}>
+                <FontAwesomeIcon icon={faCaretLeft} /> Continue Shopping
+              </button>
+
+              <a
+                className="p-[10px] text-sm bg-red-700 text-white rounded"
+                title="Proceed to Checkout"
+                href="/checkout"
+              >
                 <span>
-                  <FontAwesomeIcon icon={faCaretLeft} /> Tiếp tục mua hàng
-                </span>
-              </a>
-              <a className="p-[10px] text-sm bg-red-700 text-white rounded" title="Tiến hành đặt hàng" href="/checkout">
-                <span>
-                  Tiến hành đặt hàng <FontAwesomeIcon icon={faArrowRightLong} />
+                  Proceed to Checkout <FontAwesomeIcon icon={faArrowRightLong} />
                 </span>
               </a>
             </div>
@@ -101,9 +129,7 @@ export function CartModal() {
           title="Close"
           className="absolute top-2 right-4 h-min"
           onClick={() => {
-            if (cartDispatch) {
-              cartDispatch({ type: "CLOSE_CART_MODAL" });
-            }
+            dispatch(closeCartModal());
           }}
         >
           <FontAwesomeIcon icon={faClose} className="text-red-700" />

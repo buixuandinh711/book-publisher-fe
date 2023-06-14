@@ -2,14 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the 
 import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 import Link from "next/link";
 import Image from "next/image";
-import { useContext } from "react";
-import { UserContext, UserDispatchContext } from "@/contexts/UserContext";
 import { CartPopUp } from "./CartPopUp";
+import { useCartQuery, useLogoutMutation, useUserQuery } from "@/contexts/slices/apiSlice";
 
 export function MainBar() {
-  const authInfo = useContext(UserContext);
-  const userDispatch = useContext(UserDispatchContext);
-
   return (
     <div className="relative w-full float-left flex items-center p-0 bg-white">
       <div className="container">
@@ -56,89 +52,88 @@ export function MainBar() {
             </form>
           </div>
           <div className="w-1/3 float-left ml-0 relative min-h-1 px-4 text-red-700">
-            <div className="w-48 h-10 float-left mr-5 border border-gray-300 rounded-md">
-              <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
-                <FontAwesomeIcon icon={faUser} className="text-lg" />
-              </div>
-              <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
-                <span className="font-bold text-sm leading-none overflow-ellipsis">
-                  {authInfo.isLogin ? authInfo.user?.name : "Tài khoản"}
-                </span>
-                <span className="leading-none">
-                  {authInfo.isLogin ? (
-                    <>
-                      <Link
-                        href="/account/login"
-                        className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
-                      >
-                        Tài khoản
-                      </Link>
-                      <button
-                        className="text-xs leading-none"
-                        onClick={() => {
-                          const logout = async () => {
-                            const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/logout`, {
-                              method: "GET",
-                              credentials: "include",
-                            });
-                            if (response.ok) {
-                              if (userDispatch) {
-                                userDispatch({ type: "LOGOUT" });
-                              }
-                            } else {
-                              console.log("Log out failed");
-                            }
-                          };
-                          logout().catch((err) => {
-                            console.log(err);
-                          });
-                        }}
-                      >
-                        Thoát
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <Link
-                        href="/account/login"
-                        className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
-                      >
-                        Đăng nhập
-                      </Link>
-                      <Link href="/account/register" className="text-xs leading-none">
-                        Đăng ký
-                      </Link>
-                    </>
-                  )}
-                </span>
-              </div>
-            </div>
-
-            <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md group">
-              <div className="w-36 z-50 text-center float-left rounded-md">
-                <div className="w-full float-left">
-                  <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
-                    <FontAwesomeIcon
-                      icon={faShoppingCart}
-                      className="inline-block text-lg text-red-700"
-                    ></FontAwesomeIcon>
-                  </div>
-                  <div className="cursor-pointer w-calc[100% - 50px] float-left h-10 flex justify-center flex-col flex-nowrap">
-                    <span className="font-bold text-sm text-red-700 leading-none">Giỏ hàng</span>
-                    <span className="leading-none">
-                      <span className="font-bold text-sm text-red-700 leading-none" id="cart-total">
-                        0
-                      </span>
-                      &nbsp;
-                      <span className="text-xs leading-none">Sản phẩm</span>
-                    </span>
-                  </div>
-                </div>
-                <CartPopUp />
-              </div>
-            </div>
+            <HeaderAccount />
+            <HeaderCart />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function HeaderAccount() {
+  const userQuery = useUserQuery({});
+  const [logout] = useLogoutMutation();
+
+  return (
+    <div className="w-48 h-10 float-left mr-5 border border-gray-300 rounded-md">
+      <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
+        <FontAwesomeIcon icon={faUser} className="text-lg" />
+      </div>
+      <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
+        <span className="font-bold text-sm leading-none overflow-ellipsis">
+          {userQuery.isSuccess ? userQuery.data.name : "Account"}
+        </span>
+        <span className="leading-none">
+          {userQuery.isSuccess ? (
+            <>
+              <Link
+                href="/account/login"
+                className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+              >
+                Account
+              </Link>
+              <button
+                className="text-xs leading-none"
+                onClick={async () => {
+                  try {
+                    await logout({}).unwrap();
+                  } catch (error) {}
+                }}
+              >
+                Exit
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/account/login"
+                className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+              >
+                Log in
+              </Link>
+              <Link href="/account/register" className="text-xs leading-none">
+                Register
+              </Link>
+            </>
+          )}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function HeaderCart() {
+  const cartQuery = useCartQuery({});
+  const itemsInCart = cartQuery.isSuccess ? cartQuery.data.length : 0;
+
+  return (
+    <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md group">
+      <div className="w-36 z-50 text-center float-left rounded-md">
+        <div className="w-full float-left">
+          <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
+            <FontAwesomeIcon icon={faShoppingCart} className="inline-block text-lg text-red-700"></FontAwesomeIcon>
+          </div>
+          <div className="cursor-pointer w-calc[100% - 50px] float-left h-10 flex flex-col justify-center items-start flex-nowrap">
+            <span className="font-bold text-sm text-red-700 leading-none">Your cart</span>
+            <span className="leading-none">
+              <span className="font-bold text-sm text-red-700 leading-none">{itemsInCart}</span>
+              &nbsp;
+              <span className="text-xs leading-none">{itemsInCart > 0 ? "Items" : "Item"}</span>
+            </span>
+          </div>
+        </div>
+        <CartPopUp />
       </div>
     </div>
   );

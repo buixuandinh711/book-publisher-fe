@@ -1,9 +1,8 @@
-import { UserDispatchContext } from "@/contexts/UserContext";
+import { useLoginMutation } from "@/contexts/slices/apiSlice";
 import { passwordRegex } from "@/utils/constant";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import * as Yup from "yup";
 
 interface FormValues {
@@ -21,7 +20,7 @@ const LoginSchema = Yup.object().shape({
 
 export function LoginMain() {
   const router = useRouter();
-  const userDispatch = useContext(UserDispatchContext);
+  const [login] = useLoginMutation();
 
   return (
     <section className="w-full float-left py-8 text-red-700 text-sm">
@@ -40,28 +39,9 @@ export function LoginMain() {
                   validationSchema={LoginSchema}
                   onSubmit={async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
                     setSubmitting(false);
-                    const formData = new URLSearchParams();
-                    formData.append("email", values.email);
-                    formData.append("password", values.password);
-
                     try {
-                      const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/user/login`, {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        body: formData.toString(),
-                        credentials: "include",
-                      });
-                      if (response.ok) {
-                        const user = await response.json();
-                        if (userDispatch) {
-                          userDispatch({ type: "LOGIN", user });
-                        }
-                        router.replace("/");
-                      } else {
-                        console.log("Log in failed");
-                      }
+                      await login({ email: values.email, password: values.password }).unwrap();
+                      router.replace("/");
                     } catch (error) {
                       console.log(error);
                     }

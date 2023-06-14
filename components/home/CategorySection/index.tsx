@@ -53,13 +53,13 @@ export function CategorySection() {
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
-                      <a
+                      <Link
                         href="/catalog/classic"
                         title="Sách văn học kinh điển"
                         className="text-white text-shadow"
                       >
                         Sách văn học kinh điển
-                      </a>
+                      </Link>
                     </h2>
                     <span className="text-base font-semibold uppercase mt-10px text-white">
                       80 sản phẩm
@@ -78,13 +78,13 @@ export function CategorySection() {
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
-                      <a
+                      <Link
                         href="/catalog/popular"
                         title="Sách liên kết xuất bản"
                         className="text-white text-shadow"
                       >
                         Sách liên kết xuất bản
-                      </a>
+                      </Link>
                     </h2>
                     <span className="text-base font-semibold uppercase mt-10px text-white">
                       525 sản phẩm
@@ -103,13 +103,13 @@ export function CategorySection() {
                   />
                   <div className="p-4 absolute z-10 bottom-5 left-0 right-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center flex-col">
                     <h2 className="m-0 text-lg uppercase font-semibold text-center">
-                      <a
+                      <Link
                         href="/catalog/discount"
                         title="Sách giảm giá"
                         className="text-white text-shadow"
                       >
                         Sách giảm giá
-                      </a>
+                      </Link>
                     </h2>
                     <span className="text-base font-semibold uppercase mt-10px text-white">
                       126 sản phẩm

@@ -2,6 +2,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Image from "next/image";
+import Link from "next/link";
 
 export function HomeSlider() {
   return (
@@ -9,139 +11,73 @@ export function HomeSlider() {
       <section className="w-full float-left">
         <div className="w-full float-left">
           <div className="relative overflow-hidden">
-            <Slider
-              infinite
-              autoplay
-              autoplaySpeed={1000}
-              pauseOnHover={false}
-              arrows
-              slidesToShow={1}
-            >
-              <div className="owl-item cloned">
+            <Slider infinite autoplay autoplaySpeed={1000} pauseOnHover={false} arrows slidesToShow={1}>
+              <div>
                 <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/search?query=Tinh+hoa+v%C4%83n+ch%C6%B0%C6%A1ng+vi%E1%BB%87t&amp;type=article%2Cproduct"
-                    title="Tinh hoa văn chương Việt"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_3_image.jpg?1632297125018"
+                  <Link href="/catalog" title="Tinh hoa văn chương Việt">
+                    <Image
                       alt="tinh-hoa-van-chuong-viet"
+                      src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1686543293/book-publisher/slider_thvcv.jpg"
+                      placeholder="blur"
+                      blurDataURL="/image-loader.gif"
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      className="w-full h-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="owl-item cloned">
+              <div>
                 <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/catalog/classic"
-                    title="Văn học kinh điển"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_4_image.jpg?1632297125018"
-                      alt="van-hoc-kinh-dien"
+                  <Link href="https://nxbvanhoc.com.vn/catalog/classic" title="Văn học kinh điển">
+                    <Image
+                      alt="Văn học kinh điển"
+                      src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1686543335/book-publisher/slider_vhkd.jpg"
+                      placeholder="blur"
+                      blurDataURL="/image-loader.gif"
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      className="w-full h-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="owl-item">
+              <div>
                 <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/truyen-tranh-kinh-dien"
-                    title="Truyện cổ tích kinh điển"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_1_image.jpg?1632297125018"
-                      alt="truyen-co-tich-kinh-dien"
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="owl-item">
-                <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/combo-cung-be-kham-pha-tac-pham-kinh-dien"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_2_image.jpg?1632297125018"
-                      alt="tu-dai-danh-tac-phien-ban-nhi"
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="owl-item">
-                <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/search?query=Tinh+hoa+v%C4%83n+ch%C6%B0%C6%A1ng+vi%E1%BB%87t&amp;type=article%2Cproduct"
-                    title="Tinh hoa văn chương Việt"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_3_image.jpg?1632297125018"
+                  <Link href="/catalog" title="Truyện cổ tích kinh điển">
+                    <Image
                       alt="tinh-hoa-van-chuong-viet"
+                      src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1686543364/book-publisher/slider_ctkd.jpg"
+                      placeholder="blur"
+                      blurDataURL="/image-loader.gif"
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      className="w-full h-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="owl-item active">
+              <div>
                 <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/catalog/classic"
-                    title="Văn học kinh điển"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_4_image.jpg?1632297125018"
-                      alt="van-hoc-kinh-dien"
+                  <Link href="/catalog">
+                    <Image
+                      alt=""
+                      src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1686543386/book-publisher/slider_tddtpbn.jpg"
+                      placeholder="blur"
+                      blurDataURL="/image-loader.gif"
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      className="w-full h-auto"
                     />
-                  </a>
-                </div>
-              </div>
-              <div className="owl-item cloned">
-                <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/truyen-tranh-kinh-dien"
-                    title="Truyện cổ tích kinh điển"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_1_image.jpg?1632297125018"
-                      alt="truyen-co-tich-kinh-dien"
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="owl-item cloned">
-                <div className="item image-item">
-                  <a
-                    href="https://nxbvanhoc.com.vn/combo-cung-be-kham-pha-tac-pham-kinh-dien"
-                    className="clearfix"
-                  >
-                    <img
-                      className="img-responsive"
-                      src="//bizweb.dktcdn.net/100/370/339/themes/744741/assets/slider_2_image.jpg?1632297125018"
-                      alt="tu-dai-danh-tac-phien-ban-nhi"
-                    />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Slider>
           </div>
-          {/* <div className="owl-nav">
-            <div className="owl-prev">prev</div>
-            <div className="owl-next">next</div>
-          </div>
-          <div className="owl-dots disabled"></div> */}
         </div>
       </section>
     </section>

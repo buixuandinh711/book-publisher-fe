@@ -1,12 +1,27 @@
-import { CartAction, CartDispatchContext, CartItem } from "@/contexts/CartContext";
+import {
+  CartItem,
+  useAddToCartMutation,
+  useDecreaseCartItemMutation,
+  useRemoveCartItemMutation,
+} from "@/contexts/slices/apiSlice";
+import { closeCartModal } from "@/contexts/slices/cartSlice";
+import { useAppDispatch } from "@/contexts/store";
 import { faClose, faPlus, faSubtract } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, useContext } from "react";
 
-export function CartModalItem({ book: { id, name, image, price }, quantity }: CartItem) {
-  const cartDispatch = useContext(CartDispatchContext);
+export function CartModalItem({ book: { id, name, image, currentPrice: price }, quantity }: CartItem) {
+  const dispatch = useAppDispatch();
+  const [removeCartItem] = useRemoveCartItemMutation();
+
+  const handleRemoveCartItem = async () => {
+    try {
+      await removeCartItem({ itemId: id }).unwrap();
+    } catch (error: unknown) {
+      console.log((error as { message: string }).message);
+    }
+  };
 
   return (
     <div className="w-full border-b border-dotted text-sm text-red-700">
@@ -14,26 +29,22 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
         <div className="w-1/2 text-left flex px-2">
           <div className="item-image">
             <Link
-              className="block w-20 h-max relative"
+              className="w-20 h-20 relative flex justify-center"
               href={`/detail/${id}`}
               title={name}
               onClick={() => {
-                if (cartDispatch) {
-                  cartDispatch({
-                    type: "CLOSE_CART_MODAL",
-                  });
-                }
+                dispatch(closeCartModal());
               }}
             >
               <Image
                 alt={name}
                 src={image}
                 placeholder="blur"
-                blurDataURL="/image-loader.gif"
+                blurDataURL="/small-loader.gif"
                 width="0"
                 height="0"
-                sizes="10vw"
-                className="w-20 h-auto"
+                sizes="5vw"
+                className="w-auto h-20 object-contain"
               />
             </Link>
           </div>
@@ -43,27 +54,15 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
                 href={`/detail/${id}`}
                 title={name}
                 onClick={() => {
-                  if (cartDispatch) {
-                    cartDispatch({
-                      type: "CLOSE_CART_MODAL",
-                    });
-                  }
+                  dispatch(closeCartModal());
                 }}
               >
                 {name}
               </Link>
             </p>
             <p className="text-xs">
-              <button
-                className="remove-item-cart"
-                title="Xóa"
-                onClick={() => {
-                  if (cartDispatch) {
-                    cartDispatch({ type: "REMOVE_ITEM", bookId: id });
-                  }
-                }}
-              >
-                <FontAwesomeIcon icon={faClose} /> Xóa
+              <button className="remove-item-cart" title="Remove" onClick={handleRemoveCartItem}>
+                <FontAwesomeIcon icon={faClose} /> Remove
               </button>
             </p>
           </div>
@@ -74,7 +73,7 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
           </div>
         </div>
         <div className="w-[15%] text-center">
-          <QuantityControl id={id} quantity={quantity} cartDispatch={cartDispatch} />
+          <QuantityControl id={id} quantity={quantity} />
         </div>
         <div className="w-1/5 text-center">
           <span className="cart-price">
@@ -86,24 +85,31 @@ export function CartModalItem({ book: { id, name, image, price }, quantity }: Ca
   );
 }
 
-function QuantityControl({
-  id,
-  quantity,
-  cartDispatch,
-}: {
-  id: number;
-  quantity: number;
-  cartDispatch: Dispatch<CartAction> | null;
-}) {
+function QuantityControl({ id, quantity }: { id: string; quantity: number }) {
+  const [decreaseCartItem] = useDecreaseCartItemMutation();
+  const [addToCart] = useAddToCartMutation();
+
+  const handleDecreaseQuantity = async () => {
+    try {
+      await decreaseCartItem({ itemId: id }).unwrap();
+    } catch (error) {
+      console.log("Failed to decrease cart item");
+    }
+  };
+
+  const handleIncreaseQuantity = async () => {
+    try {
+      await addToCart({ itemId: id }).unwrap();
+    } catch (error) {
+      console.log("Failed to increase cart item");
+    }
+  };
+
   return (
     <div className="h-6 w-[74px] flex mx-auto items-stretch justify-center">
       <button
         className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-l border-gray-300"
-        onClick={() => {
-          if (cartDispatch) {
-            cartDispatch({ type: "DECREASE_ITEM_QUANTITY", bookId: id });
-          }
-        }}
+        onClick={handleDecreaseQuantity}
       >
         <FontAwesomeIcon icon={faSubtract} size="xs" />
       </button>
@@ -116,11 +122,7 @@ function QuantityControl({
       />
       <button
         className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-r border-gray-300"
-        onClick={() => {
-          if (cartDispatch) {
-            cartDispatch({ type: "INCREASE_ITEM_QUANTITY", bookId: id });
-          }
-        }}
+        onClick={handleIncreaseQuantity}
       >
         <FontAwesomeIcon icon={faPlus} size="xs" />
       </button>

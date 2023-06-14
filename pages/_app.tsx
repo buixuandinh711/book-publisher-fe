@@ -4,18 +4,16 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { UserProvider } from "@/contexts/UserContext";
-import { CartProvider } from "@/contexts/CartContext";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
+import store from "../contexts/store";
+import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
-      <CartProvider>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-      </CartProvider>
-    </UserProvider>
+    <Provider store={store}>
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
+    </Provider>
   );
 }
