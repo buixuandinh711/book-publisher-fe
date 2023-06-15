@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 const relatedBooks: BookCartProps[] = [];
 
-export function RelatedBook({ id }: { id: number }) {
+export function RelatedBook({ id }: { id: string }) {
   const { data, error } = useSWR<BookCartProps[]>(
     `http://${process.env.NEXT_PUBLIC_HOST}/books/relate/${id}`,
     (apiURL: string) => fetch(apiURL).then((res) => res.json())
@@ -16,10 +16,7 @@ export function RelatedBook({ id }: { id: number }) {
         <div className="-mx-4">
           <div className="w-full float-left relative px-4">
             <div className="w-full float-left">
-              <BookCarousel
-                header={"Sản phẩm liên quan"}
-                booksList={error || !data ? [] : data}
-              />
+              <BookCarousel header={"Sản phẩm liên quan"} booksList={error || !data ? [] : data} />
             </div>
           </div>
         </div>

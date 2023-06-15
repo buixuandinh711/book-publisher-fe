@@ -106,7 +106,7 @@ function BookCounter({ id, quantity }: { id: string; quantity: number }) {
         title="Số lượng"
         maxLength={3}
         value={quantity}
-        // onChange={}
+        onChange={() => {}}
         placeholder="1"
       />
       <button

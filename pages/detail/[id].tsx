@@ -24,19 +24,26 @@ export default function Catalog({ book }: { book: DetailMainProps & BookOverview
 export const getServerSideProps: GetServerSideProps<{
   book: DetailMainProps & BookOverviewProps;
 }> = async (context) => {
-  let data = [];
   try {
     const id = context.params!.id;
     const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books/detail/${id}`);
 
-    data = await res.json();
+    if (!res.ok) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const data = await res.json();
+    return {
+      props: {
+        book: data,
+      },
+    };
   } catch (error) {
     console.log(error);
+    return {
+      notFound: true,
+    };
   }
-
-  return {
-    props: {
-      book: data,
-    },
-  };
 };
