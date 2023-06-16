@@ -1,6 +1,8 @@
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export interface CatalogSideBarProps {
   newBooksCount: number;
@@ -32,11 +34,7 @@ export function CatalogSideBar({
           <div className="w-full float-left">
             <ul className="w-full float-left m-0 list-none pl-4">
               <li className="w-full float-left block relative">
-                <Link
-                  className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/catalog/new"
-                  title="Sách mới"
-                >
+                <Link className="text-sm text-red-700 block py-[5px] pr-7" href="/catalog/new" title="Sách mới">
                   <span>Sách mới</span>
                   &nbsp;
                   <span className="object_count">{`(${newBooksCount})`}</span>
@@ -82,106 +80,7 @@ export function CatalogSideBar({
       {/* FILTERS */}
       <div className="mb-8 w-full float-left">
         {/* LỌC GIÁ */}
-        <aside className="mb-8 w-full float-left">
-          <div className="w-full float-left mb-5">
-            <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <Link
-                href=""
-                className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
-              >
-                <span>Giá sản phẩm</span>
-              </Link>
-            </h2>
-          </div>
-          <div className="w-full float-left bg-gray-100 py-4 pr-1">
-            <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-duoi-50-000d"
-                    className="cursor-pointer block mb-[2px]"
-                  >
-                    <input
-                      type="checkbox"
-                      id="filter-duoi-50-000d"
-                      data-group="Khoảng giá"
-                      data-field="price_min"
-                      data-text="Dưới 50.000đ"
-                      defaultValue="(<50000)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Giá dưới 50.000đ
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-50-000d-100-000d"
-                    className="cursor-pointer block mb-[2px]"
-                  >
-                    <input
-                      type="checkbox"
-                      id="filter-50-000d-100-000d"
-                      data-group="Khoảng giá"
-                      data-field="price_min"
-                      data-text="50.000đ - 100.000đ"
-                      defaultValue="(>50000 AND <100000)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    50.000đ - 100.000đ
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-100-000d-200-000d"
-                    className="cursor-pointer block mb-[2px]"
-                  >
-                    <input
-                      type="checkbox"
-                      id="filter-100-000d-200-000d"
-                      data-group="Khoảng giá"
-                      data-field="price_min"
-                      data-text="100.000đ - 200.000đ"
-                      defaultValue="(>100000 AND <200000)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    100.000đ - 200.000đ
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tren200-000d"
-                    className="cursor-pointer block mb-[2px]"
-                  >
-                    <input
-                      type="checkbox"
-                      id="filter-tren200-000d"
-                      data-group="Khoảng giá"
-                      data-field="price_min"
-                      data-text="Trên 200.000đ"
-                      defaultValue="(>200000)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Giá trên 200.000đ
-                  </label>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </aside>
+        <PriceFilter />
         {/* LỌC TYPE */}
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
@@ -198,10 +97,7 @@ export function CatalogSideBar({
             <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-but-ky"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-but-ky" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-but-ky"
@@ -219,10 +115,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-but-ky-binh-luan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-but-ky-binh-luan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-but-ky-binh-luan"
@@ -240,10 +133,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-hoi-ky"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-hoi-ky" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-hoi-ky"
@@ -261,10 +151,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-ly-luan-phe-binh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-ly-luan-phe-binh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-ly-luan-phe-binh"
@@ -282,10 +169,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nghien-cuu"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nghien-cuu" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nghien-cuu"
@@ -303,10 +187,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nhat-ky"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nhat-ky" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nhat-ky"
@@ -324,10 +205,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-phong-su"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-phong-su" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-phong-su"
@@ -345,10 +223,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-phong-su-ghi-chep"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-phong-su-ghi-chep" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-phong-su-ghi-chep"
@@ -366,10 +241,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-phong-su-tieu-thuyet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-phong-su-tieu-thuyet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-phong-su-tieu-thuyet"
@@ -387,10 +259,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-phong-van-doi-thoai"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-phong-van-doi-thoai" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-phong-van-doi-thoai"
@@ -408,10 +277,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-sach-chuyen-khao"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-sach-chuyen-khao" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-sach-chuyen-khao"
@@ -429,10 +295,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-sach-chuyen-luan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-sach-chuyen-luan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-sach-chuyen-luan"
@@ -450,10 +313,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-sach-lich-su"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-sach-lich-su" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-sach-lich-su"
@@ -471,10 +331,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-sach-tham-khao"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-sach-tham-khao" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-sach-tham-khao"
@@ -492,10 +349,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-sach-thieu-nhi"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-sach-thieu-nhi" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-sach-thieu-nhi"
@@ -513,10 +367,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tan-van"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tan-van" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tan-van"
@@ -534,10 +385,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tan-van-but-ky-phe-binh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tan-van-but-ky-phe-binh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tan-van-but-ky-phe-binh"
@@ -555,10 +403,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tap-but"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tap-but" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tap-but"
@@ -576,10 +421,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tap-truyen"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tap-truyen" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tap-truyen"
@@ -597,10 +439,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tap-truyen-ngan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tap-truyen-ngan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tap-truyen-ngan"
@@ -618,10 +457,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-than-thoai"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-than-thoai" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-than-thoai"
@@ -639,10 +475,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tho"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tho" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tho"
@@ -660,10 +493,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tho-ngu-ngon"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tho-ngu-ngon" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tho-ngu-ngon"
@@ -681,10 +511,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tho-hoi-ky-kich-ban"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tho-hoi-ky-kich-ban" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tho-hoi-ky-kich-ban"
@@ -702,10 +529,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tho-van-tuy-but-tan-van"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tho-van-tuy-but-tan-van" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tho-van-tuy-but-tan-van"
@@ -723,10 +547,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-luan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-luan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-luan"
@@ -744,10 +565,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-luan-phe-binh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-luan-phe-binh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-luan-phe-binh"
@@ -765,10 +583,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-luan-va-but-ky"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-luan-va-but-ky" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-luan-va-but-ky"
@@ -786,10 +601,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-thuyet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-thuyet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-thuyet"
@@ -807,10 +619,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-thuyet-da-su"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-thuyet-da-su" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-thuyet-da-su"
@@ -828,10 +637,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-thuyet-lich-su"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-thuyet-lich-su" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-thuyet-lich-su"
@@ -849,10 +655,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tieu-thuyet-trinh-tham"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tieu-thuyet-trinh-tham" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tieu-thuyet-trinh-tham"
@@ -870,10 +673,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tinh-hoa-van-chuong-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tinh-hoa-van-chuong-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tinh-hoa-van-chuong-viet"
@@ -891,10 +691,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-trinh-tham"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-trinh-tham" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-trinh-tham"
@@ -912,10 +709,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-co"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-co" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-co"
@@ -933,10 +727,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-co-tich"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-co-tich" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-co-tich"
@@ -954,10 +745,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-cuc-ngan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-cuc-ngan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-cuc-ngan"
@@ -975,10 +763,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-cuoi"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-cuoi" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-cuoi"
@@ -996,10 +781,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-da-su"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-da-su" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-da-su"
@@ -1017,10 +799,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-dai"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-dai" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-dai"
@@ -1038,10 +817,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-ky"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-ky" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-ky"
@@ -1059,10 +835,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-ngan"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-ngan" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-ngan"
@@ -1080,10 +853,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-ngan-tan-van"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-ngan-tan-van" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-ngan-tan-van"
@@ -1101,10 +871,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-truyen-ngu-ngon"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-truyen-ngu-ngon" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-truyen-ngu-ngon"
@@ -1122,10 +889,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tu-truyen"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tu-truyen" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tu-truyen"
@@ -1143,10 +907,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tuy-but"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tuy-but" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tuy-but"
@@ -1164,10 +925,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-van-hoc-kinh-dien"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-van-hoc-kinh-dien" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-van-hoc-kinh-dien"
@@ -1185,10 +943,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-van-hoc-nuoc-ngoai"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-van-hoc-nuoc-ngoai" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-van-hoc-nuoc-ngoai"
@@ -1206,10 +961,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-van-hoc-viet-nam"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-van-hoc-viet-nam" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-van-hoc-viet-nam"
@@ -1244,10 +996,7 @@ export function CatalogSideBar({
             <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-1980-novel"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-1980-novel" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-1980-novel"
@@ -1265,10 +1014,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-alphabooks"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-alphabooks" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-alphabooks"
@@ -1286,10 +1032,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-bach-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-bach-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-bach-viet"
@@ -1307,10 +1050,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-co-phan-sach-co-nguyet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-co-phan-sach-co-nguyet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-co-phan-sach-co-nguyet"
@@ -1391,10 +1131,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-co-phan-sbooks"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-co-phan-sbooks" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-co-phan-sbooks"
@@ -1412,10 +1149,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-co-phan-van-hoa-chi"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-co-phan-van-hoa-chi" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-co-phan-van-hoa-chi"
@@ -1433,10 +1167,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-co-phan-van-hoa-dong-a"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-co-phan-van-hoa-dong-a" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-co-phan-van-hoa-dong-a"
@@ -1454,10 +1185,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-co-phan-van-hoa-huy-hoang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-co-phan-van-hoa-huy-hoang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-co-phan-van-hoa-huy-hoang"
@@ -1490,8 +1218,7 @@ export function CatalogSideBar({
                       className="hidden m-0 p-0"
                     />
                     <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Công ty Cổ phần Văn hóa và Giáo dục Tân Việt - Nhà sách Tân
-                    Việt
+                    Công ty Cổ phần Văn hóa và Giáo dục Tân Việt - Nhà sách Tân Việt
                   </label>
                 </span>
               </li>
@@ -1539,10 +1266,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-cp-dau-tu-tm-pt-phuc-minh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-cp-dau-tu-tm-pt-phuc-minh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-cp-dau-tu-tm-pt-phuc-minh"
@@ -1560,10 +1284,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-cp-sach-bach-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-cp-sach-bach-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-cp-sach-bach-viet"
@@ -1602,10 +1323,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-cp-thuong-mai-thien-ha-thuy"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-cp-thuong-mai-thien-ha-thuy" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-cp-thuong-mai-thien-ha-thuy"
@@ -1623,10 +1341,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-cp-van-hoa-huy-hoang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-cp-van-hoa-huy-hoang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-cp-van-hoa-huy-hoang"
@@ -1686,10 +1401,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-sach-tri-tue-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-sach-tri-tue-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-sach-tri-tue-viet"
@@ -1812,10 +1524,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-tnhh-sach-amun"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-tnhh-sach-amun" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-tnhh-sach-amun"
@@ -1833,10 +1542,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-tnhh-sach-ha-giang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-tnhh-sach-ha-giang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-tnhh-sach-ha-giang"
@@ -1854,10 +1560,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-tnhh-son-quynh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-tnhh-son-quynh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-tnhh-son-quynh"
@@ -1875,10 +1578,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-tnhh-tazano-gieo-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-tnhh-tazano-gieo-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-tnhh-tazano-gieo-books"
@@ -1959,10 +1659,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-cong-ty-tnhh-tm-dv-vh-huong-trang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-cong-ty-tnhh-tm-dv-vh-huong-trang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-cong-ty-tnhh-tm-dv-vh-huong-trang"
@@ -2184,8 +1881,7 @@ export function CatalogSideBar({
                       className="hidden m-0 p-0"
                     />
                     <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Công ty TNHH Xúc tiến hợp tác văn hóa &amp; truyền thông Sao
-                    Bắc
+                    Công ty TNHH Xúc tiến hợp tác văn hóa &amp; truyền thông Sao Bắc
                   </label>
                 </span>
               </li>
@@ -2212,10 +1908,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-dinh-ti"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-dinh-ti" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-dinh-ti"
@@ -2233,10 +1926,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-dinh-ti-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-dinh-ti-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-dinh-ti-books"
@@ -2254,10 +1944,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-dinh-ti-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-dinh-ti-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-dinh-ti-books"
@@ -2275,10 +1962,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-dong-a"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-dong-a" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-dong-a"
@@ -2296,10 +1980,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-ehomebooks"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-ehomebooks" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-ehomebooks"
@@ -2317,10 +1998,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-hagiang-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-hagiang-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-hagiang-books"
@@ -2338,10 +2016,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-hai-dang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-hai-dang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-hai-dang"
@@ -2359,10 +2034,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-hanoibooks"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-hanoibooks" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-hanoibooks"
@@ -2380,10 +2052,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-huy-hoang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-huy-hoang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-huy-hoang"
@@ -2401,10 +2070,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-lien-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-lien-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-lien-viet"
@@ -2422,10 +2088,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-minh-chau-book"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-minh-chau-book" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-minh-chau-book"
@@ -2443,10 +2106,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-minh-thang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-minh-thang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-minh-thang"
@@ -2464,10 +2124,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-minh-thang-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-minh-thang-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-minh-thang-books"
@@ -2485,10 +2142,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-mintbooks"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-mintbooks" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-mintbooks"
@@ -2506,10 +2160,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-nam"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-nam" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-nam"
@@ -2527,10 +2178,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-hoang-gia"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-hoang-gia" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-hoang-gia"
@@ -2548,10 +2196,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-khang-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-khang-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-khang-viet"
@@ -2569,10 +2214,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-minh-thang"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-minh-thang" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-minh-thang"
@@ -2590,10 +2232,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-nguoi-tre-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-nguoi-tre-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-nguoi-tre-viet"
@@ -2611,10 +2250,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-thanh-nien"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-thanh-nien" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-thanh-nien"
@@ -2632,10 +2268,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-tri-thuc-tre"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-tri-thuc-tre" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-tri-thuc-tre"
@@ -2653,10 +2286,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-sach-tri-thuc-tre-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-sach-tri-thuc-tre-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-sach-tri-thuc-tre-books"
@@ -2674,10 +2304,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nha-xuat-ban-hoi-nha-van"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nha-xuat-ban-hoi-nha-van" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nha-xuat-ban-hoi-nha-van"
@@ -2695,10 +2322,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nxb-van-hoc"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nxb-van-hoc" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nxb-van-hoc"
@@ -2716,10 +2340,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-phuc-minh"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-phuc-minh" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-phuc-minh"
@@ -2737,10 +2358,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-quang-van"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-quang-van" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-quang-van"
@@ -2758,10 +2376,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-quoc-hoc"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-quoc-hoc" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-quoc-hoc"
@@ -2779,10 +2394,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tac-gia"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tac-gia" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tac-gia"
@@ -2800,10 +2412,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tan-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tan-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tan-viet"
@@ -2821,10 +2430,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tri-thuc-tre-books"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tri-thuc-tre-books" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tri-thuc-tre-books"
@@ -2842,10 +2448,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tri-tue"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tri-tue" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tri-tue"
@@ -2863,10 +2466,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-tri-viet"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-tri-viet" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-tri-viet"
@@ -2884,10 +2484,7 @@ export function CatalogSideBar({
               </li>
               <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-trung-tam-nghien-cuu-quoc-hoc"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-trung-tam-nghien-cuu-quoc-hoc" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-trung-tam-nghien-cuu-quoc-hoc"
@@ -2906,7 +2503,6 @@ export function CatalogSideBar({
             </ul>
           </div>
         </aside>
-        {/* LỌC TAG 1 */}
         {/* LỌC TAG 2 */}
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
@@ -2921,15 +2517,9 @@ export function CatalogSideBar({
           </div>
           <div className="w-full float-left bg-gray-100 py-4 pr-1">
             <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
-              <li
-                className="leading-loose w-full cursor-pointer float-left m-0 p-0"
-                title="Người lớn"
-              >
+              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0" title="Người lớn">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-nguoi-lon"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-nguoi-lon" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-nguoi-lon"
@@ -2945,15 +2535,9 @@ export function CatalogSideBar({
                   </label>
                 </span>
               </li>
-              <li
-                className="leading-loose w-full cursor-pointer float-left m-0 p-0"
-                title="Thiếu nhi"
-              >
+              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0" title="Thiếu nhi">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-thieu-nhi"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-thieu-nhi" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-thieu-nhi"
@@ -2969,15 +2553,9 @@ export function CatalogSideBar({
                   </label>
                 </span>
               </li>
-              <li
-                className="leading-loose w-full cursor-pointer float-left m-0 p-0"
-                title="Thiếu niên"
-              >
+              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0" title="Thiếu niên">
                 <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label
-                    htmlFor="filter-thieu-nien"
-                    className="cursor-pointer block mb-[2px]"
-                  >
+                  <label htmlFor="filter-thieu-nien" className="cursor-pointer block mb-[2px]">
                     <input
                       type="checkbox"
                       id="filter-thieu-nien"
@@ -2997,238 +2575,164 @@ export function CatalogSideBar({
           </div>
         </aside>
       </div>
-      {/* FEATURE PRODUCTS */}
-      {/* <div className="sidebar-item sidebar-menu sidebar-collection-menu">
-        <div className="module-header">
-          <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-            <Link
-              href=""
-              className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
-            >
-              <span>Sản phẩm bán chạy</span>
-            </Link>
-          </h2>
-        </div>
-        <div className="sidebar-menu-content module-content padding-0">
-          <div
-            className="collection-sidebar-items owl-carousel owl-theme owl-loaded owl-drag"
-            data-lg-items={1}
-            data-md-items={1}
-            data-sm-items={1}
-            data-xs-items={1}
-            data-xxs-items={1}
+    </aside>
+  );
+}
+
+const priceRanges = [
+  {
+    name: "Under 50.000đ",
+    maxPrice: 50000,
+  },
+  {
+    name: "50.000đ - 100.000đ",
+    minPrice: 50000,
+    maxPrice: 100000,
+  },
+  {
+    name: "100.000đ - 200.000đ",
+    minPrice: 100000,
+    maxPrice: 200000,
+  },
+  {
+    name: "Above 200.000đ",
+    minPrice: 200000,
+  },
+];
+
+function PriceFilter() {
+  const [rangeIndex, setRangeIndex] = useState(-1);
+  const router = useRouter();
+
+  return (
+    <aside className="mb-8 w-full float-left">
+      <div className="w-full float-left mb-5">
+        <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
+          <Link
+            href=""
+            className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
           >
-            <div className="owl-stage-outer">
-              <div
-                className="owl-stage"
-                style={{
-                  transform: "translate3d(0px, 0px, 0px)",
-                  transition: "all 0s ease 0s",
-                  width: 466,
-                }}
-              >
-                <div className="owl-item active" style={{ width: 233 }}>
-                  <div className="item">
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/ho-xuan-huong-tieng-vong"
-                        title="Hồ Xuân Hương tiếng vọng"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/ho-xuan-huong-tieng-vong.jpg?v=1669608992000"
-                          alt="Hồ Xuân Hương tiếng vọng"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link
-                            href="/ho-xuan-huong-tieng-vong"
-                            title="Hồ Xuân Hương tiếng vọng"
-                          >
-                            <span>Hồ Xuân Hương tiếng vọng</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">172.000₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">215.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/napoleon-bonaparte"
-                        title="Napoléon Bonaparte"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/images.jpg?v=1623140283000"
-                          alt="Napoléon Bonaparte"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link
-                            href="/napoleon-bonaparte"
-                            title="Napoléon Bonaparte"
-                          >
-                            <span>Napoléon Bonaparte</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">472.000₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">590.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/chu-be-ti-hon"
-                        title="Chú bé tí hon"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/chu-be-ti-hon.jpg?v=1582693899637"
-                          alt="Chú bé tí hon"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link href="/chu-be-ti-hon" title="Chú bé tí hon">
-                            <span>Chú bé tí hon</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">29.400₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">42.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="owl-item" style={{ width: 233 }}>
-                  <div className="item">
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/co-be-quang-khan-do"
-                        title="Cô bé quàng khăn đỏ"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/co-be-quang-khan-do.jpg?v=1582693785597"
-                          alt="Cô bé quàng khăn đỏ"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link
-                            href="/co-be-quang-khan-do"
-                            title="Cô bé quàng khăn đỏ"
-                          >
-                            <span>Cô bé quàng khăn đỏ</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">29.400₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">42.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/ba-chu-lon-con"
-                        title="Ba chú lợn con"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/ba-chu-lon-con.jpg?v=1582693743287"
-                          alt="Ba chú lợn con"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link href="/ba-chu-lon-con" title="Ba chú lợn con">
-                            <span>Ba chú lợn con</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">29.400₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">42.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="product-item product-sidebar">
-                      <Link
-                        className="product-image"
-                        href="/goldilocks-va-ba-chu-gau"
-                        title="Goldilocks và ba chú gấu"
-                      >
-                        <img
-                          className="img-responsive"
-                          src="//bizweb.dktcdn.net/thumb/small/100/370/339/products/goldilocks-va-ba-chu-gau.jpg?v=1582693584137"
-                          alt="Goldilocks và ba chú gấu"
-                        />
-                      </Link>
-                      <div className="product-info">
-                        <h3 className="product-name">
-                          <Link
-                            href="/goldilocks-va-ba-chu-gau"
-                            title="Goldilocks và ba chú gấu"
-                          >
-                            <span>Goldilocks và ba chú&nbsp;gấu</span>
-                          </Link>
-                        </h3>
-                        <div className="price-box price-loop-style res-item">
-                          <span className="special-price">
-                            <span className="price">29.400₫</span>
-                          </span>
-                          <span className="old-price">
-                            <span className="price">42.000₫</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="owl-nav disabled">
-              <div className="owl-prev">
-                <i className="fa fa-angle-left" />
-              </div>
-              <div className="owl-next">
-                <i className="fa fa-angle-right" />
-              </div>
-            </div>
-            <div className="owl-dots disabled" />
-          </div>
-        </div>
-      </div> */}
+            <span>Giá sản phẩm</span>
+          </Link>
+        </h2>
+      </div>
+      <div className="w-full float-left bg-gray-100 py-4 pr-1">
+        <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
+          {priceRanges.map((range, index) => (
+            <li key={index} className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+              <span className="text-red-700 cursor-pointer text-sm font-normal">
+                <label htmlFor={`range-${index}`} className="cursor-pointer block mb-[2px]">
+                  <input
+                    type="checkbox"
+                    id={`range-${index}`}
+                    className="form-checkbox mr-2 p-0 w-3 h-3 border-red-700 focus:ring-0 text-red-700"
+                    checked={index == rangeIndex}
+                    onChange={() => {
+                      const basePath = router.asPath.split("?")[0];
+                      const query = { ...router.query };
+                      if (index === rangeIndex) {
+                        setRangeIndex(-1);
+                        delete query["min-price"];
+                        delete query["max-price"];
+                      } else {
+                        setRangeIndex(index);
+
+                        delete query.slug;
+                        delete query["min-price"];
+                        delete query["max-price"];
+
+                        if (range.minPrice !== undefined) {
+                          query["min-price"] = range.minPrice.toString();
+                        }
+                        if (range.maxPrice !== undefined) {
+                          query["max-price"] = range.maxPrice.toString();
+                        }
+                      }
+                      router.replace({
+                        pathname: basePath,
+                        query,
+                      });
+                    }}
+                  />
+                  {range.name}
+                </label>
+              </span>
+            </li>
+          ))}
+          {/* <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+            <span className="text-red-700 cursor-pointer text-sm font-normal">
+              <label htmlFor="price-under-50000" className="cursor-pointer block mb-[2px]">
+                <input
+                  type="radio"
+                  id="price-under-50000"
+                  data-group="Khoảng giá"
+                  data-field="price_min"
+                  data-text="Dưới 50.000đ"
+                  defaultValue="(<50000)"
+                  data-operator="OR"
+                  className="hidden m-0 p-0"
+                />
+                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
+                Giá dưới 50.000đ
+              </label>
+            </span>
+          </li>
+          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+            <span className="text-red-700 cursor-pointer text-sm font-normal">
+              <label htmlFor="filter-50-000d-100-000d" className="cursor-pointer block mb-[2px]">
+                <input
+                  type="checkbox"
+                  id="filter-50-000d-100-000d"
+                  data-group="Khoảng giá"
+                  data-field="price_min"
+                  data-text="50.000đ - 100.000đ"
+                  defaultValue="(>50000 AND <100000)"
+                  data-operator="OR"
+                  className="hidden m-0 p-0"
+                />
+                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
+                50.000đ - 100.000đ
+              </label>
+            </span>
+          </li>
+          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+            <span className="text-red-700 cursor-pointer text-sm font-normal">
+              <label htmlFor="filter-100-000d-200-000d" className="cursor-pointer block mb-[2px]">
+                <input
+                  type="checkbox"
+                  id="filter-100-000d-200-000d"
+                  data-group="Khoảng giá"
+                  data-field="price_min"
+                  data-text="100.000đ - 200.000đ"
+                  defaultValue="(>100000 AND <200000)"
+                  data-operator="OR"
+                  className="hidden m-0 p-0"
+                />
+                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
+                100.000đ - 200.000đ
+              </label>
+            </span>
+          </li>
+          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+            <span className="text-red-700 cursor-pointer text-sm font-normal">
+              <label htmlFor="filter-tren200-000d" className="cursor-pointer block mb-[2px]">
+                <input
+                  type="checkbox"
+                  id="filter-tren200-000d"
+                  data-group="Khoảng giá"
+                  data-field="price_min"
+                  data-text="Trên 200.000đ"
+                  defaultValue="(>200000)"
+                  data-operator="OR"
+                  className="hidden m-0 p-0"
+                />
+                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
+                Giá trên 200.000đ
+              </label>
+            </span>
+          </li> */}
+        </ul>
+      </div>
     </aside>
   );
 }

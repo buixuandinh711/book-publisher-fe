@@ -119,7 +119,7 @@ function HeaderCart() {
 
   return (
     <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md group">
-      <div className="w-36 z-50 text-center float-left rounded-md">
+      <div className="w-36 z-10 text-center float-left rounded-md">
         <div className="w-full float-left">
           <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
             <FontAwesomeIcon icon={faShoppingCart} className="inline-block text-lg text-red-700"></FontAwesomeIcon>

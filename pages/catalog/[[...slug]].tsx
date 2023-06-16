@@ -2,6 +2,7 @@ import { BreadScumb } from "@/components/BreadCrumb";
 import { CartModal } from "@/components/CartModal";
 import { CatalogMain, CatalogMainProps } from "@/components/catalog/CatalogMain";
 import { CatalogSideBar, CatalogSideBarProps } from "@/components/catalog/CatalogSideBar";
+import { parsedUrlQueryToURLSearchParams } from "@/utils/utils";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 export default function Catalog({
@@ -35,10 +36,8 @@ export const getServerSideProps: GetServerSideProps<
     catalogSideBarProps: CatalogSideBarProps;
   },
   { slug: string[]; page: string }
-> = async (context: GetServerSidePropsContext<{ slug: string[]; page: string }>) => {
-  let data;
-
-  const { page, slug } = context.query;
+> = async (context: GetServerSidePropsContext<{ slug?: string[]; page?: string }>) => {
+  const { slug, ...queryParams } = context.query;
 
   let category = "";
 
@@ -52,11 +51,7 @@ export const getServerSideProps: GetServerSideProps<
     category = "/" + slug[0];
   }
 
-  let query = "";
-
-  if (page && typeof page === "string") {
-    query = new URLSearchParams({ page }).toString();
-  }
+  const query = parsedUrlQueryToURLSearchParams(queryParams);
 
   try {
     const bookPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books${category}?${query}`);
@@ -83,8 +78,8 @@ export const getServerSideProps: GetServerSideProps<
     };
   } catch (error) {
     console.log(error);
+    return {
+      notFound: true,
+    };
   }
-  return {
-    notFound: true,
-  };
 };

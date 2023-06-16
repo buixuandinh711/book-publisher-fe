@@ -1,13 +1,8 @@
+import { parsedUrlQueryToURLSearchParams } from "@/utils/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export function CatalogPagination({
-  currentPage,
-  totalPages,
-}: {
-  currentPage: number;
-  totalPages: number;
-}) {
+export function CatalogPagination({ currentPage, totalPages }: { currentPage: number; totalPages: number }) {
   const router = useRouter();
   const currentPath = router.asPath.split("?")[0];
 
@@ -30,12 +25,7 @@ export function CatalogPagination({
             )}
           </li>
           {createPages(currentPage, totalPages).map((page) => (
-            <PageNumber
-              key={page.toString()}
-              page={page}
-              currentPath={currentPath}
-              isCurrent={page === currentPage}
-            />
+            <PageNumber key={page.toString()} page={page} currentPath={currentPath} isCurrent={page === currentPage} />
           ))}
           <li className="float-left inline">
             {currentPage < totalPages ? (
@@ -67,25 +57,26 @@ function PageNumber({
   isCurrent: boolean;
 }) {
   const isPageLink = typeof page === "number";
+  const router = useRouter();
+  const { slug, ...queryParams } = router.query;
+  queryParams.page = page.toString();
+  const query = parsedUrlQueryToURLSearchParams(queryParams);
+
   return (
     <li className="float-left inline">
       {isPageLink ? (
         <Link
           className={`-ml-[1px] w-10 h-10 text-sm border p-0 flex justify-center items-center hover:text-white hover:bg-red-700 hover:border-red-700 ${
-            isCurrent
-              ? "text-white bg-red-700 border-red-700"
-              : "text-red-700 bg-white border-gray-300"
+            isCurrent ? "text-white bg-red-700 border-red-700" : "text-red-700 bg-white border-gray-300"
           }`}
-          href={`${currentPath}?page=${page}`}
+          href={`${currentPath}?${query}`}
         >
           {page}
         </Link>
       ) : (
         <div
           className={`-ml-[1px] w-10 h-10 text-sm border p-0 flex justify-center items-center ${
-            isCurrent
-              ? "text-white bg-red-700 border-red-700"
-              : "text-red-700 bg-white border-gray-300"
+            isCurrent ? "text-white bg-red-700 border-red-700" : "text-red-700 bg-white border-gray-300"
           }`}
         >
           {page}
@@ -95,10 +86,7 @@ function PageNumber({
   );
 }
 
-function createPages(
-  currentPage: number,
-  totalPages: number
-): (string | number)[] {
+function createPages(currentPage: number, totalPages: number): (string | number)[] {
   const pages: (string | number)[] = [];
   if (currentPage <= 4) {
     for (let i = 1; i < currentPage; i++) {
