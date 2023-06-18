@@ -16,7 +16,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 
 export interface DetailMainProps extends BookCartProps {
   isbn: string;
-  category: string;
+  genre: string;
   author: string;
   publicationYear: number;
   dimensions: string;
@@ -31,7 +31,7 @@ export function DetailMain({
   originalPrice,
   currentPrice,
   isbn,
-  category,
+  genre,
   author,
   publicationYear,
   dimensions,
@@ -51,7 +51,7 @@ export function DetailMain({
                   originalPrice,
                   currentPrice,
                   isbn,
-                  category,
+                  genre,
                   author,
                   publicationYear,
                   dimensions,
@@ -111,7 +111,7 @@ function BookInfo({
   originalPrice,
   currentPrice,
   isbn,
-  category,
+  genre,
   author,
   publicationYear,
   dimensions,
@@ -122,7 +122,7 @@ function BookInfo({
   currentPrice: number;
   originalPrice: number;
   isbn: string;
-  category: string;
+  genre: string;
   author: string;
   publicationYear: number;
   dimensions: string;
@@ -165,8 +165,8 @@ function BookInfo({
           <em />
         </li>
         <li className="w-1/2 float-left mb-10px">
-          <span>Category: </span>
-          <strong itemProp="model">{category}</strong>
+          <span>Genre: </span>
+          <strong itemProp="model">{genre}</strong>
         </li>
         <li className="w-1/2 float-left mb-10px">
           <span>Publisher: </span>
