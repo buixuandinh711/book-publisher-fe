@@ -1,14 +1,16 @@
+import { parsedUrlQueryToURLSearchParams } from "@/utils/utils";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface CatalogSideBarProps {
   newBooksCount: number;
   classicBooksCount: number;
   discountBooksCount: number;
   popularBooksCount: number;
+  genres: string[];
 }
 
 export function CatalogSideBar({
@@ -16,970 +18,17 @@ export function CatalogSideBar({
   classicBooksCount,
   discountBooksCount,
   popularBooksCount,
+  genres,
 }: CatalogSideBarProps) {
   return (
     <aside className="mb-8 relative  w-1/4 float-left min-h-[1px] px-4">
-      <div className="mb-8 w-full float-left">
-        <div className="w-full float-left mb-5">
-          <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-            <a
-              href=""
-              className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
-            >
-              <span>Danh mục sản phẩm</span>
-            </a>
-          </h2>
-        </div>
-        <div className="w-full float-left bg-gray-100 py-4 pr-1">
-          <div className="w-full float-left">
-            <ul className="w-full float-left m-0 list-none pl-4">
-              <li className="w-full float-left block relative">
-                <Link className="text-sm text-red-700 block py-[5px] pr-7" href="/catalog/new" title="Sách mới">
-                  <span>Sách mới</span>
-                  &nbsp;
-                  <span className="object_count">{`(${newBooksCount})`}</span>
-                </Link>
-              </li>
-              <li className="w-full float-left block relative">
-                <Link
-                  className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/catalog/classic"
-                  title="Sách văn học kinh điển"
-                >
-                  <span>Sách văn học kinh điển</span>
-                  &nbsp;
-                  <span className="object_count">{`(${classicBooksCount})`}</span>
-                </Link>
-              </li>
-              <li className="w-full float-left block relative">
-                <Link
-                  className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/catalog/popular"
-                  title="Sách liên kết xuất bản"
-                >
-                  <span>Sách phổ biến</span>
-                  &nbsp;
-                  <span className="object_count">{`(${popularBooksCount})`}</span>
-                </Link>
-              </li>
-              <li className="w-full float-left block relative">
-                <Link
-                  className="text-sm text-red-700 block py-[5px] pr-7"
-                  href="/catalog/discount"
-                  title="Sách giảm giá"
-                >
-                  <span>Sách giảm giá</span>
-                  &nbsp;
-                  <span className="object_count">{`(${discountBooksCount})`}</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <Category {...{ newBooksCount, classicBooksCount, discountBooksCount, popularBooksCount }} />
       {/* FILTERS */}
       <div className="mb-8 w-full float-left">
         {/* LỌC GIÁ */}
         <PriceFilter />
         {/* LỌC TYPE */}
-        <aside className="mb-8 w-full float-left">
-          <div className="w-full float-left mb-5">
-            <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
-              <Link
-                href=""
-                className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
-              >
-                <span>Loại tác phẩm</span>
-              </Link>
-            </h2>
-          </div>
-          <div className="w-full float-left bg-gray-100 py-4 pr-1">
-            <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-but-ky" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-but-ky"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Bút ký"
-                      defaultValue="(Bút ký)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Bút ký
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-but-ky-binh-luan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-but-ky-binh-luan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Bút ký - Bình luận"
-                      defaultValue="(Bút ký - Bình luận)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Bút ký - Bình luận
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-hoi-ky" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-hoi-ky"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Hồi ký"
-                      defaultValue="(Hồi ký)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Hồi ký
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-ly-luan-phe-binh" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-ly-luan-phe-binh"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Lý luận - Phê bình"
-                      defaultValue="(Lý luận - Phê bình)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Lý luận - Phê bình
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-nghien-cuu" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-nghien-cuu"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Nghiên cứu"
-                      defaultValue="(Nghiên cứu)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Nghiên cứu
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-nhat-ky" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-nhat-ky"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Nhật ký"
-                      defaultValue="(Nhật ký)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Nhật ký
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-phong-su" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-phong-su"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Phóng sự"
-                      defaultValue="(Phóng sự)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Phóng sự
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-phong-su-ghi-chep" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-phong-su-ghi-chep"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Phóng sự - Ghi chép"
-                      defaultValue="(Phóng sự - Ghi chép)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Phóng sự - Ghi chép
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-phong-su-tieu-thuyet" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-phong-su-tieu-thuyet"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Phóng sự - Tiểu thuyết"
-                      defaultValue="(Phóng sự - Tiểu thuyết)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Phóng sự - Tiểu thuyết
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-phong-van-doi-thoai" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-phong-van-doi-thoai"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Phỏng vấn, đối thoại"
-                      defaultValue="(Phỏng vấn, đối thoại)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Phỏng vấn, đối thoại
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-sach-chuyen-khao" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-sach-chuyen-khao"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Sách chuyên khảo"
-                      defaultValue="(Sách chuyên khảo)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Sách chuyên khảo
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-sach-chuyen-luan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-sach-chuyen-luan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Sách chuyên luận"
-                      defaultValue="(Sách chuyên luận)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Sách chuyên luận
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-sach-lich-su" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-sach-lich-su"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Sách lịch sử"
-                      defaultValue="(Sách lịch sử)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Sách lịch sử
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-sach-tham-khao" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-sach-tham-khao"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Sách tham khảo"
-                      defaultValue="(Sách tham khảo)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Sách tham khảo
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-sach-thieu-nhi" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-sach-thieu-nhi"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Sách thiếu nhi"
-                      defaultValue="(Sách thiếu nhi)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Sách thiếu nhi
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tan-van" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tan-van"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tản văn"
-                      defaultValue="(Tản văn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tản văn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tan-van-but-ky-phe-binh" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tan-van-but-ky-phe-binh"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tản văn, Bút ký, Phê bình"
-                      defaultValue="(Tản văn, Bút ký, Phê bình)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tản văn, Bút ký, Phê bình
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tap-but" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tap-but"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tạp bút"
-                      defaultValue="(Tạp bút)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tạp bút
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tap-truyen" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tap-truyen"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tập truyện"
-                      defaultValue="(Tập truyện)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tập truyện
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tap-truyen-ngan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tap-truyen-ngan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tập truyện ngắn"
-                      defaultValue="(Tập truyện ngắn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tập truyện ngắn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-than-thoai" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-than-thoai"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Thần thoại"
-                      defaultValue="(Thần thoại)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Thần thoại
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tho" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tho"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Thơ"
-                      defaultValue="(Thơ)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Thơ
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tho-ngu-ngon" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tho-ngu-ngon"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Thơ ngụ ngôn"
-                      defaultValue="(Thơ ngụ ngôn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Thơ ngụ ngôn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tho-hoi-ky-kich-ban" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tho-hoi-ky-kich-ban"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Thơ, Hồi ký, Kịch bản"
-                      defaultValue="(Thơ, Hồi ký, Kịch bản)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Thơ, Hồi ký, Kịch bản
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tho-van-tuy-but-tan-van" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tho-van-tuy-but-tan-van"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Thơ, Văn, Tùy bút, Tản Văn"
-                      defaultValue="(Thơ, Văn, Tùy bút, Tản Văn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Thơ, Văn, Tùy bút, Tản Văn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-luan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-luan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu luận"
-                      defaultValue="(Tiểu luận)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu luận
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-luan-phe-binh" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-luan-phe-binh"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu luận - Phê bình"
-                      defaultValue="(Tiểu luận - Phê bình)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu luận - Phê bình
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-luan-va-but-ky" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-luan-va-but-ky"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu luận và bút ký"
-                      defaultValue="(Tiểu luận và bút ký)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu luận và bút ký
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-thuyet" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-thuyet"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu thuyết"
-                      defaultValue="(Tiểu thuyết)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu thuyết
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-thuyet-da-su" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-thuyet-da-su"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu thuyết dã sử"
-                      defaultValue="(Tiểu thuyết dã sử)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu thuyết dã sử
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-thuyet-lich-su" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-thuyet-lich-su"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu thuyết lịch sử"
-                      defaultValue="(Tiểu thuyết lịch sử)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu thuyết lịch sử
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tieu-thuyet-trinh-tham" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tieu-thuyet-trinh-tham"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tiểu thuyết trinh thám"
-                      defaultValue="(Tiểu thuyết trinh thám)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tiểu thuyết trinh thám
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tinh-hoa-van-chuong-viet" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tinh-hoa-van-chuong-viet"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tinh hoa văn chương Việt"
-                      defaultValue="(Tinh hoa văn chương Việt)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tinh hoa văn chương Việt
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-trinh-tham" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-trinh-tham"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Trinh thám"
-                      defaultValue="(Trinh thám)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Trinh thám
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-co" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-co"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện cổ"
-                      defaultValue="(Truyện cổ)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện cổ
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-co-tich" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-co-tich"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện cổ tích"
-                      defaultValue="(Truyện cổ tích)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện cổ tích
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-cuc-ngan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-cuc-ngan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện cực ngắn"
-                      defaultValue="(Truyện cực ngắn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện cực ngắn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-cuoi" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-cuoi"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện cười"
-                      defaultValue="(Truyện cười)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện cười
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-da-su" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-da-su"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện Dã sử"
-                      defaultValue="(Truyện Dã sử)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện Dã sử
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-dai" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-dai"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện dài"
-                      defaultValue="(Truyện dài)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện dài
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-ky" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-ky"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện ký"
-                      defaultValue="(Truyện ký)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện ký
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-ngan" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-ngan"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện ngắn"
-                      defaultValue="(Truyện ngắn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện ngắn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-ngan-tan-van" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-ngan-tan-van"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện ngắn - Tản văn"
-                      defaultValue="(Truyện ngắn - Tản văn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện ngắn - Tản văn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-truyen-ngu-ngon" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-truyen-ngu-ngon"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Truyện ngụ ngôn"
-                      defaultValue="(Truyện ngụ ngôn)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Truyện ngụ ngôn
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tu-truyen" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tu-truyen"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tự truyện"
-                      defaultValue="(Tự truyện)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tự truyện
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-tuy-but" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-tuy-but"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Tùy bút"
-                      defaultValue="(Tùy bút)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Tùy bút
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-van-hoc-kinh-dien" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-van-hoc-kinh-dien"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Văn học kinh điển"
-                      defaultValue="(Văn học kinh điển)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Văn học kinh điển
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-van-hoc-nuoc-ngoai" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-van-hoc-nuoc-ngoai"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Văn học nước ngoài"
-                      defaultValue="(Văn học nước ngoài)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Văn học nước ngoài
-                  </label>
-                </span>
-              </li>
-              <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-                <span className="text-red-700 cursor-pointer text-sm font-normal">
-                  <label htmlFor="filter-van-hoc-viet-nam" className="cursor-pointer block mb-[2px]">
-                    <input
-                      type="checkbox"
-                      id="filter-van-hoc-viet-nam"
-                      data-group="Loại"
-                      data-field="product_type"
-                      data-text="Văn học Việt Nam"
-                      defaultValue="(Văn học Việt Nam)"
-                      data-operator="OR"
-                      className="hidden m-0 p-0"
-                    />
-                    <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                    Văn học Việt Nam
-                  </label>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </aside>
+        <GenreFilter genres={genres} />
         {/* LỌC VENDOR */}
         <aside className="mb-8 w-full float-left">
           <div className="w-full float-left mb-5">
@@ -2579,30 +1628,117 @@ export function CatalogSideBar({
   );
 }
 
+function Category({
+  newBooksCount,
+  classicBooksCount,
+  discountBooksCount,
+  popularBooksCount,
+}: Omit<CatalogSideBarProps, "genres">) {
+  const router = useRouter();
+  const { slug, ...queryParams } = router.query;
+  const query = parsedUrlQueryToURLSearchParams(queryParams);
+
+  return (
+    <div className="mb-8 w-full float-left">
+      <div className="w-full float-left mb-5">
+        <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
+          <Link
+            href={`/catalog?${query}`}
+            className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
+          >
+            <span>Danh mục sản phẩm</span>
+          </Link>
+        </h2>
+      </div>
+      <div className="w-full float-left bg-gray-100 py-4 pr-1">
+        <div className="w-full float-left">
+          <ul className="w-full float-left m-0 list-none pl-4">
+            <li className="w-full float-left block relative">
+              <Link
+                className="text-sm text-red-700 block py-[5px] pr-7"
+                href={`/catalog/new?${query}`}
+                title="Sách mới"
+              >
+                <span>Sách mới</span>
+                &nbsp;
+                <span className="object_count">{`(${newBooksCount})`}</span>
+              </Link>
+            </li>
+            <li className="w-full float-left block relative">
+              <Link
+                className="text-sm text-red-700 block py-[5px] pr-7"
+                href={`/catalog/classic?${query}`}
+                title="Sách văn học kinh điển"
+              >
+                <span>Sách văn học kinh điển</span>
+                &nbsp;
+                <span className="object_count">{`(${classicBooksCount})`}</span>
+              </Link>
+            </li>
+            <li className="w-full float-left block relative">
+              <Link
+                className="text-sm text-red-700 block py-[5px] pr-7"
+                href={`/catalog/popular?${query}`}
+                title="Sách liên kết xuất bản"
+              >
+                <span>Sách phổ biến</span>
+                &nbsp;
+                <span className="object_count">{`(${popularBooksCount})`}</span>
+              </Link>
+            </li>
+            <li className="w-full float-left block relative">
+              <Link
+                className="text-sm text-red-700 block py-[5px] pr-7"
+                href={`/catalog/discount?${query}`}
+                title="Sách giảm giá"
+              >
+                <span>Sách giảm giá</span>
+                &nbsp;
+                <span className="object_count">{`(${discountBooksCount})`}</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const priceRanges = [
   {
     name: "Under 50.000đ",
-    maxPrice: 50000,
+    maxPrice: "50000",
   },
   {
     name: "50.000đ - 100.000đ",
-    minPrice: 50000,
-    maxPrice: 100000,
+    minPrice: "50000",
+    maxPrice: "100000",
   },
   {
     name: "100.000đ - 200.000đ",
-    minPrice: 100000,
-    maxPrice: 200000,
+    minPrice: "100000",
+    maxPrice: "200000",
   },
   {
     name: "Above 200.000đ",
-    minPrice: 200000,
+    minPrice: "200000",
   },
 ];
 
 function PriceFilter() {
   const [rangeIndex, setRangeIndex] = useState(-1);
   const router = useRouter();
+  const { "min-price": minPrice, "max-price": maxPrice } = router.query;
+  useEffect(() => {
+    for (let i = 0; i < priceRanges.length; i++) {
+      let range = priceRanges[i];
+      if (range.minPrice === minPrice && range.maxPrice === maxPrice) {
+        setRangeIndex(i);
+        return;
+      }
+    }
+    setRangeIndex(-1);
+  }, [minPrice, maxPrice, setRangeIndex]);
 
   return (
     <aside className="mb-8 w-full float-left">
@@ -2631,11 +1767,12 @@ function PriceFilter() {
                       const basePath = router.asPath.split("?")[0];
                       const query = { ...router.query };
                       if (index === rangeIndex) {
-                        setRangeIndex(-1);
+                        // setRangeIndex(-1);
+                        delete query.slug;
                         delete query["min-price"];
                         delete query["max-price"];
                       } else {
-                        setRangeIndex(index);
+                        // setRangeIndex(index);
 
                         delete query.slug;
                         delete query["min-price"];
@@ -2648,10 +1785,16 @@ function PriceFilter() {
                           query["max-price"] = range.maxPrice.toString();
                         }
                       }
-                      router.replace({
-                        pathname: basePath,
-                        query,
-                      });
+                      router.replace(
+                        {
+                          pathname: basePath,
+                          query,
+                        },
+                        undefined,
+                        {
+                          scroll: false,
+                        }
+                      );
                     }}
                   />
                   {range.name}
@@ -2659,78 +1802,87 @@ function PriceFilter() {
               </span>
             </li>
           ))}
-          {/* <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-            <span className="text-red-700 cursor-pointer text-sm font-normal">
-              <label htmlFor="price-under-50000" className="cursor-pointer block mb-[2px]">
-                <input
-                  type="radio"
-                  id="price-under-50000"
-                  data-group="Khoảng giá"
-                  data-field="price_min"
-                  data-text="Dưới 50.000đ"
-                  defaultValue="(<50000)"
-                  data-operator="OR"
-                  className="hidden m-0 p-0"
-                />
-                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                Giá dưới 50.000đ
-              </label>
-            </span>
-          </li>
-          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-            <span className="text-red-700 cursor-pointer text-sm font-normal">
-              <label htmlFor="filter-50-000d-100-000d" className="cursor-pointer block mb-[2px]">
-                <input
-                  type="checkbox"
-                  id="filter-50-000d-100-000d"
-                  data-group="Khoảng giá"
-                  data-field="price_min"
-                  data-text="50.000đ - 100.000đ"
-                  defaultValue="(>50000 AND <100000)"
-                  data-operator="OR"
-                  className="hidden m-0 p-0"
-                />
-                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                50.000đ - 100.000đ
-              </label>
-            </span>
-          </li>
-          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-            <span className="text-red-700 cursor-pointer text-sm font-normal">
-              <label htmlFor="filter-100-000d-200-000d" className="cursor-pointer block mb-[2px]">
-                <input
-                  type="checkbox"
-                  id="filter-100-000d-200-000d"
-                  data-group="Khoảng giá"
-                  data-field="price_min"
-                  data-text="100.000đ - 200.000đ"
-                  defaultValue="(>100000 AND <200000)"
-                  data-operator="OR"
-                  className="hidden m-0 p-0"
-                />
-                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                100.000đ - 200.000đ
-              </label>
-            </span>
-          </li>
-          <li className="leading-loose w-full cursor-pointer float-left m-0 p-0">
-            <span className="text-red-700 cursor-pointer text-sm font-normal">
-              <label htmlFor="filter-tren200-000d" className="cursor-pointer block mb-[2px]">
-                <input
-                  type="checkbox"
-                  id="filter-tren200-000d"
-                  data-group="Khoảng giá"
-                  data-field="price_min"
-                  data-text="Trên 200.000đ"
-                  defaultValue="(>200000)"
-                  data-operator="OR"
-                  className="hidden m-0 p-0"
-                />
-                <FontAwesomeIcon icon={faSquare} className="mr-2 w-3" />
-                Giá trên 200.000đ
-              </label>
-            </span>
-          </li> */}
+        </ul>
+      </div>
+    </aside>
+  );
+}
+
+function GenreFilter({ genres }: { genres: string[] }) {
+  const router = useRouter();
+  const [chosenGenres, setChosenGenres] = useState<string[]>([]);
+  const { genre } = router.query;
+
+  useEffect(() => {
+    if (genre === undefined) {
+      setChosenGenres([]);
+    } else if (typeof genre === "string") {
+      setChosenGenres([genre]);
+    } else {
+      setChosenGenres(genre);
+    }
+  }, [genre, setChosenGenres]);
+
+  return (
+    <aside className="mb-8 w-full float-left">
+      <div className="w-full float-left mb-5">
+        <h2 className="m-0 text-base relative w-full float-left font-bold text-red-700 leading-normal before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
+          <Link
+            href=""
+            className="text-lg font-bold py-[5px] pr-4 relative text-red-700 after:absolute after:border-b-[3px] after:border-b-red-700 after:left-0 after:right-4 after:-bottom-[3px]"
+          >
+            <span>Genres</span>
+          </Link>
+        </h2>
+      </div>
+      <div className="w-full float-left bg-gray-100 py-4 pr-1">
+        <ul className="max-h-[140px] overflow-y-auto list-none m-0 pl-4">
+          {genres.map((item) => (
+            <li key={item} className="leading-loose w-full cursor-pointer float-left m-0 p-0">
+              <span className="text-red-700 cursor-pointer text-sm font-normal">
+                <label htmlFor={`filter-${item.toLocaleLowerCase()}`} className="cursor-pointer block mb-[2px]">
+                  <input
+                    type="checkbox"
+                    id={`filter-${item.toLocaleLowerCase()}`}
+                    className="form-checkbox mr-2 p-0 w-3 h-3 border-red-700 focus:ring-0 text-red-700"
+                    checked={chosenGenres.includes(item)}
+                    onChange={() => {
+                      const basePath = router.asPath.split("?")[0];
+                      let newChosen;
+
+                      if (chosenGenres.includes(item)) {
+                        newChosen = chosenGenres.filter((chosen) => chosen !== item);
+                      } else {
+                        newChosen = chosenGenres.concat(item);
+                      }
+
+                      const newQuery = {
+                        ...router.query,
+                      };
+
+                      delete newQuery.slug;
+                      newQuery.genre = newChosen;
+
+                      console.log(newQuery);
+
+                      router.replace(
+                        {
+                          pathname: basePath,
+                          query: newQuery,
+                        },
+                        undefined,
+                        {
+                          scroll: false,
+                        }
+                      );
+                      // setChosenGenres(newChosen);
+                    }}
+                  />
+                  {item}
+                </label>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
     </aside>

@@ -58,13 +58,19 @@ export const getServerSideProps: GetServerSideProps<
 
     const bookCountPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books/category-count`);
 
-    const [booksRes, bookCountRes] = await Promise.all([bookPromise, bookCountPromise]);
+    const bookGenresPromise = fetch(`http://${process.env.NEXT_PUBLIC_HOST}/books/genres`);
 
-    if (!booksRes.ok || !bookCountRes.ok) {
+    const [booksRes, bookCountRes, bookGenres] = await Promise.all([bookPromise, bookCountPromise, bookGenresPromise]);
+
+    if (!booksRes.ok || !bookCountRes.ok || !bookGenres.ok) {
       throw new Error("Failed to load data");
     }
 
-    const [booksData, bookCountData] = await Promise.all([booksRes.json(), bookCountRes.json()]);
+    const [booksData, bookCountData, bookGenresData] = await Promise.all([
+      booksRes.json(),
+      bookCountRes.json(),
+      bookGenres.json(),
+    ]);
 
     return {
       props: {
@@ -73,7 +79,10 @@ export const getServerSideProps: GetServerSideProps<
           currentPage: parseInt(booksData.currentPage),
           totalPages: parseInt(booksData.totalPages),
         },
-        catalogSideBarProps: bookCountData,
+        catalogSideBarProps: {
+          ...bookCountData,
+          genres: bookGenresData,
+        },
       },
     };
   } catch (error) {
