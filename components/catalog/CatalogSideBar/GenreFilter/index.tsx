@@ -57,8 +57,6 @@ export function GenreFilter({ genres }: { genres: string[] }) {
                       delete newQuery.slug;
                       newQuery.genre = newChosen;
 
-                      console.log(newQuery);
-
                       router.replace(
                         {
                           pathname: basePath,
@@ -69,7 +67,6 @@ export function GenreFilter({ genres }: { genres: string[] }) {
                           scroll: false,
                         }
                       );
-                      // setChosenGenres(newChosen);
                     }}
                   />
                   {item}
