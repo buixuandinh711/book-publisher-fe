@@ -3,12 +3,7 @@ import { CatalogSideBarProps } from "..";
 import { useRouter } from "next/router";
 import { parsedUrlQueryToURLSearchParams } from "@/utils/utils";
 
-export function Category({
-  newBooksCount,
-  classicBooksCount,
-  discountBooksCount,
-  popularBooksCount,
-}: Omit<CatalogSideBarProps, "genres">) {
+export function Category() {
   const router = useRouter();
   const { slug, ...queryParams } = router.query;
   const query = parsedUrlQueryToURLSearchParams(queryParams);
@@ -35,8 +30,6 @@ export function Category({
                 title="Sách mới"
               >
                 <span>Sách mới</span>
-                &nbsp;
-                <span className="object_count">{`(${newBooksCount})`}</span>
               </Link>
             </li>
             <li className="w-full float-left block relative">
@@ -46,8 +39,6 @@ export function Category({
                 title="Sách văn học kinh điển"
               >
                 <span>Sách văn học kinh điển</span>
-                &nbsp;
-                <span className="object_count">{`(${classicBooksCount})`}</span>
               </Link>
             </li>
             <li className="w-full float-left block relative">
@@ -57,8 +48,6 @@ export function Category({
                 title="Sách liên kết xuất bản"
               >
                 <span>Sách phổ biến</span>
-                &nbsp;
-                <span className="object_count">{`(${popularBooksCount})`}</span>
               </Link>
             </li>
             <li className="w-full float-left block relative">
@@ -68,8 +57,6 @@ export function Category({
                 title="Sách giảm giá"
               >
                 <span>Sách giảm giá</span>
-                &nbsp;
-                <span className="object_count">{`(${discountBooksCount})`}</span>
               </Link>
             </li>
           </ul>
