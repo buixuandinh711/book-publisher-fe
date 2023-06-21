@@ -7,9 +7,9 @@ import Link from "next/link";
 
 export function HomeSlider() {
   return (
-    <section className="w-full float-left mb-0">
-      <section className="w-full float-left">
-        <div className="w-full float-left">
+    <section className="float-left mb-0 w-full">
+      <section className="float-left w-full">
+        <div className="float-left w-full">
           <div className="relative overflow-hidden">
             <Slider infinite autoplay autoplaySpeed={1000} pauseOnHover={false} arrows slidesToShow={1}>
               <div>
@@ -23,7 +23,7 @@ export function HomeSlider() {
                       width="0"
                       height="0"
                       sizes="100vw"
-                      className="w-full h-auto"
+                      className="h-auto w-full"
                     />
                   </Link>
                 </div>
@@ -39,7 +39,7 @@ export function HomeSlider() {
                       width="0"
                       height="0"
                       sizes="100vw"
-                      className="w-full h-auto"
+                      className="h-auto w-full"
                     />
                   </Link>
                 </div>
@@ -55,7 +55,7 @@ export function HomeSlider() {
                       width="0"
                       height="0"
                       sizes="100vw"
-                      className="w-full h-auto"
+                      className="h-auto w-full"
                     />
                   </Link>
                 </div>
@@ -71,7 +71,7 @@ export function HomeSlider() {
                       width="0"
                       height="0"
                       sizes="100vw"
-                      className="w-full h-auto"
+                      className="h-auto w-full"
                     />
                   </Link>
                 </div>

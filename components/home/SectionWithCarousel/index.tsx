@@ -6,12 +6,9 @@ interface SectionWithCarouselProps {
   booksList: BookCartProps[];
 }
 
-export function SectionWithCarousel({
-  header,
-  booksList,
-}: SectionWithCarouselProps) {
+export function SectionWithCarousel({ header, booksList }: SectionWithCarouselProps) {
   return (
-    <div className="w-full float-left py-[30px]">
+    <div className="float-left w-full py-[30px]">
       <div className="container">
         <div className="-px-4">
           <BookCarousel header={header} booksList={booksList} />

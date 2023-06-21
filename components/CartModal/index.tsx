@@ -1,13 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CartModalItem } from "./CartModalItem";
-import {
-  faArrowRightLong,
-  faCaretLeft,
-  faCaretRight,
-  faCheck,
-  faClose,
-  faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faCaretLeft, faCaretRight, faCheck, faClose, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useCartQuery } from "@/contexts/slices/apiSlice";
 import Image from "next/image";
@@ -28,19 +21,19 @@ export function CartModal() {
   return (
     <div
       id="cart-modal"
-      className="overflow-x-hidden overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-10 outline-none bg-black bg-opacity-40"
+      className="fixed bottom-0 left-0 right-0 top-0 z-10 overflow-y-auto overflow-x-hidden bg-black bg-opacity-40 outline-none"
       onClick={() => {
         dispatch(closeCartModal());
       }}
     >
       <div
         id="popup-cart-desktop"
-        className="w-[750px] bg-white float-none mx-auto mt-[10%] p-5 relative rounded-md z-20"
+        className="relative z-20 float-none mx-auto mt-[10%] w-[750px] rounded-md bg-white p-5"
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <div className="mb-[10px] text-base pr-4 text-red-700">
+        <div className="mb-[10px] pr-4 text-base text-red-700">
           <FontAwesomeIcon icon={faCheck} className="font-bold" /> You have added {'"'}
           <span className="cart-popup-name">
             <Link
@@ -56,25 +49,18 @@ export function CartModal() {
           </span>
           {'"'} to the cart.
         </div>
-        <div className="text-sm mb-[10px] cursor-pointer text-red-700">
-          <FontAwesomeIcon icon={faShoppingCart} /> Your Cart (
-          <span id="cart-modal-item-count">{cartQuery.data?.length}</span> items){" "}
+        <div className="mb-[10px] cursor-pointer text-sm text-red-700">
+          <FontAwesomeIcon icon={faShoppingCart} /> Your Cart (<span id="cart-modal-item-count">{cartQuery.data?.length}</span> items){" "}
           <FontAwesomeIcon icon={faCaretRight} />
         </div>
         <div className="content-popup-cart">
-          <div className="w-full flex">
-            <div className="w-1/2 text-left bg-red-700 text-white py-1 px-2 text-sm border-r border-r-whited rounded-tl">
-              Product
-            </div>
-            <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Price
-            </div>
-            <div className="w-[15%] text-center bg-red-700 text-white py-1 px-2 text-sm border-r border-r-white">
-              Quantity
-            </div>
-            <div className="w-1/5 text-center bg-red-700 text-white py-1 px-2 text-sm rounded-tr">Total</div>
+          <div className="flex w-full">
+            <div className="border-r-whited w-1/2 rounded-tl border-r bg-red-700 px-2 py-1 text-left text-sm text-white">Product</div>
+            <div className="w-[15%] border-r border-r-white bg-red-700 px-2 py-1 text-center text-sm text-white">Price</div>
+            <div className="w-[15%] border-r border-r-white bg-red-700 px-2 py-1 text-center text-sm text-white">Quantity</div>
+            <div className="w-1/5 rounded-tr bg-red-700 px-2 py-1 text-center text-sm text-white">Total</div>
           </div>
-          <div className="w-full max-h-72 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-b">
+          <div className="max-h-72 w-full overflow-y-auto overflow-x-hidden rounded-b border border-gray-300">
             {cartQuery.isLoading ? (
               <Image
                 alt="Loading"
@@ -82,17 +68,15 @@ export function CartModal() {
                 width="0"
                 height="0"
                 sizes="10vw"
-                className="w-[100px] h-auto max-h-full align-middle object-contain"
+                className="h-auto max-h-full w-[100px] object-contain align-middle"
               />
             ) : (
               cartQuery.isSuccess &&
-              cartQuery.data.map((item) => (
-                <CartModalItem book={{ ...item.book }} quantity={item.quantity} key={item.book.id} />
-              ))
+              cartQuery.data.map((item) => <CartModalItem book={{ ...item.book }} quantity={item.quantity} key={item.book.id} />)
             )}
           </div>
           <div className="w-full text-red-700">
-            <div className="w-full px-[10px] py-4 flex justify-between items-center">
+            <div className="flex w-full items-center justify-between px-[10px] py-4">
               <div className="text-sm">
                 <p>Shipping nationwide</p>
               </div>
@@ -108,16 +92,12 @@ export function CartModal() {
                 </p>
               </div>
             </div>
-            <div className="w-full flex justify-between items-center">
+            <div className="flex w-full items-center justify-between">
               <button className="m-[10px] text-sm" title="Continue Shopping" onClick={handleContinueShopping}>
                 <FontAwesomeIcon icon={faCaretLeft} /> Continue Shopping
               </button>
 
-              <a
-                className="p-[10px] text-sm bg-red-700 text-white rounded"
-                title="Proceed to Checkout"
-                href="/checkout"
-              >
+              <a className="rounded bg-red-700 p-[10px] text-sm text-white" title="Proceed to Checkout" href="/checkout">
                 <span>
                   Proceed to Checkout <FontAwesomeIcon icon={faArrowRightLong} />
                 </span>
@@ -127,7 +107,7 @@ export function CartModal() {
         </div>
         <button
           title="Close"
-          className="absolute top-2 right-4 h-min"
+          className="absolute right-4 top-2 h-min"
           onClick={() => {
             dispatch(closeCartModal());
           }}

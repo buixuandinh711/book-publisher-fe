@@ -1,10 +1,5 @@
 import { BookCartProps } from "@/components/BookCart";
-import {
-  useAddToCartMutation,
-  useCartQuery,
-  useDecreaseCartItemMutation,
-  useUpdateCartItemMutation,
-} from "@/contexts/slices/apiSlice";
+import { useAddToCartMutation, useCartQuery, useDecreaseCartItemMutation, useUpdateCartItemMutation } from "@/contexts/slices/apiSlice";
 import { openCartModal } from "@/contexts/slices/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/contexts/store";
 import { calculateDiscountPercentage, orUpdating } from "@/utils/utils";
@@ -41,10 +36,10 @@ export function DetailMain({
   return (
     <div className="container">
       <div className="-px-4">
-        <div className="mb-8 w-full float-left relative  px-4">
+        <div className="relative float-left mb-8 w-full  px-4">
           <div className="-px-4">
             <BookImage {...{ name, image, originalPrice, currentPrice }} />
-            <div className="w-1/2 float-left relative px-4 text-red-700">
+            <div className="relative float-left w-1/2 px-4 text-red-700">
               <BookInfo
                 {...{
                   name,
@@ -81,19 +76,19 @@ function BookImage({
   currentPrice: number;
 }) {
   return (
-    <div className="w-1/2 float-left relative px-4">
+    <div className="relative float-left w-1/2 px-4">
       {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
-        <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-10 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
+        <div className="absolute left-0 top-0 z-10 h-10 w-10 bg-red-700 text-center text-sm font-bold leading-10 text-white before:absolute before:bottom-full before:left-0 before:top-full before:z-50 before:m-0 before:border-l-20 before:border-r-20 before:border-t-10 before:border-red-700 before:border-l-transparent before:border-r-transparent">
           {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
         </div>
       )}
-      <div className="h-[521px] bg-gray-100 mb-4">
-        <a href={image} className="flex justify-center items-center h-full">
-          <div className="!w-full !h-full flex justify-center items-center relative">
+      <div className="mb-4 h-[521px] bg-gray-100">
+        <a href={image} className="flex h-full items-center justify-center">
+          <div className="relative flex !h-full !w-full items-center justify-center">
             <Image
               src={image}
               alt={name}
-              className="w-auto max-w-full inline-block h-auto static max-h-full align-middle object-contain"
+              className="static inline-block h-auto max-h-full w-auto max-w-full object-contain align-middle"
               fill
               sizes="(max-width: 1080px) 40vw"
               placeholder="blur"
@@ -131,59 +126,59 @@ function BookInfo({
 }) {
   return (
     <>
-      <h1 className="text-2xl mb-4 w-full float-left font-bold" itemProp="name">
+      <h1 className="float-left mb-4 w-full text-2xl font-bold" itemProp="name">
         {name}
       </h1>
-      <div className="mb-10px w-full float-left">
+      <div className="float-left mb-10px w-full">
         <div className="bizweb-product-reviews-badge" />
       </div>
-      <div className="mb-4 w-full float-left">
-        <span className="text-2xl text-black font-bold">
+      <div className="float-left mb-4 w-full">
+        <span className="text-2xl font-bold text-black">
           <span className="" itemProp="price">
             {`${currentPrice.toLocaleString()}₫`}
           </span>
           <meta itemProp="priceCurrency" content="VND" />
         </span>
-        <span className="text-lg text-black ml-10px">
+        <span className="ml-10px text-lg text-black">
           <span className="line-through" itemProp="priceSpecification">
             {`${originalPrice.toLocaleString()}₫`}
           </span>
           <meta itemProp="priceCurrency" content="VND" />
         </span>
       </div>
-      <div className="w-full float-left mb-10px text-sm">
+      <div className="float-left mb-10px w-full text-sm">
         * <em>Product price does not include VAT</em>
       </div>
-      <ul className="p-0 w-full float-left m-0 text-sm leading-relaxed">
-        <li className="w-1/2 float-left mb-10px">
+      <ul className="float-left m-0 w-full p-0 text-sm leading-relaxed">
+        <li className="float-left mb-10px w-1/2">
           <span>ISBN: </span>
           <strong itemProp="sku">{isbn || "Updating"}</strong>
         </li>
-        <li className="w-1/2 float-left mb-10px">
+        <li className="float-left mb-10px w-1/2">
           <span>Status: </span>
           <strong itemProp="supersededBy">In stock</strong>
           <em />
         </li>
-        <li className="w-1/2 float-left mb-10px">
+        <li className="float-left mb-10px w-1/2">
           <span>Genre: </span>
           <strong itemProp="model">{genre}</strong>
         </li>
-        <li className="w-1/2 float-left mb-10px">
+        <li className="float-left mb-10px w-1/2">
           <span>Publisher: </span>
           <strong itemProp="name">Publisher ABC</strong>
         </li>
-        <li className="pb-10px border-b border-b-gray-300 w-1/2 float-left mb-4">
+        <li className="float-left mb-4 w-1/2 border-b border-b-gray-300 pb-10px">
           <span>Author: </span>
           <strong itemProp="name">{orUpdating(author)}</strong>
         </li>
       </ul>
       {/* SHORT DESCRIPTION */}
-      <div className="w-full float-left mb-4 pb-10px border-b border-b-gray-300 text-sm">
-        <div className="w-full float-left relative">
-          <label className="m-0 float-left block max-w-full font-bold">Product Introduction</label>
+      <div className="float-left mb-4 w-full border-b border-b-gray-300 pb-10px text-sm">
+        <div className="relative float-left w-full">
+          <label className="float-left m-0 block max-w-full font-bold">Product Introduction</label>
           {/* <em className="fa fa-minus" aria-hidden="true" /> */}
         </div>
-        <div className="block w-full float-left text-xs mt-2">
+        <div className="float-left mt-2 block w-full text-xs">
           <p className="mb-[15px]">{`✓ Publication Year: ${orUpdating(publicationYear)}`}</p>
           <p className="mb-[15px]">{`✓ Dimensions: ${orUpdating(dimensions)}`}</p>
           <p className="mb-[15px]">{`✓ Number of Pages: ${orUpdating(numPages)}`}</p>
@@ -214,20 +209,18 @@ function AddToCart({ id, name }: { id: string; name: string }) {
   };
 
   return (
-    <div className="w-full float-left">
-      <div className="w-full float-left">
+    <div className="float-left w-full">
+      <div className="float-left w-full">
         <div className="box-variant fw clearfix "></div>
-        <div className="w-[calc(100%-215px)] mr-4 float-left">
-          <div className="p-0 mb-4 inline-block w-full float-left border-none">
-            <label className="w-24 float-left overflow-hidden leading-[40px] max-w-full font-bold text-sm">
-              Amount
-            </label>
+        <div className="float-left mr-4 w-[calc(100%-215px)]">
+          <div className="float-left mb-4 inline-block w-full border-none p-0">
+            <label className="float-left w-24 max-w-full overflow-hidden text-sm font-bold leading-[40px]">Amount</label>
             <BookCounter counter={counter} setCounter={setCounter} />
           </div>
         </div>
-        <div className="w-48 float-left mb-4">
+        <div className="float-left mb-4 w-48">
           <button
-            className="w-full float-left bg-red-700 text-white relative text-base cursor-pointer inline-block h-10 leading-[40px] text-center font-normal"
+            className="relative float-left inline-block h-10 w-full cursor-pointer bg-red-700 text-center text-base font-normal leading-[40px] text-white"
             title="Add to cart"
             onClick={handleAddToCart}
           >
@@ -253,7 +246,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
   return (
     <>
       <button
-        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap hover:bg-red-700 hover:text-white active:bg-red-800 transition-colors duration-200"
+        className="float-left h-10 w-10 whitespace-nowrap border border-gray-300 bg-white text-center leading-[40px] outline-none transition-colors duration-200 hover:bg-red-700 hover:text-white active:bg-red-800"
         type="button"
         onClick={() => {
           setCounter((prev) => {
@@ -268,7 +261,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
       </button>
       <input
         type="text"
-        className="w-[calc(100%-188px)] h-10 float-left -mx-[1px] text-center border border-gray-300 min-h-[40px] p-1 text-gray-900 bg-white align-middle"
+        className="float-left -mx-[1px] h-10 min-h-[40px] w-[calc(100%-188px)] border border-gray-300 bg-white p-1 text-center align-middle text-gray-900"
         title="Amount"
         maxLength={3}
         value={counter}
@@ -276,7 +269,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
         placeholder="0"
       />
       <button
-        className="w-10 h-10 float-left bg-white border border-gray-300 text-center leading-[40px] outline-none whitespace-nowrap hover:bg-red-700 hover:text-white active:bg-red-800 transition-colors duration-200"
+        className="float-left h-10 w-10 whitespace-nowrap border border-gray-300 bg-white text-center leading-[40px] outline-none transition-colors duration-200 hover:bg-red-700 hover:text-white active:bg-red-800"
         type="button"
         onClick={() => {
           setCounter((prev) => {
@@ -296,7 +289,7 @@ function BookCounter({ counter, setCounter }: { counter: string; setCounter: Dis
 function Media() {
   return (
     <>
-      <div className="border border-gray-300 inline-block mb-5 bg-gray-100 py-4 px-2 rounded-md text-black text-sm">
+      <div className="mb-5 inline-block rounded-md border border-gray-300 bg-gray-100 px-2 py-4 text-sm text-black">
         Hotline phone number:{" "}
         <a href="tel:0904907492" className="text-red-700">
           0971443322{" "}
@@ -304,11 +297,11 @@ function Media() {
         (every day of the week from 08:00 - 20:00)
       </div>
       {/* SOCIAL MEDIA SHARING */}
-      <div className="w-full float-left">
-        <ul className="p-0 m-0 list-none">
-          <li className="mr-10px float-left inline-block mb-0">
+      <div className="float-left w-full">
+        <ul className="m-0 list-none p-0">
+          <li className="float-left mb-0 mr-10px inline-block">
             <a
-              className="text-sky-700 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-700 hover:border-sky-700 hover:text-white"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-sky-700 hover:border-sky-700 hover:bg-sky-700 hover:text-white"
               href="https://www.facebook.com/PublisherABC/"
             >
               <span className="icon icon-facebook" aria-hidden="true">
@@ -316,9 +309,9 @@ function Media() {
               </span>
             </a>
           </li>
-          <li className="mr-10px float-left inline-block mb-0">
+          <li className="float-left mb-0 mr-10px inline-block">
             <a
-              className="text-sky-400 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-400 hover:border-sky-400 hover:text-white"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-sky-400 hover:border-sky-400 hover:bg-sky-400 hover:text-white"
               href="https://twitter.com/"
             >
               <span className="icon icon-twitter" aria-hidden="true">
@@ -326,9 +319,9 @@ function Media() {
               </span>
             </a>
           </li>
-          <li className="mr-10px float-left inline-block mb-0">
+          <li className="float-left mb-0 mr-10px inline-block">
             <a
-              className="text-red-500 w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-red-500 hover:border-red-500 hover:bg-red-500 hover:text-white"
               href="https://plus.google.com/"
             >
               <span className="icon icon-google-plus" aria-hidden="true">

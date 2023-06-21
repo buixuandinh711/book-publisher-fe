@@ -15,7 +15,7 @@ export default function Catalog({
   return (
     <>
       <BreadScumb />
-      <section className="w-full float-left pt-8">
+      <section className="float-left w-full pt-8">
         <div className="container">
           <div className="-mx-4">
             <CatalogSideBar {...catalogSideBarProps} />
@@ -35,8 +35,16 @@ export const getServerSideProps: GetServerSideProps<
     catalogMainProps: CatalogMainProps;
     catalogSideBarProps: CatalogSideBarProps;
   },
-  { slug: string[]; page: string }
-> = async (context: GetServerSidePropsContext<{ slug?: string[]; page?: string }>) => {
+  {
+    slug: string[];
+    page: string;
+  }
+> = async (
+  context: GetServerSidePropsContext<{
+    slug?: string[];
+    page?: string;
+  }>
+) => {
   const { slug, ...queryParams } = context.query;
 
   let category = "";

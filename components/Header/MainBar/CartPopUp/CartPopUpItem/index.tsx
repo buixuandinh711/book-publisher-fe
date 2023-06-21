@@ -1,9 +1,4 @@
-import {
-  CartItem,
-  useAddToCartMutation,
-  useDecreaseCartItemMutation,
-  useRemoveCartItemMutation,
-} from "@/contexts/slices/apiSlice";
+import { CartItem, useAddToCartMutation, useDecreaseCartItemMutation, useRemoveCartItemMutation } from "@/contexts/slices/apiSlice";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -22,9 +17,9 @@ export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, 
   };
 
   return (
-    <li className="w-full py-[10px] border-t border-t-gray-300 first:border-none hover:bg-gray-50">
-      <div className="flex relative">
-        <Link className="block w-[100px] h-[100px] mr-[10px] text-center shrink-0" href={`/detail/${id}`} title={name}>
+    <li className="w-full border-t border-t-gray-300 py-[10px] first:border-none hover:bg-gray-50">
+      <div className="relative flex">
+        <Link className="mr-[10px] block h-[100px] w-[100px] shrink-0 text-center" href={`/detail/${id}`} title={name}>
           <Image
             alt={name}
             src={image}
@@ -33,7 +28,7 @@ export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, 
             width="0"
             height="0"
             sizes="10vw"
-            className="w-[100px] h-auto max-h-full align-middle object-contain"
+            className="h-auto max-h-full w-[100px] object-contain align-middle"
           />
         </Link>
         <div className="detail-item flex-shrink">
@@ -42,13 +37,13 @@ export function CartPopUpItem({ book: { id, name, image, currentPrice: price }, 
               {name}
             </Link>
           </div>
-          <div className="text-base font-bold pb-[2px]">
+          <div className="pb-[2px] text-base font-bold">
             <span className="price">{`${price.toLocaleString()}₫`}</span>
           </div>
           <BookCounter quantity={quantity} id={id} />
         </div>
         <button onClick={handleRemoveCartItem}>
-          <FontAwesomeIcon icon={faClose} className="text-red-700 absolute top-1 right-4" />
+          <FontAwesomeIcon icon={faClose} className="absolute right-4 top-1 text-red-700" />
         </button>
       </div>
     </li>
@@ -94,25 +89,19 @@ function BookCounter({ id, quantity }: { id: string; quantity: number }) {
 
   return (
     <>
-      <button
-        className="w-7 h-7 float-left bg-white border border-gray-300 text-center text-red-700"
-        onClick={handleDecreaseQuantity}
-      >
+      <button className="float-left h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleDecreaseQuantity}>
         -
       </button>
       <input
         type="text"
-        className="w-10 h-7 float-left -mx-[1px] text-center border border-gray-300 min-h-[28px] p-1 text-gray-900 bg-white align-middle text-sm"
+        className="float-left -mx-[1px] h-7 min-h-[28px] w-10 border border-gray-300 bg-white p-1 text-center align-middle text-sm text-gray-900"
         title="Số lượng"
         maxLength={3}
         value={quantity}
         onChange={() => {}}
         placeholder="1"
       />
-      <button
-        className="w-7 h-7 float-left bg-white border border-gray-300 text-center text-red-700"
-        onClick={handleIncreaseQuantity}
-      >
+      <button className="float-left h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleIncreaseQuantity}>
         +
       </button>
     </>

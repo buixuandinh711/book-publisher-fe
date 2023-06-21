@@ -29,8 +29,7 @@ export default function Home({
           {
             link: "/",
             title: "Tinh hoa văn chương Việt",
-            imageSrc:
-              "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859350/book-publisher/banner_vietnamese_book.png",
+            imageSrc: "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859350/book-publisher/banner_vietnamese_book.png",
           },
         ]}
       />
@@ -40,8 +39,7 @@ export default function Home({
           {
             link: "/",
             title: "combo sách giảm giá",
-            imageSrc:
-              "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859387/book-publisher/banner_combo_discount.png",
+            imageSrc: "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859387/book-publisher/banner_combo_discount.png",
           },
         ]}
       />
@@ -52,14 +50,12 @@ export default function Home({
           {
             link: "/",
             title: "Danh tướng Việt Nam",
-            imageSrc:
-              "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859567/book-publisher/banner_botton_1.png",
+            imageSrc: "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859567/book-publisher/banner_botton_1.png",
           },
           {
             link: "/",
             title: "Nữ chúa Việt Nam trong lịch sử",
-            imageSrc:
-              "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859582/book-publisher/banner_bottom_2.png",
+            imageSrc: "https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683859582/book-publisher/banner_bottom_2.png",
           },
         ]}
       />

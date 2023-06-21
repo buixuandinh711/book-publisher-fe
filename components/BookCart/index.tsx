@@ -27,22 +27,18 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
   };
 
   return (
-    <div className="text-left relative overflow-hidden bg-white w-[190px] px-4 mx-auto">
-      <div className="relative w-full float-left">
+    <div className="relative mx-auto w-[190px] overflow-hidden bg-white px-4 text-left">
+      <div className="relative float-left w-full">
         {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
-          <div className="absolute text-sm text-white w-10 h-10 leading-10 font-bold top-0 left-0 text-center z-10 bg-red-700 before:border-red-700 before:border-t-10 before:border-l-20 before:border-r-20 before:border-l-transparent before:border-r-transparent before:absolute before:bottom-full before:m-0 before:left-0 before:top-full before:z-50">
+          <div className="absolute left-0 top-0 z-10 h-10 w-10 bg-red-700 text-center text-sm font-bold leading-10 text-white before:absolute before:bottom-full before:left-0 before:top-full before:z-50 before:m-0 before:border-l-20 before:border-r-20 before:border-t-10 before:border-red-700 before:border-l-transparent before:border-r-transparent">
             {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
           </div>
         )}
-        <Link
-          href={`/detail/${id}`}
-          title={name}
-          className="h-56 flex items-center justify-center text-center relative"
-        >
+        <Link href={`/detail/${id}`} title={name} className="relative flex h-56 items-center justify-center text-center">
           <Image
             src={image}
             alt={name}
-            className="align-middle border-0 max-w-full max-h-full w-auto h-52 mx-auto object-cover"
+            className="mx-auto h-52 max-h-full w-auto max-w-full border-0 object-cover align-middle"
             fill
             sizes="(max-width: 1080px) 10vw"
             placeholder="blur"
@@ -50,14 +46,14 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
           />
         </Link>
       </div>
-      <div className="w-full float-left z-10 relative pb-3 min-h-105">
-        <h3 className="min-h-[50px] overflow-hidden text-ellipsis line-clamp-2 w-full float-left text-base text-red-700 text-center my-3 leading-normal">
-          <Link href={`/detail/${id}`} title={name} className="text-red-700 font-semibold">
+      <div className="relative z-10 float-left min-h-105 w-full pb-3">
+        <h3 className="float-left my-3 line-clamp-2 min-h-[50px] w-full overflow-hidden text-ellipsis text-center text-base leading-normal text-red-700">
+          <Link href={`/detail/${id}`} title={name} className="font-semibold text-red-700">
             {name}
           </Link>
         </h3>
-        <div className="min-h-[37px] flex items-center justify-center flex-col leading-normal w-full float-left">
-          <div className="text-lg text-black font-bold">
+        <div className="float-left flex min-h-[37px] w-full flex-col items-center justify-center leading-normal">
+          <div className="text-lg font-bold text-black">
             <span className="price product-price">{currentPrice.toLocaleString()}</span>
           </div>
           <div className="m-0 text-sm text-black line-through">
@@ -65,11 +61,11 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
           </div>
         </div>
       </div>
-      <div className="inline-flex justify-center w-full float-left">
+      <div className="float-left inline-flex w-full justify-center">
         <div>
           <input type="hidden" name="variantId" defaultValue={76671181} />
           <button
-            className="bg-red-700 text-white border-none relative text-base px-7 cursor-pointer inline-block h-10 leading-[40px] text-center whitespace-nowrap outline-none font-normal tracking-normal"
+            className="relative inline-block h-10 cursor-pointer whitespace-nowrap border-none bg-red-700 px-7 text-center text-base font-normal leading-[40px] tracking-normal text-white outline-none"
             title="Mua hàng"
             onClick={handleAddToCart}
           >

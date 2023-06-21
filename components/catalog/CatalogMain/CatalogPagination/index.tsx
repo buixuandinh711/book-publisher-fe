@@ -8,18 +8,18 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
 
   return (
     <div className="text-xs-right">
-      <nav className="w-full float-left flex justify-center items-center">
-        <ul className="inline-block pl-0 my-4 rounded-md list-none">
+      <nav className="float-left flex w-full items-center justify-center">
+        <ul className="my-4 inline-block list-none rounded-md pl-0">
           <li className="float-left inline">
             {currentPage > 1 ? (
               <Link
-                className="ml-0 rounded-tl-md rounded-bl-md w-10 h-10 text-sm border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white hover:text-white hover:bg-red-700 hover:border-red-700"
+                className="ml-0 flex h-10 w-10 items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
                 href={`${currentPath}?page=${currentPage - 1}`}
               >
                 «
               </Link>
             ) : (
-              <div className="ml-0 rounded-tl-md rounded-bl-md w-10 h-10 text-sm cursor-not-allowed border border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white">
+              <div className="ml-0 flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700">
                 «
               </div>
             )}
@@ -30,13 +30,13 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
           <li className="float-left inline">
             {currentPage < totalPages ? (
               <Link
-                className="-ml-[1px] w-10 h-10 text-sm border rounded-tr-md rounded-br-md border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white hover:text-white hover:bg-red-700 hover:border-red-700"
+                className="-ml-[1px] flex h-10 w-10 items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
                 href={`${currentPath}?page=${currentPage + 1}`}
               >
                 »
               </Link>
             ) : (
-              <div className="-ml-[1px] w-10 h-10 text-sm border cursor-not-allowed rounded-tr-md rounded-br-md border-gray-300 p-0 flex justify-center items-center text-red-700 bg-white">
+              <div className="-ml-[1px] flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700">
                 »
               </div>
             )}
@@ -47,15 +47,7 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
   );
 }
 
-function PageNumber({
-  page,
-  currentPath,
-  isCurrent,
-}: {
-  page: string | number;
-  currentPath: string;
-  isCurrent: boolean;
-}) {
+function PageNumber({ page, currentPath, isCurrent }: { page: string | number; currentPath: string; isCurrent: boolean }) {
   const isPageLink = typeof page === "number";
   const router = useRouter();
   const { slug, ...queryParams } = router.query;
@@ -66,8 +58,8 @@ function PageNumber({
     <li className="float-left inline">
       {isPageLink ? (
         <Link
-          className={`-ml-[1px] w-10 h-10 text-sm border p-0 flex justify-center items-center hover:text-white hover:bg-red-700 hover:border-red-700 ${
-            isCurrent ? "text-white bg-red-700 border-red-700" : "text-red-700 bg-white border-gray-300"
+          className={`-ml-[1px] flex h-10 w-10 items-center justify-center border p-0 text-sm hover:border-red-700 hover:bg-red-700 hover:text-white ${
+            isCurrent ? "border-red-700 bg-red-700 text-white" : "border-gray-300 bg-white text-red-700"
           }`}
           href={`${currentPath}?${query}`}
         >
@@ -75,8 +67,8 @@ function PageNumber({
         </Link>
       ) : (
         <div
-          className={`-ml-[1px] w-10 h-10 text-sm border p-0 flex justify-center items-center ${
-            isCurrent ? "text-white bg-red-700 border-red-700" : "text-red-700 bg-white border-gray-300"
+          className={`-ml-[1px] flex h-10 w-10 items-center justify-center border p-0 text-sm ${
+            isCurrent ? "border-red-700 bg-red-700 text-white" : "border-gray-300 bg-white text-red-700"
           }`}
         >
           {page}

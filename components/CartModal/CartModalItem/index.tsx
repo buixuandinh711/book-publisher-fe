@@ -1,9 +1,4 @@
-import {
-  CartItem,
-  useAddToCartMutation,
-  useDecreaseCartItemMutation,
-  useRemoveCartItemMutation,
-} from "@/contexts/slices/apiSlice";
+import { CartItem, useAddToCartMutation, useDecreaseCartItemMutation, useRemoveCartItemMutation } from "@/contexts/slices/apiSlice";
 import { closeCartModal } from "@/contexts/slices/cartSlice";
 import { useAppDispatch } from "@/contexts/store";
 import { faClose, faPlus, faSubtract } from "@fortawesome/free-solid-svg-icons";
@@ -25,11 +20,11 @@ export function CartModalItem({ book: { id, name, image, currentPrice: price }, 
 
   return (
     <div className="w-full border-b border-dotted text-sm text-red-700">
-      <div className="flex items-start -mr-3 py-2">
-        <div className="w-1/2 text-left flex px-2">
+      <div className="-mr-3 flex items-start py-2">
+        <div className="flex w-1/2 px-2 text-left">
           <div className="item-image">
             <Link
-              className="w-20 h-20 relative flex justify-center"
+              className="relative flex h-20 w-20 justify-center"
               href={`/detail/${id}`}
               title={name}
               onClick={() => {
@@ -44,7 +39,7 @@ export function CartModalItem({ book: { id, name, image, currentPrice: price }, 
                 width="0"
                 height="0"
                 sizes="5vw"
-                className="w-auto h-20 object-contain"
+                className="h-20 w-auto object-contain"
               />
             </Link>
           </div>
@@ -106,22 +101,22 @@ function QuantityControl({ id, quantity }: { id: string; quantity: number }) {
   };
 
   return (
-    <div className="h-6 w-[74px] flex mx-auto items-stretch justify-center">
+    <div className="mx-auto flex h-6 w-[74px] items-stretch justify-center">
       <button
-        className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-l border-gray-300"
+        className="flex grow basis-0 cursor-pointer items-center justify-center border-y border-l border-gray-300"
         onClick={handleDecreaseQuantity}
       >
         <FontAwesomeIcon icon={faSubtract} size="xs" />
       </button>
       <input
-        className="basis-0 grow flex items-center justify-center min-w-0 text-center outline-none border border-gray-300"
+        className="flex min-w-0 grow basis-0 items-center justify-center border border-gray-300 text-center outline-none"
         type="text"
         placeholder="0"
         value={quantity}
         onChange={() => {}}
       />
       <button
-        className="basis-0 grow flex items-center justify-center cursor-pointer border-y border-r border-gray-300"
+        className="flex grow basis-0 cursor-pointer items-center justify-center border-y border-r border-gray-300"
         onClick={handleIncreaseQuantity}
       >
         <FontAwesomeIcon icon={faPlus} size="xs" />

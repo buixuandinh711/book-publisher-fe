@@ -7,18 +7,14 @@ import { useCartQuery, useLogoutMutation, useUserQuery } from "@/contexts/slices
 
 export function MainBar() {
   return (
-    <div className="relative w-full float-left flex items-center p-0 bg-white">
+    <div className="relative float-left flex w-full items-center bg-white p-0">
       <div className="container">
-        <div className="flex items-center -mx-4">
-          <div className="w-1/3 float-left ml-0 relative min-h-1 px-4">
-            <div className="h-24 flex content-start items-center">
-              <Link
-                title="NHÀ XUẤT BẢN VĂN HỌC"
-                href="/"
-                className="text-red-700 no-underline bg-transparent relative w-[360px] h-[57px]"
-              >
+        <div className="-mx-4 flex items-center">
+          <div className="relative float-left ml-0 min-h-1 w-1/3 px-4">
+            <div className="flex h-24 content-start items-center">
+              <Link title="NHÀ XUẤT BẢN VĂN HỌC" href="/" className="relative h-[57px] w-[360px] bg-transparent text-red-700 no-underline">
                 <Image
-                  className="block max-w-full h-auto border-0 max-h-full align-middle"
+                  className="block h-auto max-h-full max-w-full border-0 align-middle"
                   src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1684837345/book-publisher/header_logo.png "
                   alt="Logo NHÀ XUẤT BẢN VĂN HỌC"
                   fill
@@ -27,23 +23,19 @@ export function MainBar() {
               </Link>
             </div>
           </div>
-          <div className="w-1/3 float-left ml-0 relative min-h-1 px-4 inline-flex items-center">
-            <form
-              action="/search"
-              method="get"
-              className="float-left w-full m-0 border border-gray-300 pr-10 pl-4 rounded-md"
-            >
-              <div className="w-full float-left relative table border-separate">
+          <div className="relative float-left ml-0 inline-flex min-h-1 w-1/3 items-center px-4">
+            <form action="/search" method="get" className="float-left m-0 w-full rounded-md border border-gray-300 pl-4 pr-10">
+              <div className="relative float-left table w-full border-separate">
                 <input
                   type="text"
-                  className="outline-none text-base bg-transparent text-red-700 placeholder-red-700 pr-6 min-h-1 h-10 border-none rounded-none table-cell relative z-10 float-left w-full mb-0"
+                  className="relative z-10 float-left mb-0 table-cell h-10 min-h-1 w-full rounded-none border-none bg-transparent pr-6 text-base text-red-700 placeholder-red-700 outline-none"
                   name="query"
                   id="search"
                   title="Nhập từ khoá cần tìm"
                   placeholder="Nhập từ khóa cần tìm ..."
                 />
                 <button
-                  className="absolute h-auto top-0 -right-10 bottom-0 z-10 w-6 text-sm bg-transparent text-red-700 flex justify-center items-center leading-10 px-5 text-center"
+                  className="absolute -right-10 bottom-0 top-0 z-10 flex h-auto w-6 items-center justify-center bg-transparent px-5 text-center text-sm leading-10 text-red-700"
                   type="submit"
                 >
                   <FontAwesomeIcon icon={faSearch} className="inline-block text-sm"></FontAwesomeIcon>
@@ -51,7 +43,7 @@ export function MainBar() {
               </div>
             </form>
           </div>
-          <div className="w-1/3 float-left ml-0 relative min-h-1 px-4 text-red-700">
+          <div className="relative float-left ml-0 min-h-1 w-1/3 px-4 text-red-700">
             <HeaderAccount />
             <HeaderCart />
           </div>
@@ -66,20 +58,18 @@ function HeaderAccount() {
   const [logout] = useLogoutMutation();
 
   return (
-    <div className="w-48 h-10 float-left mr-5 border border-gray-300 rounded-md">
-      <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
+    <div className="float-left mr-5 h-10 w-48 rounded-md border border-gray-300">
+      <div className="float-left mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
         <FontAwesomeIcon icon={faUser} className="text-lg" />
       </div>
-      <div className="float-left h-10 flex justify-center flex-col flex-nowrap">
-        <span className="font-bold text-sm leading-none overflow-ellipsis">
-          {userQuery.isSuccess ? userQuery.data.name : "Account"}
-        </span>
+      <div className="float-left flex h-10 flex-col flex-nowrap justify-center">
+        <span className="overflow-ellipsis text-sm font-bold leading-none">{userQuery.isSuccess ? userQuery.data.name : "Account"}</span>
         <span className="leading-none">
           {userQuery.isSuccess ? (
             <>
               <Link
                 href="/account/login"
-                className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+                className="relative mr-2 text-xs leading-none before:absolute before:-right-2 before:bottom-0 before:top-1 before:content-['*']"
               >
                 Account
               </Link>
@@ -98,7 +88,7 @@ function HeaderAccount() {
             <>
               <Link
                 href="/account/login"
-                className="mr-2 relative text-xs leading-none before:content-['*'] before:absolute before:-right-2 before:bottom-0 before:top-1"
+                className="relative mr-2 text-xs leading-none before:absolute before:-right-2 before:bottom-0 before:top-1 before:content-['*']"
               >
                 Log in
               </Link>
@@ -118,16 +108,16 @@ function HeaderCart() {
   const itemsInCart = cartQuery.isSuccess ? cartQuery.data.length : 0;
 
   return (
-    <div className="w-36 h-10 flex justify-end items-center float-left text-gray-900 p-0 z-50 border border-gray-300 rounded-md group">
-      <div className="w-36 z-10 text-center float-left rounded-md">
-        <div className="w-full float-left">
-          <div className="float-left mr-1 h-10 w-10 overflow-hidden border-r border-r-gray-300 flex justify-center items-center">
+    <div className="group z-50 float-left flex h-10 w-36 items-center justify-end rounded-md border border-gray-300 p-0 text-gray-900">
+      <div className="z-10 float-left w-36 rounded-md text-center">
+        <div className="float-left w-full">
+          <div className="float-left mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
             <FontAwesomeIcon icon={faShoppingCart} className="inline-block text-lg text-red-700"></FontAwesomeIcon>
           </div>
-          <div className="cursor-pointer w-calc[100% - 50px] float-left h-10 flex flex-col justify-center items-start flex-nowrap">
-            <span className="font-bold text-sm text-red-700 leading-none">Your cart</span>
+          <div className="w-calc[100% - 50px] float-left flex h-10 cursor-pointer flex-col flex-nowrap items-start justify-center">
+            <span className="text-sm font-bold leading-none text-red-700">Your cart</span>
             <span className="leading-none">
-              <span className="font-bold text-sm text-red-700 leading-none">{itemsInCart}</span>
+              <span className="text-sm font-bold leading-none text-red-700">{itemsInCart}</span>
               &nbsp;
               <span className="text-xs leading-none">{itemsInCart > 0 ? "Items" : "Item"}</span>
             </span>

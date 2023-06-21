@@ -12,14 +12,8 @@ interface RegisterFormValues {
 }
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .max(50, "First name should not exceed 50 characters.")
-    .matches(nameRegex)
-    .required("First name is required."),
-  lastName: Yup.string()
-    .max(50, "Last name should not exceed 50 characters.")
-    .matches(nameRegex)
-    .required("Last name is required."),
+  firstName: Yup.string().max(50, "First name should not exceed 50 characters.").matches(nameRegex).required("First name is required."),
+  lastName: Yup.string().max(50, "Last name should not exceed 50 characters.").matches(nameRegex).required("Last name is required."),
   email: Yup.string().email("Invalid email format.").required("Email is required."),
   password: Yup.string()
     .required("Password is required.")
@@ -32,9 +26,9 @@ export function RegisterMain() {
   const [register] = useRegisterMutation();
 
   return (
-    <section className="w-full float-left py-8 text-red-700 text-sm">
+    <section className="float-left w-full py-8 text-sm text-red-700">
       <div className="container">
-        <h1 className="mb-8 text-2xl font-bold uppercase w-full float-left leading-snug">Register New Account</h1>
+        <h1 className="float-left mb-8 w-full text-2xl font-bold uppercase leading-snug">Register New Account</h1>
         <div className="-mx-4">
           <p className="mb-4 px-4">{"If you don't have an account, please register here"}</p>
           <Formik
@@ -66,19 +60,19 @@ export function RegisterMain() {
           >
             {({ errors, touched }) => (
               <Form acceptCharset="UTF-8">
-                <div className="w-1/2 float-left relative px-4">
+                <div className="relative float-left w-1/2 px-4">
                   <div className="mb-8">
                     <div>
-                      <div className="w-full float-left">
+                      <div className="float-left w-full">
                         <fieldset className="relative mb-6">
-                          <label htmlFor="firstName" className="block mb-[2px] max-w-full font-bold cursor-pointer">
+                          <label htmlFor="firstName" className="mb-[2px] block max-w-full cursor-pointer font-bold">
                             First Name:{" "}
                           </label>
                           <Field
                             type="text"
                             id="firstName"
                             name="firstName"
-                            className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                            className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                             placeholder="First Name"
                           />
                           {errors.firstName && touched.firstName ? (
@@ -86,14 +80,14 @@ export function RegisterMain() {
                           ) : null}
                         </fieldset>
                         <fieldset className="relative mb-6">
-                          <label htmlFor="lastName" className="block mb-[2px] max-w-full font-bold">
+                          <label htmlFor="lastName" className="mb-[2px] block max-w-full font-bold">
                             Last Name:{" "}
                           </label>
                           <Field
                             type="text"
                             id="lastName"
                             name="lastName"
-                            className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                            className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                             placeholder="Last Name"
                           />
                           {errors.lastName && touched.lastName ? (
@@ -102,7 +96,7 @@ export function RegisterMain() {
                         </fieldset>
                         <div className="mt-8">
                           <button
-                            className="bg-red-700 text-white border border-red-700 rounded-md min-w-[160px] relative cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
+                            className="relative inline-block h-10 min-w-[160px] cursor-pointer rounded-md border border-red-700 bg-red-700 text-center leading-[40px] text-white outline-none"
                             type="submit"
                           >
                             Register
@@ -112,18 +106,18 @@ export function RegisterMain() {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/2 float-left relative px-4">
-                  <div className="w-full float-left">
-                    <div className="w-full float-left">
+                <div className="relative float-left w-1/2 px-4">
+                  <div className="float-left w-full">
+                    <div className="float-left w-full">
                       <fieldset className="relative mb-6">
-                        <label htmlFor="email" className="block mb-[2px] max-w-full font-bold">
+                        <label htmlFor="email" className="mb-[2px] block max-w-full font-bold">
                           Email:{" "}
                         </label>
                         <Field
                           type="email"
                           id="email"
                           name="email"
-                          className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                          className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                           placeholder="Email"
                         />
                         {errors.email && touched.email ? (
@@ -131,16 +125,16 @@ export function RegisterMain() {
                         ) : null}
                       </fieldset>
                     </div>
-                    <div className="w-full float-left">
+                    <div className="float-left w-full">
                       <fieldset className="relative mb-6">
-                        <label htmlFor="password" className="block mb-[2px] max-w-full font-bold">
+                        <label htmlFor="password" className="mb-[2px] block max-w-full font-bold">
                           Password:{" "}
                         </label>
                         <Field
                           type="password"
                           id="password"
                           name="password"
-                          className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                          className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                           placeholder="Password"
                         />
                         {errors.password && touched.password ? (

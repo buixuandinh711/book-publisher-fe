@@ -7,15 +7,15 @@ export function CartPopUp() {
 
   if (cartQuery.isLoading)
     return (
-      <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
-        <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
+      <div className="absolute right-4 top-10 hidden rounded bg-white text-left shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)] group-hover:block">
+        <div id="cart-sidebar" className="w-[360px] overflow-hidden p-5">
           <Image
             alt="Loading"
             src="/image-loader.gif"
             width="0"
             height="0"
             sizes="10vw"
-            className="w-[100px] h-auto max-h-full align-middle object-contain"
+            className="h-auto max-h-full w-[100px] object-contain align-middle"
           />
         </div>
       </div>
@@ -23,8 +23,8 @@ export function CartPopUp() {
 
   if (!cartQuery.isSuccess) {
     return (
-      <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
-        <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
+      <div className="absolute right-4 top-10 hidden rounded bg-white text-left shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)] group-hover:block">
+        <div id="cart-sidebar" className="w-[360px] overflow-hidden p-5">
           Failed to load your cart, please retry
         </div>
       </div>
@@ -33,8 +33,8 @@ export function CartPopUp() {
 
   if (cartQuery.data.length < 1) {
     return (
-      <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
-        <div id="cart-sidebar" className="p-5 w-[360px] overflow-hidden">
+      <div className="absolute right-4 top-10 hidden rounded bg-white text-left shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)] group-hover:block">
+        <div id="cart-sidebar" className="w-[360px] overflow-hidden p-5">
           Your cart is empty
         </div>
       </div>
@@ -42,34 +42,31 @@ export function CartPopUp() {
   }
 
   return (
-    <div className="group-hover:block hidden absolute top-10 right-4 bg-white text-left rounded shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)]">
-      <div id="cart-sidebar" className="py-5 w-[360px] overflow-hidden">
-        <ul className="w-full max-h-[380px] overflow-x-hidden overflow-y-auto pl-4">
+    <div className="absolute right-4 top-10 hidden rounded bg-white text-left shadow-[0_0_15px_-5px_rgba(0,0,0,0.4)] group-hover:block">
+      <div id="cart-sidebar" className="w-[360px] overflow-hidden py-5">
+        <ul className="max-h-[380px] w-full overflow-y-auto overflow-x-hidden pl-4">
           {cartQuery.data.map((item) => (
             <CartPopUpItem {...item} key={item.book.id} />
           ))}
         </ul>
         <div className="w-full px-4">
-          <div className="text-base py-3 flex items-center justify-between">
+          <div className="flex items-center justify-between py-3 text-base">
             <strong className="font-bold text-black">{"Total: "}</strong>
             <span className="mr-1 font-bold text-red-700">
-              {cartQuery.data
-                .reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0)
-                .toLocaleString()}
-              ₫
+              {cartQuery.data.reduce((accumulator, item) => accumulator + item.book.currentPrice * item.quantity, 0).toLocaleString()}₫
             </span>
           </div>
         </div>
-        <div className="w-full px-4 flex items-center justify-center">
+        <div className="flex w-full items-center justify-center px-4">
           <a
             href="/cart"
-            className="block w-1/2 h-10 font-bold uppercase border border-red-700 text-red-700 bg-white px-5  cursor-pointer leading-[40px] text-sm text-center rounded-l hover:bg-red-700 hover:text-white transition-all duration-400"
+            className="duration-400 block h-10 w-1/2 cursor-pointer rounded-l border border-red-700 bg-white px-5  text-center text-sm font-bold uppercase leading-[40px] text-red-700 transition-all hover:bg-red-700 hover:text-white"
           >
             <span>Cart</span>
           </a>
           <a
             href="/checkout"
-            className="block w-1/2 h-10 font-bold uppercase border border-red-700 text-red-700 bg-white px-5  cursor-pointer leading-[40px] text-sm text-center -ml-[1px] rounded-r hover:bg-red-700 hover:text-white transition-all duration-400"
+            className="duration-400 -ml-[1px] block h-10 w-1/2 cursor-pointer rounded-r border border-red-700 bg-white  px-5 text-center text-sm font-bold uppercase leading-[40px] text-red-700 transition-all hover:bg-red-700 hover:text-white"
           >
             <span>Check out</span>
           </a>

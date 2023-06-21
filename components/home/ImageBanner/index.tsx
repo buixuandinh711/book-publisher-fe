@@ -13,23 +13,13 @@ interface ImageBannerProps {
 
 export function ImageBanner({ bannersList }: ImageBannerProps) {
   return (
-    <section className="py-8 cursor-pointer w-full float-left">
+    <section className="float-left w-full cursor-pointer py-8">
       <div className="container">
         <div className="-mx-4">
-          <div className="flex gap-4 justify-around">
+          <div className="flex justify-around gap-4">
             {bannersList.map((banner, index) => (
-              <Link
-                href={banner.link}
-                title={banner.title}
-                key={index}
-                className="block relative grow min-h-[200px]"
-              >
-                <Image
-                  src={banner.imageSrc}
-                  alt={banner.title}
-                  fill
-                  sizes={`(max-width: 1080px) ${70 / bannersList.length}vw`}
-                />
+              <Link href={banner.link} title={banner.title} key={index} className="relative block min-h-[200px] grow">
+                <Image src={banner.imageSrc} alt={banner.title} fill sizes={`(max-width: 1080px) ${70 / bannersList.length}vw`} />
               </Link>
             ))}
           </div>

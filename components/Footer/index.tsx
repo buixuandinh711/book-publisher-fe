@@ -6,14 +6,14 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="w-full float-left bg-gray-100 relative overflow-hidden mt-8">
-      <div className="pt-8 pb-10">
+    <footer className="relative float-left mt-8 w-full overflow-hidden bg-gray-100">
+      <div className="pb-10 pt-8">
         <div className="container">
           <div className="footer-inner">
             <div className="-mx-4 overflow-hidden">
-              <div className="border-r border-black mt-8 w-1/2 float-left relative min-h-[1px] px-4">
-                <div className="mt-0 w-full float-left">
-                  <div className="w-full float-left mb-8">
+              <div className="relative float-left mt-8 min-h-[1px] w-1/2 border-r border-black px-4">
+                <div className="float-left mt-0 w-full">
+                  <div className="float-left mb-8 w-full">
                     <Link href="/" title="NHÀ XUẤT BẢN VĂN HỌC" className="text-red-700">
                       <Image
                         alt="NHÀ XUẤT BẢN VĂN HỌC"
@@ -23,13 +23,13 @@ export function Footer() {
                         width="0"
                         height="0"
                         sizes="30vw"
-                        className="w-[350px] block h-auto max-h-full align-middle"
+                        className="block h-auto max-h-full w-[350px] align-middle"
                       />
                     </Link>
                   </div>
-                  <div className="w-full float-left">
-                    <div className="mb-10px text-black text-sm">MÃ SỐ DOANH NGHIỆP: 0100111514</div>
-                    <div className="text-black w-full float-left text-sm">
+                  <div className="float-left w-full">
+                    <div className="mb-10px text-sm text-black">MÃ SỐ DOANH NGHIỆP: 0100111514</div>
+                    <div className="float-left w-full text-sm text-black">
                       <b />
                       <br />
                       <FontAwesomeIcon icon={faMapMarkerAlt} className="pr-10px" />
@@ -65,43 +65,43 @@ export function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="w-1/2 float-left relative min-h-[1px] px-4 mt-8 pl-8">
-                <div className="w-full float-left">
-                  <h4 className="w-full float-left text-red-700 text-lg uppercase mb-8 font-bold">
+              <div className="relative float-left mt-8 min-h-[1px] w-1/2 px-4 pl-8">
+                <div className="float-left w-full">
+                  <h4 className="float-left mb-8 w-full text-lg font-bold uppercase text-red-700">
                     <span>Chính sách</span>
                   </h4>
-                  <ul className="mb-4 leading-4 w-full float-left p-0 list-none m-0">
-                    <li className="pb-10px w-full float-left text-gray-800">
+                  <ul className="float-left m-0 mb-4 w-full list-none p-0 leading-4">
+                    <li className="float-left w-full pb-10px text-gray-800">
                       <a href="/chinh-sach-bao-mat" className="float-left text-sm text-black">
                         Chính sách bảo mật
                       </a>
                     </li>
-                    <li className="w-full float-left">
+                    <li className="float-left w-full">
                       <a href="/chinh-sach-doi-tra" className="float-left text-sm text-black">
                         Chính sách đổi trả
                       </a>
                     </li>
                   </ul>
                   <br />
-                  <h4 className="w-full float-left text-red-700 text-lg uppercase mb-8 font-bold">
+                  <h4 className="float-left mb-8 w-full text-lg font-bold uppercase text-red-700">
                     <span>Hướng dẫn</span>
                   </h4>
-                  <ul className="mb-4 leading-4 w-full float-left p-0 list-none m-0">
-                    <li className="pb-10px w-full float-left text-gray-800">
+                  <ul className="float-left m-0 mb-4 w-full list-none p-0 leading-4">
+                    <li className="float-left w-full pb-10px text-gray-800">
                       <a href="/huong-dan">Hướng dẫn mua hàng</a>
                     </li>
-                    <li className="pb-10px w-full float-left text-gray-800">
+                    <li className="float-left w-full pb-10px text-gray-800">
                       <a href="/huong-dan">Hướng dẫn thanh toán</a>
                     </li>
-                    <li className="w-full float-left text-gray-800">
+                    <li className="float-left w-full text-gray-800">
                       <a href="/dieu-khoan">Điều khoản dịch vụ</a>
                     </li>
                   </ul>
-                  <div className="w-full float-left mt-4">
-                    <ul className="p-0 m-0 list-none">
-                      <li className="mr-10px float-left inline-block mb-0">
+                  <div className="float-left mt-4 w-full">
+                    <ul className="m-0 list-none p-0">
+                      <li className="float-left mb-0 mr-10px inline-block">
                         <a
-                          className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-700 hover:border-sky-700 hover:text-white"
+                          className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-sky-700 hover:bg-sky-700 hover:text-white"
                           href="https://www.facebook.com/Nh%C3%A0-xu%E1%BA%A5t-b%E1%BA%A3n-V%C4%83n-h%E1%BB%8Dc-475715752558826/"
                         >
                           <span className="icon icon-facebook" aria-hidden="true">
@@ -109,9 +109,9 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-10px float-left inline-block mb-0">
+                      <li className="float-left mb-0 mr-10px inline-block">
                         <a
-                          className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-sky-400 hover:border-sky-400 hover:text-white"
+                          className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-sky-400 hover:bg-sky-400 hover:text-white"
                           href="https://twitter.com/"
                         >
                           <span className="icon icon-twitter" aria-hidden="true">
@@ -119,9 +119,9 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-10px float-left inline-block mb-0">
+                      <li className="float-left mb-0 mr-10px inline-block">
                         <a
-                          className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white"
+                          className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-red-500 hover:bg-red-500 hover:text-white"
                           href="https://plus.google.com/"
                         >
                           <span className="icon icon-google-plus" aria-hidden="true">
@@ -129,9 +129,9 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="mr-10px float-left inline-block mb-0">
+                      <li className="float-left mb-0 mr-10px inline-block">
                         <a
-                          className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-red-600 hover:border-red-600 hover:text-white"
+                          className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-red-600 hover:bg-red-600 hover:text-white"
                           href="https://www.youtube.com"
                         >
                           <span className="icon icon-youtube" aria-hidden="true">
@@ -139,9 +139,9 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="float-left inline-block mb-0">
+                      <li className="float-left mb-0 inline-block">
                         <a
-                          className="text-black w-[35px] h-[35px] border border-gray-300 flex justify-center items-center rounded-full hover:bg-pink-600 hover:border-pink-600 hover:text-white"
+                          className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-pink-600 hover:bg-pink-600 hover:text-white"
                           href="https://www.instagram.com/"
                         >
                           <span className="icon icon-instagram" aria-hidden="true">

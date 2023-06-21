@@ -23,11 +23,11 @@ export function LoginMain() {
   const [login] = useLoginMutation();
 
   return (
-    <section className="w-full float-left py-8 text-red-700 text-sm">
+    <section className="float-left w-full py-8 text-sm text-red-700">
       <div className="container">
-        <h1 className="mb-8 text-2xl font-bold uppercase w-full float-left leading-snug">Log in to your account</h1>
+        <h1 className="float-left mb-8 w-full text-2xl font-bold uppercase leading-snug">Log in to your account</h1>
         <div className="-mx-4">
-          <div className="w-1/2 float-left relative px-4">
+          <div className="relative float-left w-1/2 px-4">
             <div className="mb-8">
               <div id="login">
                 <p className="mb-4">If you already have an account, log in here.</p>
@@ -52,16 +52,16 @@ export function LoginMain() {
                       <input name="FormType" type="hidden" defaultValue="customer_login" />
                       <input name="utf8" type="hidden" defaultValue="true" />
                       <div className="form-signup"></div>
-                      <div className="w-full float-left">
+                      <div className="float-left w-full">
                         <fieldset className="relative mb-6">
-                          <label htmlFor="email" className="block mb-[2px] max-w-full font-bold">
+                          <label htmlFor="email" className="mb-[2px] block max-w-full font-bold">
                             Email:{" "}
                           </label>
                           <Field
                             type="email"
                             id="email"
                             name="email"
-                            className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                            className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                             placeholder="Email"
                           />
                           {errors.email && touched.email ? (
@@ -69,14 +69,14 @@ export function LoginMain() {
                           ) : null}
                         </fieldset>
                         <fieldset className="relative mb-6">
-                          <label htmlFor="password" className="block mb-[2px] max-w-full font-bold">
+                          <label htmlFor="password" className="mb-[2px] block max-w-full font-bold">
                             Password:{" "}
                           </label>
                           <Field
                             type="password"
                             id="password"
                             name="password"
-                            className="block w-full min-h-[40px] py-1 px-2 text-gray-900 bg-white h-10 border border-gray-300 max-w-full rounded-md outline-none"
+                            className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
                             placeholder="Password"
                           />
                           {errors.password && touched.password ? (
@@ -85,14 +85,14 @@ export function LoginMain() {
                         </fieldset>
                         <div className="mt-8">
                           <button
-                            className="bg-red-700 text-white border border-red-700 rounded-md min-w-[160px] relative cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
+                            className="relative inline-block h-10 min-w-[160px] cursor-pointer rounded-md border border-red-700 bg-red-700 text-center leading-[40px] text-white outline-none"
                             type="submit"
                             value="Log in"
                           >
                             <span>Log in</span>
                           </button>
                           <Link
-                            className="bg-white text-red-700 border border-red-700 rounded-md min-w-[160px] ml-2 relative px-8 cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
+                            className="relative ml-2 inline-block h-10 min-w-[160px] cursor-pointer rounded-md border border-red-700 bg-white px-8 text-center leading-[40px] text-red-700 outline-none"
                             href="/account/register"
                           >
                             <span>Sign up</span>
@@ -103,32 +103,32 @@ export function LoginMain() {
                   )}
                 </Formik>
 
-                <span className="mt-8 block float-left underline cursor-pointer">Forgot your password?</span>
+                <span className="float-left mt-8 block cursor-pointer underline">Forgot your password?</span>
               </div>
             </div>
           </div>
-          <div className="w-1/2 float-left relative px-4 border-l border-gray-300 hidden">
-            <div id="recover-password" className="w-full float-left">
+          <div className="relative float-left hidden w-1/2 border-l border-gray-300 px-4">
+            <div id="recover-password" className="float-left w-full">
               <p className="mb-4">Forgot your password? Enter your email address to reset your password via email.</p>
               <form method="post" action="/account/recover" id="recover_customer_password" acceptCharset="UTF-8">
                 <input name="FormType" type="hidden" defaultValue="recover_customer_password" />
                 <input name="utf8" type="hidden" defaultValue="true" />
                 <div className="form-signup aaaaaaaa"></div>
-                <div className="w-full float-left">
+                <div className="float-left w-full">
                   <fieldset className="pb-2">
-                    <label className="block mb-[2px] max-w-full font-bold">Email: </label>
+                    <label className="mb-[2px] block max-w-full font-bold">Email: </label>
                     <input
                       type="email"
-                      className="block w-full min-h-[40px] py-1 px-2 text-gray-300 bg-white h-10 border border-gray-300 max-w-full rounded-md"
+                      className="block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-300"
                       name="Email"
                       id="recover-email"
                       placeholder="Email"
                     />
                   </fieldset>
                 </div>
-                <div className="mt-6 w-full float-left">
+                <div className="float-left mt-6 w-full">
                   <button
-                    className="bg-red-700 text-white border border-red-700 rounded-md min-w-[160px] relative cursor-pointer inline-block h-10 leading-[40px] text-center outline-none"
+                    className="relative inline-block h-10 min-w-[160px] cursor-pointer rounded-md border border-red-700 bg-red-700 text-center leading-[40px] text-white outline-none"
                     type="submit"
                     value="Reset Password"
                   >
