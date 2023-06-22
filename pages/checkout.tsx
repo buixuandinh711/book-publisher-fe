@@ -1,4 +1,6 @@
 import { BreadScumb } from "@/components/BreadCrumb";
+import { faMoneyBill, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Checkout() {
   return (
@@ -118,16 +120,71 @@ export default function Checkout() {
                     <div className="absolute bottom-0 left-0 translate-y-full">{errors.email}</div>
                   ) : null} */}
                     </fieldset>
+                    <fieldset className="relative mb-4">
+                      <label htmlFor="note" className="mb-[2px] block font-bold">
+                        Note:{" "}
+                      </label>
+                      <textarea
+                        id="note"
+                        name="Note"
+                        className="block h-20 min-h-[6px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900 outline-none"
+                        placeholder="Note"
+                      />
+                      {/* {errors.email && touched.email ? (
+                    <div className="absolute bottom-0 left-0 translate-y-full">{errors.email}</div>
+                  ) : null} */}
+                    </fieldset>
                   </div>
                 </div>
                 <div className="basis-1/2 pr-6">
                   <div>
                     <h2 className="w-full pb-4 text-xl font-bold">Shipping </h2>
-                    <div className="min-h-105 w-full border border-gray-300"></div>
+                    <div className="flex h-10 w-full items-center justify-between rounded-md border border-gray-300 px-3">
+                      <div>
+                        <label htmlFor="shipping-radio" className="hidden">
+                          Shipping
+                        </label>
+                        <input
+                          id="shipping-radio"
+                          type="radio"
+                          checked
+                          className="form-radio text-red-700 focus:outline-none focus:ring-0"
+                        />
+                        <span className="px-2 font-medium">Home divery</span>
+                      </div>
+                      <span className="font-medium">20$</span>
+                    </div>
                   </div>
                   <div className="mt-8">
                     <h2 className="w-full pb-4 text-xl font-bold">Payment</h2>
-                    <div className="min-h-105 w-full border border-gray-300"></div>
+                    <div>
+                      <div className="flex h-10 w-full items-center justify-between rounded-md rounded-b-none border border-gray-300 px-3">
+                        <div>
+                          <label className="font-medium">
+                            <input
+                              type="radio"
+                              name="payment-method"
+                              className="form-radio mr-2 text-red-700 focus:outline-none focus:ring-0"
+                            />
+                            Ship COD
+                          </label>
+                        </div>
+                        <FontAwesomeIcon icon={faMoneyBill} />
+                      </div>
+                      <div className="flex h-10 w-full items-center justify-between rounded-md rounded-t-none border border-t-0 border-gray-300 px-3">
+                        <div>
+                          <label className="font-medium">
+                            <input
+                              type="radio"
+                              name="payment-method"
+                              className="form-radio mr-2 text-red-700 focus:outline-none focus:ring-0"
+                            />
+                            Momo Wallet
+                          </label>
+                        </div>
+                        <FontAwesomeIcon icon={faWallet} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
