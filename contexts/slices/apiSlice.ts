@@ -1,3 +1,4 @@
+import { District, Ward } from "@/utils/types/checkout";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface User {
@@ -139,6 +140,20 @@ export const apiSlice = createApi({
       },
       invalidatesTags: ["Cart"],
     }),
+    checkoutDistrict: builder.query<District[], { provinceId: string }>({
+      query: ({ provinceId }) => ({
+        url: `/checkout/district/${provinceId}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
+    checkoutWard: builder.query<Ward[], { districtId: string }>({
+      query: ({ districtId }) => ({
+        url: `/checkout/ward/${districtId}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -152,4 +167,6 @@ export const {
   useDecreaseCartItemMutation,
   useRemoveCartItemMutation,
   useUpdateCartItemMutation,
+  useCheckoutDistrictQuery,
+  useCheckoutWardQuery,
 } = apiSlice;
