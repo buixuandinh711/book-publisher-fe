@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Error404() {
   return (
     <section className="float-left w-full">
