@@ -55,6 +55,9 @@ export function CheckoutShippingPayment({ formik }: { formik: FormikProps<Checko
             <FontAwesomeIcon icon={faWallet} />
           </div>
         </div>
+        {formik.errors.payment && formik.touched.payment ? (
+          <div className=" text-red-500">{formik.errors.payment}</div>
+        ) : null}
       </div>
     </div>
   );

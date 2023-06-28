@@ -4,7 +4,7 @@ import { FormikProps } from "formik";
 import { CheckoutFormValues } from "..";
 
 export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]; formik: FormikProps<CheckoutFormValues> }) {
-  const districtQuery = useCheckoutDistrictQuery({ provinceId: formik.values.city }, { skip: formik.values.city === "" });
+  const districtQuery = useCheckoutDistrictQuery({ provinceId: formik.values.province }, { skip: formik.values.province === "" });
   const wardQuery = useCheckoutWardQuery({ districtId: formik.values.district }, { skip: formik.values.district === "" });
 
   return (
@@ -81,19 +81,19 @@ export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]
           ) : null}
         </fieldset>
         <fieldset className="relative mb-6">
-          <label htmlFor="city" className="mb-[2px] block font-bold">
+          <label htmlFor="province" className="mb-[2px] block font-bold">
             Province/City:{" "}
           </label>
           <select
-            id="city"
-            name="city"
+            id="province"
+            name="province"
             className="form-select block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
             onChange={(e) => {
               formik.setFieldValue("district", "");
               formik.setFieldValue("ward", "");
               formik.handleChange(e);
             }}
-            value={formik.values.city}
+            value={formik.values.province}
           >
             <option value="" disabled hidden>
               Select an Option
@@ -104,8 +104,8 @@ export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]
               </option>
             ))}
           </select>
-          {formik.errors.city && formik.touched.city ? (
-            <div className="absolute bottom-0 left-0 translate-y-full text-red-500">{formik.errors.city}</div>
+          {formik.errors.province && formik.touched.province ? (
+            <div className="absolute bottom-0 left-0 translate-y-full text-red-500">{formik.errors.province}</div>
           ) : null}
         </fieldset>
         <fieldset className="relative mb-6">

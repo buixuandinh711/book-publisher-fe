@@ -1,17 +1,18 @@
 import { Province } from "@/utils/types/checkout";
 import { CheckoutShippingPayment } from "./CheckoutShippingPayment";
 import { CheckoutRecipient } from "./CheckoutRecipient";
-import { useFormik } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 
 import * as Yup from "yup";
 import { nameRegex, phoneRegex } from "@/utils/constant";
+import { useSubmitOrderMutation } from "@/contexts/slices/apiSlice";
 
 export interface CheckoutFormValues {
   email: string;
   name: string;
   phone: string;
   address: string;
-  city: string;
+  province: string;
   district: string;
   ward: string;
   note: string;
@@ -23,7 +24,7 @@ const RecipientSchema = Yup.object().shape({
   name: Yup.string().max(100, "Name should not exceed 100 characters.").matches(nameRegex).required("Name is required."),
   phone: Yup.string().matches(phoneRegex, "Phone number is not valid").required("Phone number is required."),
   address: Yup.string().max(200, "Address should not exceed 100 characters.").required("Address is required."),
-  city: Yup.string().min(1).required("City is required."),
+  province: Yup.string().min(1).required("City is required."),
   district: Yup.string().min(1).required("District is required."),
   ward: Yup.string().min(1).required("Ward is required."),
   payment: Yup.string().min(1).required("Payment method is required."),
@@ -34,7 +35,7 @@ const initialValues: CheckoutFormValues = {
   name: "",
   phone: "",
   address: "",
-  city: "",
+  province: "",
   district: "",
   ward: "",
   note: "",
@@ -42,10 +43,17 @@ const initialValues: CheckoutFormValues = {
 };
 
 export function CheckoutForm({ provinces }: { provinces: Province[] }) {
+  const [submitOrder] = useSubmitOrderMutation();
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values: CheckoutFormValues, { setSubmitting }: FormikHelpers<CheckoutFormValues>) => {
+      setSubmitting(false);
+      try {
+        const res = await submitOrder({ formValues: values }).unwrap();
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
     },
     validationSchema: RecipientSchema,
   });

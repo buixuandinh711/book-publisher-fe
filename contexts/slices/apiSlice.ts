@@ -1,3 +1,4 @@
+import { CheckoutFormValues } from "@/components/checkout/CheckoutForm";
 import { District, Ward } from "@/utils/types/checkout";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -154,6 +155,20 @@ export const apiSlice = createApi({
         credentials: "include",
       }),
     }),
+    submitOrder: builder.mutation<{}, { formValues: CheckoutFormValues }>({
+      query: ({ formValues }) => {
+        return {
+          url: "/checkout/submit-order",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -169,4 +184,5 @@ export const {
   useUpdateCartItemMutation,
   useCheckoutDistrictQuery,
   useCheckoutWardQuery,
+  useSubmitOrderMutation,
 } = apiSlice;
