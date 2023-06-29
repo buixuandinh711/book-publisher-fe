@@ -1,15 +1,19 @@
-import { useCheckoutDistrictQuery, useCheckoutWardQuery } from "@/contexts/slices/apiSlice";
+import { useCheckoutDistrictQuery, useCheckoutWardQuery, usePreviewOrderMutation } from "@/contexts/slices/apiSlice";
 import { Province } from "@/utils/types/checkout";
 import { FormikProps } from "formik";
 import { CheckoutFormValues } from "..";
+import { MutationTrigger } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]; formik: FormikProps<CheckoutFormValues> }) {
   const districtQuery = useCheckoutDistrictQuery({ provinceId: formik.values.province }, { skip: formik.values.province === "" });
   const wardQuery = useCheckoutWardQuery({ districtId: formik.values.district }, { skip: formik.values.district === "" });
 
+  const [previewOrder] = usePreviewOrderMutation({
+    fixedCacheKey: "shared-preview-order",
+  });
+
   return (
     <div className="basis-1/2 pr-6">
-      <button onClick={() => formik.handleSubmit()}>Test</button>
       <h2 className="w-full pb-4 text-xl font-bold">Delivery information</h2>
       <div className="w-full">
         <fieldset className="relative mb-6">
@@ -89,9 +93,10 @@ export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]
             name="province"
             className="form-select block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
             onChange={(e) => {
+              formik.handleChange(e);
               formik.setFieldValue("district", "");
               formik.setFieldValue("ward", "");
-              formik.handleChange(e);
+              previewOrder({ formValues: { district: "", ward: "" } });
             }}
             value={formik.values.province}
           >
@@ -117,8 +122,9 @@ export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]
             name="district"
             className="form-select block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
             onChange={(e) => {
-              formik.setFieldValue("ward", "");
               formik.handleChange(e);
+              formik.setFieldValue("ward", "");
+              previewOrder({ formValues: { district: "", ward: "" } });
             }}
             value={formik.values.district}
           >
@@ -144,7 +150,11 @@ export function CheckoutRecipient({ provinces, formik }: { provinces: Province[]
             id="ward"
             name="ward"
             className="form-select block h-10 min-h-[40px] w-full max-w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              const value = e.target.value;
+              previewOrder({ formValues: { district: formik.values.district, ward: value } });
+            }}
             value={formik.values.ward}
           >
             <option value="" disabled hidden>

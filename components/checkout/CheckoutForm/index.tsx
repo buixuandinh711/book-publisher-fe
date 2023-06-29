@@ -5,7 +5,8 @@ import { FormikHelpers, useFormik } from "formik";
 
 import * as Yup from "yup";
 import { nameRegex, phoneRegex } from "@/utils/constant";
-import { useSubmitOrderMutation } from "@/contexts/slices/apiSlice";
+import { usePreviewOrderMutation, useSubmitOrderMutation } from "@/contexts/slices/apiSlice";
+import { useEffect } from "react";
 
 export interface CheckoutFormValues {
   email: string;
@@ -43,11 +44,11 @@ const initialValues: CheckoutFormValues = {
 };
 
 export function CheckoutForm({ provinces }: { provinces: Province[] }) {
-  const [submitOrder] = useSubmitOrderMutation();
   const formik = useFormik({
     initialValues,
     onSubmit: async (values: CheckoutFormValues, { setSubmitting }: FormikHelpers<CheckoutFormValues>) => {
       setSubmitting(false);
+      console.log(JSON.stringify(values));
       try {
         const res = await submitOrder({ formValues: values }).unwrap();
         console.log(res);
@@ -57,6 +58,7 @@ export function CheckoutForm({ provinces }: { provinces: Province[] }) {
     },
     validationSchema: RecipientSchema,
   });
+  const [submitOrder] = useSubmitOrderMutation();
 
   return (
     <main className="basis-3/4">

@@ -12,3 +12,8 @@ export interface Ward {
   code: string;
   name: string;
 }
+
+export interface PreviewInfo {
+  shippingFee: number;
+  shippingTime: string;
+}

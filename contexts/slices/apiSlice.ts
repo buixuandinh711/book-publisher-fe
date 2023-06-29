@@ -1,5 +1,5 @@
 import { CheckoutFormValues } from "@/components/checkout/CheckoutForm";
-import { District, Ward } from "@/utils/types/checkout";
+import { District, PreviewInfo, Ward } from "@/utils/types/checkout";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface User {
@@ -167,6 +167,20 @@ export const apiSlice = createApi({
           credentials: "include",
         };
       },
+      // invalidatesTags: ["Cart"],
+    }),
+    previewOrder: builder.mutation<PreviewInfo, { formValues: Pick<CheckoutFormValues, "district" | "ward"> }>({
+      query: ({ formValues }) => {
+        return {
+          url: "/checkout/preview-order",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+          credentials: "include",
+        };
+      },
       invalidatesTags: ["Cart"],
     }),
   }),
@@ -185,4 +199,5 @@ export const {
   useCheckoutDistrictQuery,
   useCheckoutWardQuery,
   useSubmitOrderMutation,
+  usePreviewOrderMutation,
 } = apiSlice;
