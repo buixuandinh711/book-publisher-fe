@@ -97,11 +97,11 @@ export function CartModal() {
                 <FontAwesomeIcon icon={faCaretLeft} /> Continue Shopping
               </button>
 
-              <a className="rounded bg-red-700 p-[10px] text-sm text-white" title="Proceed to Checkout" href="/checkout">
+              <Link className="rounded bg-red-700 p-[10px] text-sm text-white" title="Proceed to Checkout" href="/checkout">
                 <span>
                   Proceed to Checkout <FontAwesomeIcon icon={faArrowRightLong} />
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
