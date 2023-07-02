@@ -1,6 +1,7 @@
 import { useCartQuery } from "@/contexts/slices/apiSlice";
 import { CartPopUpItem } from "./CartPopUpItem";
 import Image from "next/image";
+import Link from "next/link";
 
 export function CartPopUp() {
   const cartQuery = useCartQuery({});
@@ -64,12 +65,12 @@ export function CartPopUp() {
           >
             <span>Cart</span>
           </a>
-          <a
-            href="/checkout"
+          <Link
+            href="/cart/checkout"
             className="duration-400 -ml-[1px] block h-10 w-1/2 cursor-pointer rounded-r border border-red-700 bg-white  px-5 text-center text-sm font-bold uppercase leading-[40px] text-red-700 transition-all hover:bg-red-700 hover:text-white"
           >
             <span>Check out</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useCartQuery } from "@/contexts/slices/apiSlice";
-import { AccountCartItem } from "@/components/account/AccountCartItem";
+import { AccountCartItem } from "@/components/cart/AccountCartItem";
 import { BreadScumb } from "@/components/BreadCrumb";
+import Link from "next/link";
 
 export default function CartPage() {
   const cartQuery = useCartQuery({});
@@ -33,22 +34,15 @@ export default function CartPage() {
             </table>
           </div>
           <div className="mt-4 flex justify-end">
-            <button
-              className="mr-2 rounded bg-red-700 px-4 py-2 text-white hover:bg-red-800"
-              onClick={() => {
-                // Handle continue shopping button click
-              }}
+            <Link
+              className="mr-2 rounded border border-red-700 bg-white px-4 py-2 text-red-700 hover:bg-red-700 hover:text-white"
+              href="/catalog"
             >
               Continue Shopping
-            </button>
-            <button
-              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-              onClick={() => {
-                // Handle proceed to checkout button click
-              }}
-            >
+            </Link>
+            <Link className="rounded bg-red-700 px-4 py-2 text-white hover:bg-red-800" href="/cart/checkout">
               Proceed to Checkout
-            </button>
+            </Link>
           </div>
         </div>
       </div>

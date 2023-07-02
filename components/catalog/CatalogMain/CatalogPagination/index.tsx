@@ -10,40 +10,62 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
     <div className="text-xs-right">
       <nav className=" flex w-full items-center justify-center">
         <ul className="my-4 flex list-none items-center rounded-md pl-0">
-          <li className=" inline">
-            {currentPage > 1 ? (
-              <Link
-                className="ml-0 flex h-10 w-10 items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
-                href={`${currentPath}?page=${currentPage - 1}`}
-              >
-                «
-              </Link>
-            ) : (
-              <div className="ml-0 flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700">
-                «
-              </div>
-            )}
-          </li>
+          <PrevPage currentPage={currentPage} currentPath={currentPath} />
           {createPages(currentPage, totalPages).map((page) => (
             <PageNumber key={page.toString()} page={page} currentPath={currentPath} isCurrent={page === currentPage} />
           ))}
-          <li className=" inline">
-            {currentPage < totalPages ? (
-              <Link
-                className="-ml-[1px] flex h-10 w-10 items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
-                href={`${currentPath}?page=${currentPage + 1}`}
-              >
-                »
-              </Link>
-            ) : (
-              <div className="-ml-[1px] flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700">
-                »
-              </div>
-            )}
-          </li>
+          <NextPage currentPage={currentPage} totalPages={totalPages} currentPath={currentPath} />
         </ul>
       </nav>
     </div>
+  );
+}
+
+function PrevPage({ currentPage, currentPath }: { currentPage: number; currentPath: string }) {
+  const router = useRouter();
+  const { slug, ...queryParams } = router.query;
+  queryParams.page = (currentPage - 1).toString();
+  const query = parsedUrlQueryToURLSearchParams(queryParams);
+
+  return (
+    <li className=" inline">
+      {currentPage > 1 ? (
+        <Link
+          className="ml-0 flex h-10 w-10 items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
+          href={`${currentPath}?${query}`}
+        >
+          «
+        </Link>
+      ) : (
+        <div className="ml-0 flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700">
+          «
+        </div>
+      )}
+    </li>
+  );
+}
+
+function NextPage({ currentPage, totalPages, currentPath }: { currentPage: number; totalPages: number; currentPath: string }) {
+  const router = useRouter();
+  const { slug, ...queryParams } = router.query;
+  queryParams.page = (currentPage + 1).toString();
+  const query = parsedUrlQueryToURLSearchParams(queryParams);
+
+  return (
+    <li className=" inline">
+      {currentPage < totalPages ? (
+        <Link
+          className="-ml-[1px] flex h-10 w-10 items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
+          href={`${currentPath}?${query}`}
+        >
+          »
+        </Link>
+      ) : (
+        <div className="-ml-[1px] flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700">
+          »
+        </div>
+      )}
+    </li>
   );
 }
 
