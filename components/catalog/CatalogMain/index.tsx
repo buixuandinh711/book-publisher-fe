@@ -13,9 +13,9 @@ export interface CatalogMainProps {
 
 export function CatalogMain({ booksList, currentPage, totalPages }: CatalogMainProps) {
   return (
-    <section className="relative float-left  mb-8 min-h-[1px] w-3/4 px-4">
+    <section className="relative mb-8 min-h-[1px] w-3/4 px-4">
       {/* Banner */}
-      <div className="relative float-left mb-8 min-h-[150px] w-full">
+      <div className="relative  mb-8 min-h-[150px] w-full">
         <Image
           src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1683865774/book-publisher/catalog_banner.jpg"
           alt="tat-ca-san-pham"
@@ -24,13 +24,13 @@ export function CatalogMain({ booksList, currentPage, totalPages }: CatalogMainP
           sizes="(max-width: 1080px) 50vw"
           priority
         />
-        <h1 className="hidden">Tất cả sản phẩm</h1>
+        <h1 className="hidden">Tất cả products</h1>
       </div>
-      <div className="float-left w-full">
+      <div className=" w-full">
         <SortByDropdown />
         {/* Main */}
-        <div className="float-left w-full">
-          <section className="float-left block w-full">
+        <div className=" w-full">
+          <section className=" block w-full">
             {/* List book */}
             <div className="-mx-4">
               <div className="mb-8 grid grid-flow-row gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

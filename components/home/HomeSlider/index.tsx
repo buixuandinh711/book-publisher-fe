@@ -7,9 +7,9 @@ import Link from "next/link";
 
 export function HomeSlider() {
   return (
-    <section className="float-left mb-0 w-full">
-      <section className="float-left w-full">
-        <div className="float-left w-full">
+    <section className=" mb-0 w-full">
+      <section className=" w-full">
+        <div className=" w-full">
           <div className="relative overflow-hidden">
             <Slider infinite autoplay autoplaySpeed={1000} pauseOnHover={false} arrows slidesToShow={1}>
               <div>
@@ -30,9 +30,9 @@ export function HomeSlider() {
               </div>
               <div>
                 <div className="item image-item">
-                  <Link href="https://nxbvanhoc.com.vn/catalog/classic" title="Văn học kinh điển">
+                  <Link href="https://nxbvanhoc.com.vn/catalog/classic" title="Classical Books">
                     <Image
-                      alt="Văn học kinh điển"
+                      alt="Classical Books"
                       src="https://res.cloudinary.com/dsy1fdqx2/image/upload/v1686543335/book-publisher/slider_vhkd.jpg"
                       placeholder="blur"
                       blurDataURL="/image-loader.gif"

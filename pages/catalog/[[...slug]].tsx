@@ -15,9 +15,9 @@ export default function Catalog({
   return (
     <>
       <BreadScumb />
-      <section className="float-left w-full pt-8">
+      <section className="w-full pt-8">
         <div className="container">
-          <div className="-mx-4">
+          <div className="flex">
             <CatalogSideBar {...catalogSideBarProps} />
             <CatalogMain {...catalogMainProps} />
           </div>

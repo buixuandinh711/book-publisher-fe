@@ -88,22 +88,22 @@ function BookCounter({ id, quantity }: { id: string; quantity: number }) {
   };
 
   return (
-    <>
-      <button className="float-left h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleDecreaseQuantity}>
+    <div className="flex">
+      <button className=" h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleDecreaseQuantity}>
         -
       </button>
       <input
         type="text"
-        className="float-left -mx-[1px] h-7 min-h-[28px] w-10 border border-gray-300 bg-white p-1 text-center align-middle text-sm text-gray-900"
+        className=" -mx-[1px] h-7 min-h-[28px] w-10 border border-gray-300 bg-white p-1 text-center align-middle text-sm text-gray-900"
         title="Số lượng"
         maxLength={3}
         value={quantity}
         onChange={() => {}}
         placeholder="1"
       />
-      <button className="float-left h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleIncreaseQuantity}>
+      <button className=" h-7 w-7 border border-gray-300 bg-white text-center text-red-700" onClick={handleIncreaseQuantity}>
         +
       </button>
-    </>
+    </div>
   );
 }

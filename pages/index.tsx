@@ -23,7 +23,7 @@ export default function Home({
     <>
       <HomeSlider />
       <HomeBanner />
-      <SectionWithCarousel header="Sách mới" booksList={newBooks} />
+      <SectionWithCarousel header="New Books" booksList={newBooks} />
       <ImageBanner
         bannersList={[
           {
@@ -33,7 +33,7 @@ export default function Home({
           },
         ]}
       />
-      <SectionWithCarousel header="Văn học kinh điển" booksList={classicBooks} />
+      <SectionWithCarousel header="Classical Books" booksList={classicBooks} />
       <ImageBanner
         bannersList={[
           {
@@ -44,7 +44,7 @@ export default function Home({
         ]}
       />
       <CategorySection />
-      <SectionWithCarousel header="Sách phổ biến" booksList={popularBooks} />
+      <SectionWithCarousel header="Popular Books" booksList={popularBooks} />
       <ImageBanner
         bannersList={[
           {
@@ -59,7 +59,7 @@ export default function Home({
           },
         ]}
       />
-      <SectionWithCarousel header="Sách giảm giá" booksList={discountBooks} />
+      <SectionWithCarousel header="Discount Books" booksList={discountBooks} />
       <PrivacySection />
       <CartModal />
     </>

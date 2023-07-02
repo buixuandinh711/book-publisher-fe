@@ -21,9 +21,9 @@ export function YearFilter() {
   }, [year, setChonsenYears]);
 
   return (
-    <aside className="float-left mb-8 w-full">
-      <div className="float-left mb-5 w-full">
-        <h2 className="relative float-left m-0 w-full text-base font-bold leading-normal text-red-700 before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
+    <aside className=" mb-8 w-full">
+      <div className=" mb-5 w-full">
+        <h2 className="relative  m-0 w-full text-base font-bold leading-normal text-red-700 before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-b-gray-300">
           <Link
             href=""
             className="relative py-[5px] pr-4 text-lg font-bold text-red-700 after:absolute after:-bottom-[3px] after:left-0 after:right-4 after:border-b-[3px] after:border-b-red-700"
@@ -32,10 +32,10 @@ export function YearFilter() {
           </Link>
         </h2>
       </div>
-      <div className="float-left w-full bg-gray-100 py-4 pr-1">
+      <div className=" w-full bg-gray-100 py-4 pr-1">
         <ul className="m-0 max-h-[140px] list-none overflow-y-auto pl-4">
           {yearsArray.map((year, index) => (
-            <li key={year} className="float-left m-0 w-full cursor-pointer p-0 leading-loose">
+            <li key={year} className=" m-0 w-full cursor-pointer p-0 leading-loose">
               <span className="cursor-pointer text-sm font-normal text-red-700">
                 <label htmlFor={`filter-year-${year.toLocaleLowerCase()}`} className="mb-[2px] block cursor-pointer">
                   <input

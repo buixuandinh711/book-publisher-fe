@@ -10,7 +10,7 @@ export default function Catalog({ book }: { book: DetailMainProps & BookOverview
   return (
     <>
       <BreadScumb current={{ name: book.name, link: `${book.id}` }} />
-      <div className="float-left w-full pt-8">
+      <div className=" w-full pt-8">
         <DetailMain {...book} />
         <BookOverview description={book.description} />
         <RelatedBook id={book.id} />

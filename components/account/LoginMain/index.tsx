@@ -23,11 +23,11 @@ export function LoginMain() {
   const [login] = useLoginMutation();
 
   return (
-    <section className="float-left w-full py-8 text-sm text-red-700">
+    <section className=" w-full py-8 text-sm text-red-700">
       <div className="container">
-        <h1 className="float-left mb-8 w-full text-2xl font-bold uppercase leading-snug">Log in to your account</h1>
+        <h1 className=" mb-8 w-full text-2xl font-bold uppercase leading-snug">Log in to your account</h1>
         <div className="-mx-4">
-          <div className="relative float-left w-1/2 px-4">
+          <div className="relative  w-1/2 px-4">
             <div className="mb-8">
               <div id="login">
                 <p className="mb-4">If you already have an account, log in here.</p>
@@ -52,7 +52,7 @@ export function LoginMain() {
                       <input name="FormType" type="hidden" defaultValue="customer_login" />
                       <input name="utf8" type="hidden" defaultValue="true" />
                       <div className="form-signup"></div>
-                      <div className="float-left w-full">
+                      <div className=" w-full">
                         <fieldset className="relative mb-6">
                           <label htmlFor="email" className="mb-[2px] block max-w-full font-bold">
                             Email:{" "}
@@ -103,18 +103,18 @@ export function LoginMain() {
                   )}
                 </Formik>
 
-                <span className="float-left mt-8 block cursor-pointer underline">Forgot your password?</span>
+                <span className=" mt-8 block cursor-pointer underline">Forgot your password?</span>
               </div>
             </div>
           </div>
-          <div className="relative float-left hidden w-1/2 border-l border-gray-300 px-4">
-            <div id="recover-password" className="float-left w-full">
+          <div className="relative  hidden w-1/2 border-l border-gray-300 px-4">
+            <div id="recover-password" className=" w-full">
               <p className="mb-4">Forgot your password? Enter your email address to reset your password via email.</p>
               <form method="post" action="/account/recover" id="recover_customer_password" acceptCharset="UTF-8">
                 <input name="FormType" type="hidden" defaultValue="recover_customer_password" />
                 <input name="utf8" type="hidden" defaultValue="true" />
                 <div className="form-signup aaaaaaaa"></div>
-                <div className="float-left w-full">
+                <div className=" w-full">
                   <fieldset className="pb-2">
                     <label className="mb-[2px] block max-w-full font-bold">Email: </label>
                     <input
@@ -126,7 +126,7 @@ export function LoginMain() {
                     />
                   </fieldset>
                 </div>
-                <div className="float-left mt-6 w-full">
+                <div className=" mt-6 w-full">
                   <button
                     className="relative inline-block h-10 min-w-[160px] cursor-pointer rounded-md border border-red-700 bg-red-700 text-center leading-[40px] text-white outline-none"
                     type="submit"

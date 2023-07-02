@@ -4,47 +4,30 @@ export interface BookOverviewProps {
 
 export function BookOverview({ description }: BookOverviewProps) {
   return (
-    <div className="float-left mb-8 w-full">
+    <div className=" mb-8 w-full">
       <div className="container">
         <div className="-mx-4">
-          <div className="relative float-left w-full px-4">
-            <div className="float-left w-full">
-              <div className="product-tab e-tabs text-red-700">
-                <ul className="m-0 p-0">
-                  <li className="relative float-left inline-block cursor-pointer" data-tab="product_tab_1">
-                    <a href="" className="relative z-10 float-left bg-red-700 px-4 py-10px text-sm font-bold leading-relaxed text-white">
-                      <span>Mô tả</span>
-                    </a>
+          <div className="w-full px-4">
+            <div className=" w-full">
+              <div className="text-red-700">
+                <ul className="block">
+                  <li className="inline-flex items-center h-10 cursor-pointer bg-red-700 px-4 text-center align-middle text-sm font-bold text-white">
+                    <span>Mô tả</span>
                   </li>
-                  <li className="relative float-left inline-block cursor-pointer" data-tab="product_tab_2">
-                    <a href="" className="relative z-10 float-left bg-white px-4 py-10px text-sm font-bold leading-relaxed text-red-700">
-                      <span>Đại lý</span>
-                    </a>
-                    <span className="bg-link" />
+                  <li className="inline-flex items-center h-10 cursor-pointer bg-white px-4 text-center align-middle text-sm font-bold text-red-700">
+                    <span>Đại lý</span>
                   </li>
-                  <li className="relative float-left inline-block cursor-pointer" data-tab="product_tab_3">
-                    <a href="" className="relative z-10 float-left bg-white px-4 py-10px text-sm font-bold leading-relaxed text-red-700">
-                      <span>Hướng dẫn mua hàng</span>
-                    </a>
-                    <span className="bg-link" />
+                  <li className="inline-flex items-center h-10 cursor-pointer bg-white px-4 text-center align-middle text-sm font-bold text-red-700">
+                    <span>Hướng dẫn mua hàng</span>
                   </li>
-                  <li className="relative float-left inline-block cursor-pointer" data-tab="product_tab_4">
-                    <a href="" className="relative z-10 float-left bg-white px-4 py-10px text-sm font-bold leading-relaxed text-red-700">
-                      <span>Tags</span>
-                    </a>
-                    <span className="bg-link" />
+                  <li className="inline-flex items-center h-10 cursor-pointer bg-white px-4 text-center align-middle text-sm font-bold text-red-700">
+                    <span>Tags</span>
                   </li>
-                  <li className="relative float-left inline-block cursor-pointer" data-tab="product_tab_5">
-                    <a href="" className="relative z-10 float-left bg-white px-4 py-10px text-sm font-bold leading-relaxed text-red-700">
-                      <span>Đánh giá</span>
-                    </a>
-                    <span className="bg-link" />
+                  <li className="inline-flex items-center h-10 cursor-pointer bg-white px-4 text-center align-middle text-sm font-bold text-red-700">
+                    <span>Đánh giá</span>
                   </li>
                 </ul>
-                <div
-                  id="product_tab_1"
-                  className="visible float-left block h-auto w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-100"
-                >
+                <div className="block h-auto w-full border border-gray-300 px-4 py-8 text-xs opacity-100">
                   <div className="rte">
                     {description.split("\n").map((content, index) => (
                       <p className="mb-4" key={index}>
@@ -55,7 +38,7 @@ export function BookOverview({ description }: BookOverviewProps) {
                 </div>
                 <div
                   id="product_tab_2"
-                  className="invisible float-left hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
+                  className="invisible  hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
                 >
                   <p>
                     - Hệ thống nhà sách Fahasa : toàn quốc
@@ -86,19 +69,19 @@ export function BookOverview({ description }: BookOverviewProps) {
                 </div>
                 <div
                   id="product_tab_3"
-                  className="invisible float-left hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
+                  className="invisible  hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
                 >
                   <p style={{ textAlign: "justify" }}>
-                    <strong>Bước 1: </strong>Truy cập website và lựa chọn sản phẩm cần mua để mua hàng
+                    <strong>Bước 1: </strong>Truy cập website và lựa chọn products cần mua để mua hàng
                   </p>
                   <p style={{ textAlign: "justify" }}>
-                    <strong>Bước 2:</strong> Click vào sản phẩm muốn mua, màn hình hiển thị ra popup với các lựa chọn sau:&nbsp;
+                    <strong>Bước 2:</strong> Click vào products muốn mua, màn hình hiển thị ra popup với các lựa chọn sau:&nbsp;
                     <br />
-                    &nbsp; - Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng dể lựa chọn thêm sản phẩm vào giỏ hàng.
+                    &nbsp; - Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng dể lựa chọn thêm products vào giỏ hàng.
                     <br />
-                    &nbsp; -&nbsp;Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào xem giỏ hàng.
+                    &nbsp; -&nbsp;Nếu bạn muốn xem giỏ hàng để cập nhật products: Bấm vào xem giỏ hàng.
                     <br />
-                    &nbsp; -&nbsp;Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Đặt hàng và thanh toán.
+                    &nbsp; -&nbsp;Nếu bạn muốn đặt hàng và thanh toán cho products này vui lòng bấm vào: Đặt hàng và thanh toán.
                   </p>
                   <p style={{ textAlign: "justify" }}>
                     <strong>Bước 3: </strong>Lựa chọn thông tin tài khoản thanh toán
@@ -126,11 +109,11 @@ export function BookOverview({ description }: BookOverviewProps) {
                 </div>
                 <div
                   id="product_tab_4"
-                  className="invisible float-left hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
+                  className="invisible  hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
                 ></div>
                 <div
                   id="product_tab_5"
-                  className="invisible float-left hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
+                  className="invisible  hidden h-0 w-full overflow-hidden border border-gray-300 px-4 py-8 text-xs opacity-0"
                 >
                   <div className="rte">
                     <div id="bizweb-product-reviews" className="bizweb-product-reviews" data-id={30342227}></div>

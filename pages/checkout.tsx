@@ -10,7 +10,7 @@ export default function Checkout({ provinces }: { provinces: Province[] }) {
   return (
     <>
       <BreadScumb />
-      <div className="float-left w-full py-8 text-sm text-red-700">
+      <div className=" w-full py-8 text-sm text-red-700">
         <div className="container">
           <h1 className="mb-8 w-full text-2xl font-bold uppercase leading-snug">Checkout your cart</h1>
           <div className="flex">

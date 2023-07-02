@@ -26,9 +26,9 @@ export function RegisterMain() {
   const [register] = useRegisterMutation();
 
   return (
-    <section className="float-left w-full py-8 text-sm text-red-700">
+    <section className=" w-full py-8 text-sm text-red-700">
       <div className="container">
-        <h1 className="float-left mb-8 w-full text-2xl font-bold uppercase leading-snug">Register New Account</h1>
+        <h1 className=" mb-8 w-full text-2xl font-bold uppercase leading-snug">Register New Account</h1>
         <div className="-mx-4">
           <p className="mb-4 px-4">{"If you don't have an account, please register here"}</p>
           <Formik
@@ -59,11 +59,11 @@ export function RegisterMain() {
             }}
           >
             {({ errors, touched }) => (
-              <Form acceptCharset="UTF-8">
-                <div className="relative float-left w-1/2 px-4">
+              <Form acceptCharset="UTF-8" className="flex">
+                <div className="relative  w-1/2 px-4">
                   <div className="mb-8">
                     <div>
-                      <div className="float-left w-full">
+                      <div className=" w-full">
                         <fieldset className="relative mb-6">
                           <label htmlFor="firstName" className="mb-[2px] block max-w-full cursor-pointer font-bold">
                             First Name:{" "}
@@ -106,9 +106,9 @@ export function RegisterMain() {
                     </div>
                   </div>
                 </div>
-                <div className="relative float-left w-1/2 px-4">
-                  <div className="float-left w-full">
-                    <div className="float-left w-full">
+                <div className="relative  w-1/2 px-4">
+                  <div className=" w-full">
+                    <div className=" w-full">
                       <fieldset className="relative mb-6">
                         <label htmlFor="email" className="mb-[2px] block max-w-full font-bold">
                           Email:{" "}
@@ -125,7 +125,7 @@ export function RegisterMain() {
                         ) : null}
                       </fieldset>
                     </div>
-                    <div className="float-left w-full">
+                    <div className=" w-full">
                       <fieldset className="relative mb-6">
                         <label htmlFor="password" className="mb-[2px] block max-w-full font-bold">
                           Password:{" "}

@@ -8,7 +8,7 @@ interface SectionWithCarouselProps {
 
 export function SectionWithCarousel({ header, booksList }: SectionWithCarouselProps) {
   return (
-    <div className="float-left w-full py-[30px]">
+    <div className=" w-full py-[30px]">
       <div className="container">
         <div className="-px-4">
           <BookCarousel header={header} booksList={booksList} />
