@@ -10,11 +10,11 @@ export function RelatedBook({ id }: { id: string }) {
   );
 
   return (
-    <div className="float-left mb-8 w-full overflow-hidden">
+    <div className=" mb-8 w-full overflow-hidden">
       <div className="container">
         <div className="-mx-4">
-          <div className="relative float-left w-full px-4">
-            <div className="float-left w-full">
+          <div className="relative  w-full px-4">
+            <div className=" w-full">
               <BookCarousel header={"Sản phẩm liên quan"} booksList={error || !data ? [] : data} />
             </div>
           </div>

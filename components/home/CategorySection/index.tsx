@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export function CategorySection() {
   return (
-    <section className="relative float-left my-8 w-full overflow-hidden bg-white py-8 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-[rgba(0,0,0,0.5)]">
+    <section className="relative  my-8 w-full overflow-hidden bg-white py-8 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-[rgba(0,0,0,0.5)]">
       <div className="container">
         <div className="-mx-4">
           <div className="w-full">
@@ -24,11 +24,11 @@ export function CategorySection() {
                   />
                   <div className="absolute bottom-5 left-0 right-0 z-10 flex flex-col items-center justify-center bg-[rgba(0,0,0,0.5)] p-4">
                     <h2 className="m-0 text-center text-lg font-semibold uppercase">
-                      <a href="/sach-moi" title="Sách mới" className="text-shadow text-white">
-                        Sách mới
+                      <a href="/sach-moi" title="New Books" className="text-shadow text-white">
+                        New Books
                       </a>
                     </h2>
-                    <span className="mt-10px text-base font-semibold uppercase text-white">207 sản phẩm</span>
+                    <span className="mt-10px text-base font-semibold uppercase text-white">207 products</span>
                   </div>
                 </div>
               </div>
@@ -43,11 +43,11 @@ export function CategorySection() {
                   />
                   <div className="absolute bottom-5 left-0 right-0 z-10 flex flex-col items-center justify-center bg-[rgba(0,0,0,0.5)] p-4">
                     <h2 className="m-0 text-center text-lg font-semibold uppercase">
-                      <Link href="/catalog/classic" title="Sách văn học kinh điển" className="text-shadow text-white">
-                        Sách văn học kinh điển
+                      <Link href="/catalog/classic" title="Classical Books" className="text-shadow text-white">
+                        Classical Books
                       </Link>
                     </h2>
-                    <span className="mt-10px text-base font-semibold uppercase text-white">80 sản phẩm</span>
+                    <span className="mt-10px text-base font-semibold uppercase text-white">80 products</span>
                   </div>
                 </div>
               </div>
@@ -62,11 +62,11 @@ export function CategorySection() {
                   />
                   <div className="absolute bottom-5 left-0 right-0 z-10 flex flex-col items-center justify-center bg-[rgba(0,0,0,0.5)] p-4">
                     <h2 className="m-0 text-center text-lg font-semibold uppercase">
-                      <Link href="/catalog/popular" title="Sách liên kết xuất bản" className="text-shadow text-white">
-                        Sách liên kết xuất bản
+                      <Link href="/catalog/popular" title="Popular Books" className="text-shadow text-white">
+                        Popular Books
                       </Link>
                     </h2>
-                    <span className="mt-10px text-base font-semibold uppercase text-white">525 sản phẩm</span>
+                    <span className="mt-10px text-base font-semibold uppercase text-white">525 products</span>
                   </div>
                 </div>
               </div>
@@ -81,11 +81,11 @@ export function CategorySection() {
                   />
                   <div className="absolute bottom-5 left-0 right-0 z-10 flex flex-col items-center justify-center bg-[rgba(0,0,0,0.5)] p-4">
                     <h2 className="m-0 text-center text-lg font-semibold uppercase">
-                      <Link href="/catalog/discount" title="Sách giảm giá" className="text-shadow text-white">
-                        Sách giảm giá
+                      <Link href="/catalog/discount" title="Discount Books" className="text-shadow text-white">
+                        Discount Books
                       </Link>
                     </h2>
-                    <span className="mt-10px text-base font-semibold uppercase text-white">126 sản phẩm</span>
+                    <span className="mt-10px text-base font-semibold uppercase text-white">126 products</span>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export function CategorySection() {
                         Sách quý hiếm
                       </Link>
                     </h2>
-                    <span className="mt-10px text-base font-semibold uppercase text-white">126 sản phẩm</span>
+                    <span className="mt-10px text-base font-semibold uppercase text-white">126 products</span>
                   </div>
                 </div>
               </div>

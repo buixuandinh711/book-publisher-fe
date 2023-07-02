@@ -63,15 +63,15 @@ export function SortByDropdown() {
   };
 
   return (
-    <div className="float-left mb-5 w-full">
-      <div className="float-left flex w-full items-center justify-end bg-gray-100 text-red-700">
+    <div className=" mb-5 w-full">
+      <div className=" flex w-full items-center justify-end bg-gray-100 text-red-700">
         <label
           id="sort-by"
-          className="relative float-left w-52 cursor-pointer px-10px py-[5px] text-left text-sm before:absolute before:-left-12 before:top-1/2 before:-translate-y-1/2 before:content-['Sort_by']"
+          className="relative  w-52 cursor-pointer px-10px py-[5px] text-left text-sm before:absolute before:-left-12 before:top-1/2 before:-translate-y-1/2 before:content-['Sort_by']"
         >
-          <div className="relative float-left w-full border border-gray-300">
+          <div className="relative  w-full border border-gray-300">
             <select
-              className="borde form-select float-left h-8 w-full cursor-pointer appearance-none border-transparent bg-white px-3 py-0 text-sm focus:border-0 focus:outline-none focus:ring-red-700"
+              className="borde form-select  h-8 w-full cursor-pointer appearance-none border-transparent bg-white px-3 py-0 text-sm focus:border-0 focus:outline-none focus:ring-red-700"
               onChange={handleSelect}
               value={selectedMethod}
             >

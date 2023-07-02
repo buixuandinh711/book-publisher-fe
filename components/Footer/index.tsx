@@ -6,14 +6,14 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="relative float-left mt-8 w-full overflow-hidden bg-gray-100">
+    <footer className="relative  mt-8 w-full overflow-hidden bg-gray-100">
       <div className="pb-10 pt-8">
         <div className="container">
           <div className="footer-inner">
-            <div className="-mx-4 overflow-hidden">
-              <div className="relative float-left mt-8 min-h-[1px] w-1/2 border-r border-black px-4">
-                <div className="float-left mt-0 w-full">
-                  <div className="float-left mb-8 w-full">
+            <div className="-mx-4 flex overflow-hidden">
+              <div className="relative  mt-8 min-h-[1px] w-1/2 border-r border-black px-4">
+                <div className=" mt-0 w-full">
+                  <div className=" mb-8 w-full">
                     <Link href="/" title="NHÀ XUẤT BẢN VĂN HỌC" className="text-red-700">
                       <Image
                         alt="NHÀ XUẤT BẢN VĂN HỌC"
@@ -27,9 +27,9 @@ export function Footer() {
                       />
                     </Link>
                   </div>
-                  <div className="float-left w-full">
+                  <div className=" w-full">
                     <div className="mb-10px text-sm text-black">MÃ SỐ DOANH NGHIỆP: 0100111514</div>
-                    <div className="float-left w-full text-sm text-black">
+                    <div className=" w-full text-sm text-black">
                       <b />
                       <br />
                       <FontAwesomeIcon icon={faMapMarkerAlt} className="pr-10px" />
@@ -65,41 +65,41 @@ export function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="relative float-left mt-8 min-h-[1px] w-1/2 px-4 pl-8">
-                <div className="float-left w-full">
-                  <h4 className="float-left mb-8 w-full text-lg font-bold uppercase text-red-700">
+              <div className="relative  mt-8 min-h-[1px] w-1/2 px-4 pl-8">
+                <div className=" w-full">
+                  <h4 className=" mb-8 w-full text-lg font-bold uppercase text-red-700">
                     <span>Chính sách</span>
                   </h4>
-                  <ul className="float-left m-0 mb-4 w-full list-none p-0 leading-4">
-                    <li className="float-left w-full pb-10px text-gray-800">
-                      <a href="/chinh-sach-bao-mat" className="float-left text-sm text-black">
+                  <ul className=" m-0 mb-4 w-full list-none p-0 leading-4">
+                    <li className=" w-full pb-10px text-gray-800">
+                      <a href="/chinh-sach-bao-mat" className=" text-sm text-black">
                         Chính sách bảo mật
                       </a>
                     </li>
-                    <li className="float-left w-full">
-                      <a href="/chinh-sach-doi-tra" className="float-left text-sm text-black">
+                    <li className=" w-full">
+                      <a href="/chinh-sach-doi-tra" className=" text-sm text-black">
                         Chính sách đổi trả
                       </a>
                     </li>
                   </ul>
                   <br />
-                  <h4 className="float-left mb-8 w-full text-lg font-bold uppercase text-red-700">
+                  <h4 className=" mb-8 w-full text-lg font-bold uppercase text-red-700">
                     <span>Hướng dẫn</span>
                   </h4>
-                  <ul className="float-left m-0 mb-4 w-full list-none p-0 leading-4">
-                    <li className="float-left w-full pb-10px text-gray-800">
+                  <ul className=" m-0 mb-4 w-full list-none p-0 leading-4">
+                    <li className=" w-full pb-10px text-gray-800">
                       <a href="/huong-dan">Hướng dẫn mua hàng</a>
                     </li>
-                    <li className="float-left w-full pb-10px text-gray-800">
+                    <li className=" w-full pb-10px text-gray-800">
                       <a href="/huong-dan">Hướng dẫn thanh toán</a>
                     </li>
-                    <li className="float-left w-full text-gray-800">
+                    <li className=" w-full text-gray-800">
                       <a href="/dieu-khoan">Điều khoản dịch vụ</a>
                     </li>
                   </ul>
-                  <div className="float-left mt-4 w-full">
+                  <div className=" mt-4 w-full">
                     <ul className="m-0 list-none p-0">
-                      <li className="float-left mb-0 mr-10px inline-block">
+                      <li className=" mb-0 mr-10px inline-block">
                         <a
                           className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-sky-700 hover:bg-sky-700 hover:text-white"
                           href="https://www.facebook.com/Nh%C3%A0-xu%E1%BA%A5t-b%E1%BA%A3n-V%C4%83n-h%E1%BB%8Dc-475715752558826/"
@@ -109,7 +109,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="float-left mb-0 mr-10px inline-block">
+                      <li className=" mb-0 mr-10px inline-block">
                         <a
                           className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-sky-400 hover:bg-sky-400 hover:text-white"
                           href="https://twitter.com/"
@@ -119,7 +119,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="float-left mb-0 mr-10px inline-block">
+                      <li className=" mb-0 mr-10px inline-block">
                         <a
                           className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-red-500 hover:bg-red-500 hover:text-white"
                           href="https://plus.google.com/"
@@ -129,7 +129,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="float-left mb-0 mr-10px inline-block">
+                      <li className=" mb-0 mr-10px inline-block">
                         <a
                           className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-red-600 hover:bg-red-600 hover:text-white"
                           href="https://www.youtube.com"
@@ -139,7 +139,7 @@ export function Footer() {
                           </span>
                         </a>
                       </li>
-                      <li className="float-left mb-0 inline-block">
+                      <li className=" mb-0 inline-block">
                         <a
                           className="flex h-[35px] w-[35px] items-center justify-center rounded-full border border-gray-300 text-black hover:border-pink-600 hover:bg-pink-600 hover:text-white"
                           href="https://www.instagram.com/"

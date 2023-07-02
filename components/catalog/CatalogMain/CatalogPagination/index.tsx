@@ -8,9 +8,9 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
 
   return (
     <div className="text-xs-right">
-      <nav className="float-left flex w-full items-center justify-center">
-        <ul className="my-4 inline-block list-none rounded-md pl-0">
-          <li className="float-left inline">
+      <nav className=" flex w-full items-center justify-center">
+        <ul className="my-4 flex list-none items-center rounded-md pl-0">
+          <li className=" inline">
             {currentPage > 1 ? (
               <Link
                 className="ml-0 flex h-10 w-10 items-center justify-center rounded-bl-md rounded-tl-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
@@ -27,7 +27,7 @@ export function CatalogPagination({ currentPage, totalPages }: { currentPage: nu
           {createPages(currentPage, totalPages).map((page) => (
             <PageNumber key={page.toString()} page={page} currentPath={currentPath} isCurrent={page === currentPage} />
           ))}
-          <li className="float-left inline">
+          <li className=" inline">
             {currentPage < totalPages ? (
               <Link
                 className="-ml-[1px] flex h-10 w-10 items-center justify-center rounded-br-md rounded-tr-md border border-gray-300 bg-white p-0 text-sm text-red-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
@@ -55,7 +55,7 @@ function PageNumber({ page, currentPath, isCurrent }: { page: string | number; c
   const query = parsedUrlQueryToURLSearchParams(queryParams);
 
   return (
-    <li className="float-left inline">
+    <li className=" inline">
       {isPageLink ? (
         <Link
           className={`-ml-[1px] flex h-10 w-10 items-center justify-center border p-0 text-sm hover:border-red-700 hover:bg-red-700 hover:text-white ${

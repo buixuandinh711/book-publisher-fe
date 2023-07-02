@@ -28,7 +28,7 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
 
   return (
     <div className="relative mx-auto w-[190px] overflow-hidden bg-white px-4 text-left">
-      <div className="relative float-left w-full">
+      <div className="relative w-full">
         {calculateDiscountPercentage(originalPrice, currentPrice) > 0 && (
           <div className="absolute left-0 top-0 z-10 h-10 w-10 bg-red-700 text-center text-sm font-bold leading-10 text-white before:absolute before:bottom-full before:left-0 before:top-full before:z-50 before:m-0 before:border-l-20 before:border-r-20 before:border-t-10 before:border-red-700 before:border-l-transparent before:border-r-transparent">
             {`-${calculateDiscountPercentage(originalPrice, currentPrice)}%`}
@@ -46,13 +46,13 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
           />
         </Link>
       </div>
-      <div className="relative z-10 float-left min-h-105 w-full pb-3">
-        <h3 className="float-left my-3 line-clamp-2 min-h-[50px] w-full overflow-hidden text-ellipsis text-center text-base leading-normal text-red-700">
+      <div className="relative z-10 min-h-105 w-full pb-3">
+        <h3 className=" my-3 line-clamp-2 min-h-[50px] w-full overflow-hidden text-ellipsis text-center text-base leading-normal text-red-700">
           <Link href={`/detail/${id}`} title={name} className="font-semibold text-red-700">
             {name}
           </Link>
         </h3>
-        <div className="float-left flex min-h-[37px] w-full flex-col items-center justify-center leading-normal">
+        <div className=" flex min-h-[37px] w-full flex-col items-center justify-center leading-normal">
           <div className="text-lg font-bold text-black">
             <span className="price product-price">{currentPrice.toLocaleString()}</span>
           </div>
@@ -61,15 +61,15 @@ export function BookCart({ id, name, image, originalPrice, currentPrice }: BookC
           </div>
         </div>
       </div>
-      <div className="float-left inline-flex w-full justify-center">
+      <div className=" inline-flex w-full justify-center">
         <div>
           <input type="hidden" name="variantId" defaultValue={76671181} />
           <button
             className="relative inline-block h-10 cursor-pointer whitespace-nowrap border-none bg-red-700 px-7 text-center text-base font-normal leading-[40px] tracking-normal text-white outline-none"
-            title="Mua hàng"
+            title="Purchase"
             onClick={handleAddToCart}
           >
-            <span>Mua hàng</span>
+            <span>Purchase</span>
           </button>
         </div>
       </div>

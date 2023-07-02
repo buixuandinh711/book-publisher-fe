@@ -12,19 +12,19 @@ export interface BookCarouselProps {
 
 export function BookCarousel({ header, booksList }: BookCarouselProps) {
   return (
-    <div className="float-left w-full">
-      <div className="float-left w-full">
-        <h2 className="relative float-left mx-0 mb-8 mt-0 w-full text-base font-bold text-red-700 before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-gray-300">
+    <div className=" w-full">
+      <div className=" w-full">
+        <h2 className="relative  mx-0 mb-8 mt-0 w-full text-base font-bold text-red-700 before:absolute before:-bottom-[5px] before:left-0 before:right-0 before:border-b-[3px] before:border-gray-300">
           <a
             href="sach-giam-gia"
-            title="Sách giảm giá"
+            title="Discount Books"
             className="relative py-[5px] pr-[15px] text-lg font-bold text-red-700 after:absolute after:-bottom-[3px] after:left-0 after:right-[15px] after:h-[3px] after:border-b-[3px] after:border-b-red-700"
           >
             <span>{header}</span>
           </a>
         </h2>
       </div>
-      <div className="float-left w-full">
+      <div className=" w-full">
         <Slider
           slidesToShow={booksList.length < 6 ? booksList.length : 6}
           prevArrow={<PrevArrow />}

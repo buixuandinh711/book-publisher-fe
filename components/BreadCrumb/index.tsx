@@ -34,11 +34,11 @@ export function BreadScumb({ current }: { current?: { name: string; link: string
   const paths = pathsWithoutQuery.split("/");
 
   return (
-    <section className="float-left w-full border-b border-b-gray-300">
+    <section className="w-full border-b border-b-gray-300">
       <div className="container">
         <div className="-mx-4">
-          <div className="relative float-left min-h-[1px] w-full px-4">
-            <ul className="float-left m-0 flex w-full list-none items-center py-5">
+          <div className="relative min-h-[1px] w-full px-4">
+            <ul className="m-0 flex w-full list-none items-center py-5">
               {paths
                 .filter((p, index) => p in breadScumbMapping && (current !== undefined || index < paths.length - 1))
                 .map((p, index) => {

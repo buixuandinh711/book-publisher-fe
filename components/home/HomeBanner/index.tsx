@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function HomeBanner() {
   return (
-    <section className="section_small_banner float-left w-full py-8">
+    <section className="section_small_banner w-full py-8">
       <div className="container">
         <div className="-mx-4">
           <div className="flex justify-around gap-x-3">

@@ -3,7 +3,7 @@ import { HeaderMenu } from "./HeaderMenu";
 
 export function Header() {
   return (
-    <header className="float-left w-full">
+    <header className="w-full">
       <MainBar />
       <HeaderMenu />
     </header>

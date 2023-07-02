@@ -9,9 +9,9 @@ export interface CatalogSideBarProps {
 
 export function CatalogSideBar({ genres }: CatalogSideBarProps) {
   return (
-    <aside className="relative float-left  mb-8 min-h-[1px] w-1/4 px-4">
+    <aside className="relative mb-8 min-h-[1px] w-1/4 px-4">
       <Category />
-      <div className="float-left mb-8 w-full">
+      <div className=" mb-8 w-full">
         <PriceFilter />
         <GenreFilter genres={genres} />
         <YearFilter />

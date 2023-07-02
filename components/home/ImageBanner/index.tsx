@@ -13,7 +13,7 @@ interface ImageBannerProps {
 
 export function ImageBanner({ bannersList }: ImageBannerProps) {
   return (
-    <section className="float-left w-full cursor-pointer py-8">
+    <section className=" w-full cursor-pointer py-8">
       <div className="container">
         <div className="-mx-4">
           <div className="flex justify-around gap-4">

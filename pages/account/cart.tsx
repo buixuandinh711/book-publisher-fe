@@ -6,9 +6,9 @@ export default function CartPage() {
   const cartQuery = useCartQuery({});
 
   return (
-    <>
+    <div>
       <BreadScumb />
-      <div className="mt8">
+      <div className="mt-8">
         <div className="container">
           <div className="max-h-[700px] overflow-y-auto rounded-md border border-gray-300 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300">
             <table className="w-full">
@@ -52,6 +52,6 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

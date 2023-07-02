@@ -7,10 +7,10 @@ import { useCartQuery, useLogoutMutation, useUserQuery } from "@/contexts/slices
 
 export function MainBar() {
   return (
-    <div className="relative float-left flex w-full items-center bg-white p-0">
+    <div className="relative flex w-full items-center bg-white p-0">
       <div className="container">
         <div className="-mx-4 flex items-center">
-          <div className="relative float-left ml-0 min-h-1 w-1/3 px-4">
+          <div className="relative ml-0 min-h-1 w-1/3 px-4">
             <div className="flex h-24 content-start items-center">
               <Link title="NHÀ XUẤT BẢN VĂN HỌC" href="/" className="relative h-[57px] w-[360px] bg-transparent text-red-700 no-underline">
                 <Image
@@ -23,16 +23,16 @@ export function MainBar() {
               </Link>
             </div>
           </div>
-          <div className="relative float-left ml-0 inline-flex min-h-1 w-1/3 items-center px-4">
-            <form action="/search" method="get" className="float-left m-0 w-full rounded-md border border-gray-300 pl-4 pr-10">
-              <div className="relative float-left table w-full border-separate">
+          <div className="relative ml-0 inline-flex min-h-1 w-1/3 items-center px-4">
+            <form action="/search" method="get" className=" m-0 w-full rounded-md border border-gray-300 pl-4 pr-10">
+              <div className="relative table w-full border-separate">
                 <input
                   type="text"
-                  className="relative z-10 float-left mb-0 table-cell h-10 min-h-1 w-full rounded-none border-none bg-transparent pr-6 text-base text-red-700 placeholder-red-700 outline-none"
+                  className="relative z-10 mb-0 table-cell h-10 min-h-1 w-full rounded-none border-none bg-transparent pr-6 text-base text-red-700 placeholder-red-700 outline-none"
                   name="query"
                   id="search"
                   title="Nhập từ khoá cần tìm"
-                  placeholder="Nhập từ khóa cần tìm ..."
+                  placeholder="Enter keyword to search ..."
                 />
                 <button
                   className="absolute -right-10 bottom-0 top-0 z-10 flex h-auto w-6 items-center justify-center bg-transparent px-5 text-center text-sm leading-10 text-red-700"
@@ -43,7 +43,7 @@ export function MainBar() {
               </div>
             </form>
           </div>
-          <div className="relative float-left ml-0 min-h-1 w-1/3 px-4 text-red-700">
+          <div className="relative ml-0 flex min-h-1 w-1/3 px-4 text-red-700">
             <HeaderAccount />
             <HeaderCart />
           </div>
@@ -58,11 +58,11 @@ function HeaderAccount() {
   const [logout] = useLogoutMutation();
 
   return (
-    <div className="float-left mr-5 h-10 w-48 rounded-md border border-gray-300">
-      <div className="float-left mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
+    <div className="mr-5 flex h-10 w-48 rounded-md border border-gray-300">
+      <div className="mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
         <FontAwesomeIcon icon={faUser} className="text-lg" />
       </div>
-      <div className="float-left flex h-10 flex-col flex-nowrap justify-center">
+      <div className="flex h-10 flex-col flex-nowrap justify-center">
         <span className="overflow-ellipsis text-sm font-bold leading-none">{userQuery.isSuccess ? userQuery.data.name : "Account"}</span>
         <span className="leading-none">
           {userQuery.isSuccess ? (
@@ -108,13 +108,13 @@ function HeaderCart() {
   const itemsInCart = cartQuery.isSuccess ? cartQuery.data.length : 0;
 
   return (
-    <div className="group z-50 float-left flex h-10 w-36 items-center justify-end rounded-md border border-gray-300 p-0 text-gray-900">
-      <div className="z-10 float-left w-36 rounded-md text-center">
-        <div className="float-left w-full">
-          <div className="float-left mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
+    <div className="group z-50 flex h-10 w-36 items-center justify-end rounded-md border border-gray-300 p-0 text-gray-900">
+      <div className="z-10 w-36 rounded-md text-center">
+        <div className="flex w-full">
+          <div className=" mr-1 flex h-10 w-10 items-center justify-center overflow-hidden border-r border-r-gray-300">
             <FontAwesomeIcon icon={faShoppingCart} className="inline-block text-lg text-red-700"></FontAwesomeIcon>
           </div>
-          <div className="w-calc[100% - 50px] float-left flex h-10 cursor-pointer flex-col flex-nowrap items-start justify-center">
+          <div className="w-calc[100% - 50px] flex h-10 cursor-pointer flex-col flex-nowrap items-start justify-center">
             <span className="text-sm font-bold leading-none text-red-700">Your cart</span>
             <span className="leading-none">
               <span className="text-sm font-bold leading-none text-red-700">{itemsInCart}</span>
