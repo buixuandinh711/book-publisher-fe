@@ -3,10 +3,16 @@ import { CheckoutCoupon } from "@/components/checkout/CheckoutCoupon";
 import { CheckoutForm } from "@/components/checkout/CheckoutForm";
 import { CheckoutOrderInfo } from "@/components/checkout/CheckoutOrderInfo";
 import { CheckoutTotal } from "@/components/checkout/CheckoutTotal";
+import { OrderCreatedModal } from "@/components/checkout/OrderCreatedModal";
+import { useSubmitOrderMutation } from "@/contexts/slices/apiSlice";
 import { Province } from "@/utils/types/checkout";
 import { GetServerSideProps } from "next";
 
 export default function Checkout({ provinces }: { provinces: Province[] }) {
+  const [_, result] = useSubmitOrderMutation({
+    fixedCacheKey: "checkout-submit-order",
+  });
+
   return (
     <>
       <BreadScumb />
@@ -23,6 +29,7 @@ export default function Checkout({ provinces }: { provinces: Province[] }) {
           </div>
         </div>
       </div>
+      {result.isSuccess && <OrderCreatedModal />}
     </>
   );
 }

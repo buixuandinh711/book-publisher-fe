@@ -58,7 +58,9 @@ export function CheckoutForm({ provinces }: { provinces: Province[] }) {
     },
     validationSchema: RecipientSchema,
   });
-  const [submitOrder] = useSubmitOrderMutation();
+  const [submitOrder] = useSubmitOrderMutation({
+    fixedCacheKey: "checkout-submit-order",
+  });
 
   return (
     <main className="basis-3/4">

@@ -53,8 +53,8 @@ export function CheckoutShippingPayment({ formik }: { formik: FormikProps<Checko
                 <input
                   type="radio"
                   name="payment"
-                  value="cod"
-                  checked={formik.values.payment === "cod"}
+                  value="COD"
+                  checked={formik.values.payment === "COD"}
                   onChange={formik.handleChange}
                   className="form-radio mr-2 text-red-700 focus:outline-none focus:ring-0"
                 />
@@ -69,8 +69,8 @@ export function CheckoutShippingPayment({ formik }: { formik: FormikProps<Checko
                 <input
                   type="radio"
                   name="payment"
-                  value="momo"
-                  checked={formik.values.payment === "momo"}
+                  value="MOMO"
+                  checked={formik.values.payment === "MOMO"}
                   onChange={formik.handleChange}
                   className="form-radio mr-2 text-red-700 focus:outline-none focus:ring-0"
                 />
