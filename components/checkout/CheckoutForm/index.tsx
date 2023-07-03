@@ -48,10 +48,8 @@ export function CheckoutForm({ provinces }: { provinces: Province[] }) {
     initialValues,
     onSubmit: async (values: CheckoutFormValues, { setSubmitting }: FormikHelpers<CheckoutFormValues>) => {
       setSubmitting(false);
-      console.log(JSON.stringify(values));
       try {
-        const res = await submitOrder({ formValues: values }).unwrap();
-        console.log(res);
+        await submitOrder({ formValues: values }).unwrap();
       } catch (error) {
         console.log(error);
       }

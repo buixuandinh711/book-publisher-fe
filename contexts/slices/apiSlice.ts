@@ -167,7 +167,7 @@ export const apiSlice = createApi({
           credentials: "include",
         };
       },
-      // invalidatesTags: ["Cart"],
+      invalidatesTags: ["Cart"],
     }),
     previewOrder: builder.mutation<PreviewInfo, { formValues: Pick<CheckoutFormValues, "district" | "ward"> }>({
       query: ({ formValues }) => {
@@ -181,7 +181,6 @@ export const apiSlice = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: ["Cart"],
     }),
   }),
 });

@@ -1,16 +1,12 @@
 import {
-  faCalendarDay,
   faCalendarDays,
   faMoneyBill,
-  faTruckDroplet,
   faTruckFast,
-  faTruckLoading,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import { CheckoutFormValues } from "..";
-import { PreviewInfo } from "@/utils/types/checkout";
 import { usePreviewOrderMutation } from "@/contexts/slices/apiSlice";
 
 export function CheckoutShippingPayment({ formik }: { formik: FormikProps<CheckoutFormValues> }) {
