@@ -25,8 +25,8 @@ export default function OrderPage({ orders }: { orders: OrderItemProps[] }) {
               <tbody>
                 {orders.map((order, index) => (
                   <OrderItem
-                    key={order.id}
-                    id={order.id}
+                    key={order._id}
+                    _id={order._id}
                     recipientName={order.recipientName}
                     phone={order.phone}
                     fullAddress={order.fullAddress}
