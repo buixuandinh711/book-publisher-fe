@@ -1,54 +1,9 @@
-import { useCartQuery } from "@/contexts/slices/apiSlice";
-import { AccountCartItem } from "@/components/cart/AccountCartItem";
 import { BreadScumb } from "@/components/BreadCrumb";
+import { OrderItem, OrderItemProps } from "@/components/account/order/OrderItem";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Link from "next/link";
-import { formatDateTime } from "@/utils/utils";
 
-const orders = [
-  {
-    recipientName: "Nguyen Van A",
-    phone: "0971334456",
-    email: "nguyevanA@gmail.com",
-    fullAddress: "Lang Tho, Xã Ba Sao, Huyện Cao Lãnh, Đồng Tháp",
-    shippingCode: "LLAEMM",
-    note: "abc xyz",
-    payment: "COD",
-    createdAt: "2023-07-06T17:26:35.582Z",
-    id: "64a6f94b4f5a1fc82792d94d",
-    quantity: 2,
-    total: 795200,
-  },
-  {
-    recipientName: "Nguyen Van A",
-    phone: "0971334456",
-    email: "nguyevanA@gmail.com",
-    fullAddress: "Lang Tho, Xã Ba Sao, Huyện Cao Lãnh, Đồng Tháp",
-    shippingCode: "LLAEMM",
-    note: "abc xyz",
-    payment: "COD",
-    createdAt: "2023-07-06T17:26:35.582Z",
-    id: "64a6f94b4f5a1fc82792d94e",
-    quantity: 2,
-    total: 795200,
-  },
-  {
-    recipientName: "Nguyen Van A",
-    phone: "0971334456",
-    email: "nguyevanA@gmail.com",
-    fullAddress: "Lang Tho, Xã Ba Sao, Huyện Cao Lãnh, Đồng Tháp",
-    shippingCode: "LLAEMM",
-    note: "abc xyz",
-    payment: "COD",
-    createdAt: "2023-07-06T17:26:35.582Z",
-    id: "64a6f94b4f5a1fc82792d94f",
-    quantity: 2,
-    total: 795200,
-  },
-];
-
-export default function OrderPage() {
-  const cartQuery = useCartQuery({});
-
+export default function OrderPage({ orders }: { orders: OrderItemProps[] }) {
   return (
     <div>
       <BreadScumb />
@@ -58,12 +13,11 @@ export default function OrderPage() {
             <table className="w-full">
               <thead>
                 <tr>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white">No.</th>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white">Recipient</th>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white">Phone</th>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white">Address</th>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white">Created At</th>
-                  <th className="sticky top-0 z-[1] border-r border-white bg-red-700 p-2 leading-none text-white last:border-none">
+                  <th className="leading-idne sticky top-0 z-[1] border-r border-white bg-red-700 p-2 text-white">Created At</th>
+                  <th className="leading-idne sticky top-0 z-[1] border-r border-white bg-red-700 p-2 text-white">Recipient</th>
+                  <th className="leading-idne sticky top-0 z-[1] border-r border-white bg-red-700 p-2 text-white">Phone</th>
+                  <th className="leading-idne sticky top-0 z-[1] border-r border-white bg-red-700 p-2 text-white">Address</th>
+                  <th className="leading-idne last:border-idne sticky top-0 z-[1] border-r border-white bg-red-700 p-2 text-white">
                     Total
                   </th>
                 </tr>
@@ -72,22 +26,14 @@ export default function OrderPage() {
                 {orders.map((order, index) => (
                   <OrderItem
                     key={order.id}
-                    no={orders.length - index}
-                    recipient={order.recipientName}
+                    id={order.id}
+                    recipientName={order.recipientName}
                     phone={order.phone}
-                    address={order.fullAddress}
+                    fullAddress={order.fullAddress}
                     createdAt={order.createdAt}
                     total={order.total.toLocaleString()}
                   />
                 ))}
-                {/* {cartQuery.isLoading ? (
-                  <tr>
-                    <td>Loading...</td>
-                  </tr>
-                ) : (
-                  cartQuery.isSuccess &&
-                  cartQuery.data.map((item) => <AccountCartItem book={{ ...item.book }} quantity={item.quantity} key={item.book.id} />)
-                )} */}
               </tbody>
             </table>
           </div>
@@ -102,39 +48,55 @@ export default function OrderPage() {
   );
 }
 
-function OrderItem({
-  no,
-  recipient,
-  phone,
-  address,
-  createdAt,
-  total,
-}: {
-  no: number;
-  recipient: string;
-  phone: string;
-  address: string;
-  createdAt: string;
-  total: string;
-}) {
-  return (
-    <tr className="cursor-pointer border-b border-b-gray-300 text-red-700 last:border-none hover:bg-gray-50">
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">
-        <div className="flex justify-center">{no}</div>
-      </td>
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">
-        <div className="flex justify-center">{recipient}</div>
-      </td>
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">
-        <div className="flex justify-center">{phone}</div>
-      </td>
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">{address}</td>
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">
-        <div className="flex justify-center">{formatDateTime(createdAt)}</div>
-      </td>
-      <td className="border-r border-gray-300 px-2 py-4 last:border-none">
-        <div className="flex justify-center">{total}</div>
-      </td>
-    </tr>
-  );
-}
+export const getServerSideProps: GetServerSideProps<{
+  orders: OrderItemProps[];
+}> = async (context: GetServerSidePropsContext) => {
+  const sessionCookie = context.req.cookies["connect.sid"];
+
+  if (!sessionCookie) {
+    return {
+      redirect: {
+        destination: "/account/login",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST}/order`, {
+      headers: { cookie: `connect.sid=${sessionCookie};` },
+    });
+
+    if (!res.ok) {
+      if (res.status === 401) {
+        return {
+          redirect: {
+            destination: "/account/login",
+            permanent: false,
+          },
+        };
+      }
+      return {
+        redirect: {
+          destination: "/500",
+          permanent: false,
+        },
+      };
+    }
+
+    const data = await res.json();
+    return {
+      props: {
+        orders: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      redirect: {
+        destination: "/500",
+        permanent: false,
+      },
+    };
+  }
+};

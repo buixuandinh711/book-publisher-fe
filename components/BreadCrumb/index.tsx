@@ -15,6 +15,8 @@ const breadScumbMapping = {
   register: { name: "Register", link: "/account/register" },
   checkout: { name: "Checkout", link: "/checkout" },
   cart: { name: "Cart", link: "/cart" },
+  account: { name: "Account", link: "/account" },
+  order: { name: "Your Order", link: "/account/order" },
 };
 
 const getBreadScumb = (key: string) => {

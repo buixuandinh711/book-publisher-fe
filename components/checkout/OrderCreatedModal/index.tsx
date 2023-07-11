@@ -11,7 +11,7 @@ export function OrderCreatedModal() {
           <h1 className="text-2xl font-bold">Order Created Successfully</h1>
         </div>
         <div className="mt-6 flex justify-end">
-          <Link href="/" className="flex items-center rounded-md bg-red-700 px-4 py-2 text-white hover:bg-red-800">
+          <Link href="/account/order" className="flex items-center rounded-md bg-red-700 px-4 py-2 text-white hover:bg-red-800">
             <span>Go to Order</span>
             <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
           </Link>

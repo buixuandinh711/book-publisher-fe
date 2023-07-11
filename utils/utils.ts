@@ -44,6 +44,6 @@ export const formatDateTime = (dateString: string): string => {
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  const formattedDateTime = `${hours}:${minutes}, ${day}/${month}/${year}`;
+  const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}`;
   return formattedDateTime;
 };
